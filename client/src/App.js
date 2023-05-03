@@ -44,6 +44,7 @@ function App() {
     <ApolloProvider client={client}>
       {/* sets layout for navigation sidebar */}
       <Layout>
+        {/* contains side-view, hamburger button, and menu options */}
         <Sider
           breakpoint="lg"
           collapsedWidth="0"
@@ -69,7 +70,7 @@ function App() {
           />
         </Sider>
       </Layout>
-      {/* sets layout for header */}
+      {/* sets layout for header, content, and footer */}
       <Layout>
         <Header
           style={{
@@ -77,6 +78,7 @@ function App() {
             background: colorBgContainer,
           }}
         />
+        {/* renders content section based on current url route */}
         <Content
           style={{
             margin: '24px 16px 0',
@@ -109,6 +111,7 @@ function App() {
             </Routes>
           </Router>
         </Content>
+        {/* ends layout with footer */}
         <Footer
           style={{
             textAlign: 'center',
