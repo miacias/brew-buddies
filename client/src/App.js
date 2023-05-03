@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
+import SignupPage from './pages/SignupPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -100,6 +101,17 @@ function App() {
                   path='/connect'
                   element={
                     <ConnectPage 
+                      style={{
+                      padding: 24,
+                      minHeight: 360,
+                      background: colorBgContainer,
+                      }}
+                    />}
+                />
+                <Route
+                  path='/signup'
+                  element={
+                    <SignupPage 
                       style={{
                       padding: 24,
                       minHeight: 360,

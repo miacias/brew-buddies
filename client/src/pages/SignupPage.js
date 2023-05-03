@@ -1,8 +1,8 @@
 import React from 'react';
-import Login from '../components/LoginForm';
+import Signup from '../components/SignupForm';
 
 export default function Header() {
     return (
-        <Login/>
+        <Signup/>
     )
 }
