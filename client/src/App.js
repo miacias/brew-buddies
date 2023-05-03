@@ -69,54 +69,54 @@ function App() {
             )}
           />
         </Sider>
-      </Layout>
-      {/* sets layout for header, content, and footer */}
-      <Layout>
-        <Header
-          style={{
-            padding: 0,
-            background: colorBgContainer,
-          }}
-        />
-        {/* renders content section based on current url route */}
-        <Content
-          style={{
-            margin: '24px 16px 0',
-          }}
-        >
-          <Router>
-            <Routes>
-              <Route
-                path='/'
-                element={
-                  <HomePage 
-                    style={{
-                    padding: 24,
-                    minHeight: 360,
-                    background: colorBgContainer,
-                    }}
-                  />}
-              />
-              <Route
-                path='/connect'
-                element={
-                  <ConnectPage 
-                    style={{
-                    padding: 24,
-                    minHeight: 360,
-                    background: colorBgContainer,
-                    }}
-                  />}
-              />
-            </Routes>
-          </Router>
-        </Content>
-        {/* ends layout with footer */}
-        <Footer
-          style={{
-            textAlign: 'center',
-          }}
-        />
+        {/* sets layout for header, content, and footer */}
+        <Layout>
+          <Header
+            style={{
+              padding: 0,
+              background: colorBgContainer,
+            }}
+          />
+          {/* renders content section based on current url route */}
+          <Content
+            style={{
+              margin: '24px 16px 0',
+            }}
+          >
+            <Router>
+              <Routes>
+                <Route
+                  path='/'
+                  element={
+                    <HomePage 
+                      style={{
+                      padding: 24,
+                      minHeight: 360,
+                      background: colorBgContainer,
+                      }}
+                    />}
+                />
+                <Route
+                  path='/connect'
+                  element={
+                    <ConnectPage 
+                      style={{
+                      padding: 24,
+                      minHeight: 360,
+                      background: colorBgContainer,
+                      }}
+                    />}
+                />
+              </Routes>
+            </Router>
+          </Content>
+          {/* ends layout with footer */}
+          <Footer
+            style={{
+              textAlign: 'center',
+            }}
+          />
+        </Layout>
       </Layout>
     </ApolloProvider>
   );
