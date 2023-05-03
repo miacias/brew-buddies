@@ -4,13 +4,14 @@ const dateFormat = require('../utils/dateFormat');
 const reviewSchema = new Schema({
   reviewText: {
     type: String,
-    required: 'Please add text to your review.',
+    required: false,
     minLength: 1,
     maxLength: 280,
     trim: true,
   },
   starRating: {
     type: Number,
+    required: true,
     min: 1,
     max: 5
   },
@@ -26,15 +27,11 @@ const reviewSchema = new Schema({
     get: (timestamp) => dateFormat(timestamp),
   },
   breweryId: {
-    //need to pull ID from API call
-    type: String,
-    required: true,
+      type: Schema.Types.ObjectId,
+      ref: "Brewery",
   }
 });
 
 const Review = model('Review', reviewSchema);
 
 module.exports = Review;
-  
-//Schemas will be User and Review and Brewery
-//Saved-Breweries and Friends will all be added as arrays on the User
