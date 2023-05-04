@@ -8,8 +8,11 @@ import './App.css';
 import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
+import SingleBrewery from './pages/SingleBrewery';
+import Results from './pages/Results'
 import Header from './components/Header';
 import Footer from './components/Footer';
+
 
 const { Content, Sider } = Layout;
 
@@ -90,6 +93,28 @@ function App() {
                   path='/'
                   element={
                     <HomePage 
+                      style={{
+                      padding: 24,
+                      minHeight: 360,
+                      background: colorBgContainer,
+                      }}
+                    />}
+                />
+                <Route
+                  path='/results'
+                  element={
+                    <Results
+                      style={{
+                      padding: 24,
+                      minHeight: 360,
+                      background: colorBgContainer,
+                      }}
+                    />}
+                />
+                <Route
+                  path='/SingleBrewery'
+                  element={
+                    <SingleBrewery 
                       style={{
                       padding: 24,
                       minHeight: 360,
