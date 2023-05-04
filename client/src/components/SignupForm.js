@@ -12,40 +12,7 @@ import {
   } from 'antd';
   import { useState } from 'react';
   const { Option } = Select;
-  const residences = [
-    {
-      value: 'zhejiang',
-      label: 'Zhejiang',
-      children: [
-        {
-          value: 'hangzhou',
-          label: 'Hangzhou',
-          children: [
-            {
-              value: 'xihu',
-              label: 'West Lake',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      value: 'jiangsu',
-      label: 'Jiangsu',
-      children: [
-        {
-          value: 'nanjing',
-          label: 'Nanjing',
-          children: [
-            {
-              value: 'zhonghuamen',
-              label: 'Zhong Hua Men',
-            },
-          ],
-        },
-      ],
-    },
-  ];
+
   const formItemLayout = {
     labelCol: {
       xs: {
@@ -81,42 +48,7 @@ import {
     const onFinish = (values) => {
       console.log('Received values of form: ', values);
     };
-    const prefixSelector = (
-      <Form.Item name="prefix" noStyle>
-        <Select
-          style={{
-            width: 70,
-          }}
-        >
-          <Option value="86">+86</Option>
-          <Option value="87">+87</Option>
-        </Select>
-      </Form.Item>
-    );
-    const suffixSelector = (
-      <Form.Item name="suffix" noStyle>
-        <Select
-          style={{
-            width: 70,
-          }}
-        >
-          <Option value="USD">$</Option>
-          <Option value="CNY">¥</Option>
-        </Select>
-      </Form.Item>
-    );
-    const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-    const onWebsiteChange = (value) => {
-      if (!value) {
-        setAutoCompleteResult([]);
-      } else {
-        setAutoCompleteResult(['.com', '.org', '.net'].map((domain) => `${value}${domain}`));
-      }
-    };
-    const websiteOptions = autoCompleteResult.map((website) => ({
-      label: website,
-      value: website,
-    }));
+
     return (
       <Form
         {...formItemLayout}
@@ -124,7 +56,6 @@ import {
         name="register"
         onFinish={onFinish}
         initialValues={{
-          residence: ['zhejiang', 'hangzhou', 'xihu'],
           prefix: '86',
         }}
         style={{
@@ -202,137 +133,91 @@ import {
         </Form.Item>
   
         <Form.Item
-          name="residence"
-          label="Habitual Residence"
+          name="Image"
+          label="Image Link"
+          tooltip="Please give us a link for an image of you!"
           rules={[
             {
-              type: 'array',
-              required: true,
-              message: 'Please select your habitual residence!',
+              required: false,
+              message: "Please give us a link for an image of you!",
+              whitespace: true,
             },
           ]}
         >
-          <Cascader options={residences} />
+          <Input />
         </Form.Item>
-  
         <Form.Item
-          name="phone"
-          label="Phone Number"
+          name="City"
+          label="City"
           rules={[
             {
               required: true,
-              message: 'Please input your phone number!',
+              message: "Please put the city you in which you live.",
+              whitespace: true,
             },
           ]}
         >
-          <Input
-            addonBefore={prefixSelector}
-            style={{
-              width: '100%',
-            }}
-          />
+          <Input />
         </Form.Item>
-  
         <Form.Item
-          name="donation"
-          label="Donation"
+          name="State"
+          label="State"
           rules={[
             {
               required: true,
-              message: 'Please input donation amount!',
+              message: "Please put the state in which you live.",
+              whitespace: true,
             },
           ]}
         >
-          <InputNumber
-            addonAfter={suffixSelector}
-            style={{
-              width: '100%',
-            }}
-          />
+          <Input />
         </Form.Item>
   
         <Form.Item
-          name="website"
-          label="Website"
-          rules={[
-            {
-              required: true,
-              message: 'Please input website!',
-            },
-          ]}
-        >
-          <AutoComplete options={websiteOptions} onChange={onWebsiteChange} placeholder="website">
-            <Input />
-          </AutoComplete>
-        </Form.Item>
-  
-        <Form.Item
-          name="intro"
+          name="Intro"
           label="Intro"
           rules={[
             {
-              required: true,
-              message: 'Please input Intro',
+              required: false,
+              message: 'Please tell us a little about yourself!',
             },
           ]}
         >
-          <Input.TextArea showCount maxLength={100} />
+          <Input.TextArea showCount maxLength={250} />
         </Form.Item>
   
         <Form.Item
-          name="gender"
-          label="Gender"
+          name="Pronouns"
+          label="Pronouns"
           rules={[
             {
               required: true,
-              message: 'Please select gender!',
+              message: 'Please select one',
             },
           ]}
         >
-          <Select placeholder="select your gender">
-            <Option value="male">Male</Option>
-            <Option value="female">Female</Option>
+          <Select placeholder="Would you like to share your pronouns?">
+            <Option value="he/him">He/Him</Option>
+            <Option value="she/her">She/Her</Option>
+            <Option value="they/them">They/Them</Option>
             <Option value="other">Other</Option>
+            <Option value="Prefer-not-to-say">Prefer not to say</Option>
           </Select>
         </Form.Item>
-  
-        <Form.Item label="Captcha" extra="We must make sure that your are a human.">
-          <Row gutter={8}>
-            <Col span={12}>
-              <Form.Item
-                name="captcha"
-                noStyle
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input the captcha you got!',
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Button>Get captcha</Button>
-            </Col>
-          </Row>
-        </Form.Item>
-  
         <Form.Item
-          name="agreement"
-          valuePropName="checked"
+          name="Birthday"
+          label="Enter your birthday"
           rules={[
             {
-              validator: (_, value) =>
-                value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
+              required: true,
+              message: "Please enter your birthdate as MM/DD/YYYY, you must be 21 years of age to use this site.",
+              whitespace: true,
             },
           ]}
-          {...tailFormItemLayout}
         >
-          <Checkbox>
-            I have read the <a href="">agreement</a>
-          </Checkbox>
+          <Input />
         </Form.Item>
+  
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             Register
