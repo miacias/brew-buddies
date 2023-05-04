@@ -7,7 +7,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      trim: true, //do we want to keep this?
+      trim: true,
     },
     email: {
       type: String,
@@ -26,7 +26,13 @@ const userSchema = new Schema(
         ref: "Review",
       },
     ],
-    savedBreweries: [
+    favBreweries: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Brewery",
+      },
+    ],
+    wishBreweries: [
       {
         type: Schema.Types.ObjectId,
         ref: "Brewery",
