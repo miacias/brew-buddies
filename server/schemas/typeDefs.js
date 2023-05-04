@@ -7,7 +7,8 @@ const typeDefs = gql `
         email: String!
         password: String!
         reviews: [Review]
-        savedBreweries: [Brewery]
+        favBreweries: [Brewery]
+        wishBreweries: [Brewery]
         friends: [User]
         friendCount: Int
     }
@@ -37,13 +38,21 @@ const typeDefs = gql `
         users: [User]
         user(username: String!): User
         me: User
+        # breweries
     }
 
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
         # login(email: String!, password: String!): Auth
+        # editUser()
         # addReview(): Auth
-        # addFriend(): Auth
+        # editReview()
+        # addFriend(): User
+        # removeFriend(): User
+        # addFavBrewery()
+        # removeFavBrewery()
+        # addWishBrewery()
+        # removeWishBrewery()
     }  
 `;
 
