@@ -48,7 +48,7 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-        // be sure to send entire object from front-end so that values are not set to "null"
+        // be sure to send entire object from front-end so that values are not set to "null" (PUT)
         //  look into PATCH crud operation via apollo graphql (PUT is for entire object change whereas PATCH is one piece)
         editUser: async (parent, { username, email, password, profilePic, postalCode, intro, pronouns }, context) => {
             if (context.user) {
