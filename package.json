@@ -18,6 +18,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "eslint-config-wesbos": "^3.2.3",
     "concurrently": "^5.1.0"
   },
   "bugs": {
