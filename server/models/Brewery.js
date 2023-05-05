@@ -1,17 +1,16 @@
-const { Schema, model } = require("mongoose");
-
+const { Schema, model } = require('mongoose');
 
 const brewerySchema = new Schema(
   {
     breweryId: {
-      //Pull ID from API call
+      // Pull ID from API call
       type: String,
       required: true,
     },
     reviews: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Review",
+        ref: 'Review',
       },
     ],
   },
@@ -22,26 +21,23 @@ const brewerySchema = new Schema(
   }
 );
 
-
 brewerySchema.virtual('avgRating').get(function () {
-    if(this.reviews.length){
-        let ratingSum = 0;
-        for (let i = 0; i < this.reviews.length; i++) {
-            ratingSum += this.reviews[i];
-        }
-        return ((ratingSum / reviews.length).toFixed(1));;
-    } else {
-        return null;
+  if (this.reviews.length) {
+    let ratingSum = 0;
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < this.reviews.length; i++) {
+      ratingSum += this.reviews[i];
     }
+    // eslint-disable-next-line no-undef
+    return (ratingSum / reviews.length).toFixed(1);
+  }
+  return null;
 });
-
 
 brewerySchema.virtual('reviewCount').get(function () {
-    return this.reviews.length;
+  return this.reviews.length;
 });
 
-
-const Brewery = model("Brewery", brewerySchema);
-
+const Brewery = model('Brewery', brewerySchema);
 
 module.exports = Brewery;
