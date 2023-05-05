@@ -40,22 +40,43 @@ export const ALL_BREWERIES = gql`
         breweries {
             _id
             breweryId
-            reviews
+            reviews {
+                starRating
+            }
             avgRating
             reviewCount
         }
     }
 `;
 
+// Apollo error when data is empty: Cannot destructure property 'breweryId' of 'undefined' as it is undefined.
 export const GET_BREWERY = gql`
     query oneBrewery {
         brewery {
             _id
             breweryId
-            reviews
+            reviews {
+              reviewText
+              starRating
+              reviewAuthor
+              createdAt
+            }
+            avgRating
+            reviewCount
         }
     }
 `;
 
 export const ALL_REVIEWS = gql`
+    query allReviews {
+        reviews {
+            reviewText
+            starRating
+            reviewAuthor
+            createdAt
+            breweryId {
+              _id
+            }
+        }
+    }
 `;

@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 const ADD_USER = gql`
-    mutation addUser($username: String!, $email: String!, $password: String!, $birthdate: Date!, $image: String,, $city: String, $state: String, $intro: String, $pronouns: String) {
-        addUser(username: $username, email: $email, password: $password, birthdate: $birthdate, image: $image, city: $city, state: $state, intro: $intro, pronouns: $pronouns) {
+    mutation addUser($username: String!, $email: String!, $password: String!, $image: String, $birthdate: String!, $postalCode: String, $intro: String, $pronouns: String) {
+        addUser(username: $username, email: $email, password: $password, image: $image, birthdate: $birthdate, postalCode: $postalCode, intro: $intro, pronouns: $pronouns) {
             token
         }
     }

@@ -19,13 +19,16 @@ const resolvers = {
             }
             throw new AuthenticationError('Please log in to do this.');
         },
-        // probably won't use this
+        // probably won't use "breweries"
         breweries: async () => {
             return Brewery.find().populate('reviews');
         },
         brewery: async ({ breweryId }) => {
             return Brewery.findOne({ breweryId: breweryId }).populate('reviews');
-        }
+        },
+        // reviews: async () => {
+        //     return Reviews.find();
+        // }
     },
     Mutation: {
         addUser: async (parent, { username, email, password }) => {
@@ -46,27 +49,27 @@ const resolvers = {
             return { token, user };
         },
         // be sure to send entire object from front-end so that values are not set to "null"
-        editUser: async (parent, { username, email, password, image, postalCode, intro, pronouns }) => {
-            if (context.user) {
-                return User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    {
-                        username: username,
-                        email: email,
-                        password: password,
-                        image: image,
-                        postalCode: postalCode,
-                        intro: intro,
-                        pronouns: pronouns
-                    },
-                    {
-                        new: true,
-                        runValidators: true
-                    }
-                );
-            }
-            throw new AuthenticationError('You need to be logged in!');
-        }
+        // editUser: async (parent, { username, email, password, image, postalCode, intro, pronouns }) => {
+        //     if (context.user) {
+        //         return User.findOneAndUpdate(
+        //             { _id: context.user._id },
+        //             {
+        //                 username: username,
+        //                 email: email,
+        //                 password: password,
+        //                 image: image,
+        //                 postalCode: postalCode,
+        //                 intro: intro,
+        //                 pronouns: pronouns
+        //             },
+        //             {
+        //                 new: true,
+        //                 runValidators: true
+        //             }
+        //         );
+        //     }
+        //     throw new AuthenticationError('You need to be logged in!');
+        // }
     }
 };
 
