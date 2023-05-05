@@ -27,7 +27,7 @@ export const GET_USER = gql`
         user {
             _id
             username
-            image
+            profilePic
             birthdate
             intro
             pronouns

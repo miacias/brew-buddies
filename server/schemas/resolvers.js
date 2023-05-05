@@ -49,27 +49,28 @@ const resolvers = {
             return { token, user };
         },
         // be sure to send entire object from front-end so that values are not set to "null"
-        // editUser: async (parent, { username, email, password, image, postalCode, intro, pronouns }) => {
-        //     if (context.user) {
-        //         return User.findOneAndUpdate(
-        //             { _id: context.user._id },
-        //             {
-        //                 username: username,
-        //                 email: email,
-        //                 password: password,
-        //                 image: image,
-        //                 postalCode: postalCode,
-        //                 intro: intro,
-        //                 pronouns: pronouns
-        //             },
-        //             {
-        //                 new: true,
-        //                 runValidators: true
-        //             }
-        //         );
-        //     }
-        //     throw new AuthenticationError('You need to be logged in!');
-        // }
+        //  look into PATCH crud operation via apollo graphql (PUT is for entire object change whereas PATCH is one piece)
+        editUser: async (parent, { username, email, password, profilePic, postalCode, intro, pronouns }, context) => {
+            if (context.user) {
+                return User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    {
+                        username: username,
+                        email: email,
+                        password: password,
+                        profilePic: profilePic,
+                        postalCode: postalCode,
+                        intro: intro,
+                        pronouns: pronouns
+                    },
+                    {
+                        new: true,
+                        runValidators: true
+                    }
+                );
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        }
     }
 };
 

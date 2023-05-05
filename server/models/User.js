@@ -28,6 +28,7 @@ const userSchema = new Schema(
     },
     pronouns: {
       type: String,
+      // may need to remove this strict array. if user selects "other" and inputs custom pronouns, this will break
       enum: ['She/Her', 'He/Him', 'They/Them', 'Other', 'Prefer not to say'],
       required: false,
     },
