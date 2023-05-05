@@ -10,7 +10,7 @@ module.exports = {
     let token = req.body.token || req.query.token || req.headers.authorization;
     // removes "Bearer", then returns token string
     if (req.headers.authorization) {
-      token = token.split(' ').pop().trim();
+      token = token.split(" ").pop().trim();
     }
     // return request if token is false
     if (!token) {
@@ -21,7 +21,7 @@ module.exports = {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
     } catch {
-      console.log('Invalid token');
+      console.log("Invalid token");
     }
     // returns request object to be passed to resolver as 'context'
     return req;

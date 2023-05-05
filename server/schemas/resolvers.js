@@ -81,7 +81,6 @@ const resolvers = {
       },
       context
     ) => {
-      console.log(context.user);
       if (context.user) {
         const editedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
