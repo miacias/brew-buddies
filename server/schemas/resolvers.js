@@ -26,10 +26,10 @@ const resolvers = {
     // }
   },
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const newUser = await User.create({ username, email, password });
+    addUser: async (parent, { username, email, password, profilePic, birthday, postalCode, intro, pronouns }) => {
+      const newUser = await User.create({ username, email, password, profilePic, birthday, postalCode, intro, pronouns });
       const token = signToken(newUser);
-      return { token, newUser };
+      return { token, user: newUser };
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
@@ -51,6 +51,7 @@ const resolvers = {
       { username, email, password, profilePic, postalCode, intro, pronouns },
       context
     ) => {
+      console.log(context.user)
       if (context.user) {
         /* const editedUser = */ await User.findOneAndUpdate(
           { _id: context.user._id },

@@ -6,6 +6,7 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
+    birthday: String!
     profilePic: String
     postalCode: Int
     intro: String
@@ -53,7 +54,7 @@ const typeDefs = gql`
       email: String!
       password: String!
       profilePic: String
-      birthdate: String!
+      birthday: String!
       postalCode: String
       intro: String
       pronouns: String
