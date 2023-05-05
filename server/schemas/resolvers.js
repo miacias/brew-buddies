@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, Brewery } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -15,9 +15,16 @@ const resolvers = {
         me: async (parent, args, context) => {
             console.log(context)
             if (context.user) {
-                return User.findOne({ _id: context.user._id} ).populate('reviews');
+                return User.findOne({ _id: context.user._id }).populate('reviews');
             }
             throw new AuthenticationError('Please log in to do this.');
+        },
+        // probably won't use this
+        breweries: async () => {
+            return Brewery.find().populate('reviews');
+        },
+        brewery: async ({ breweryId }) => {
+            return Brewery.findOne({ breweryId: breweryId }).populate('reviews');
         }
     },
     Mutation: {
@@ -26,8 +33,8 @@ const resolvers = {
             const token = signToken(newUser);
             return { token, newUser };
         },
-        login: async (parent, { email, password} ) => {
-            const user = await User.findOne( {email} );
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
             if (!user) {
                 throw new AuthenticationError('No user found with that email address.')
             }
@@ -37,6 +44,28 @@ const resolvers = {
             }
             const token = signToken(user);
             return { token, user };
+        },
+        // be sure to send entire object from front-end so that values are not set to "null"
+        editUser: async (parent, { username, email, password, image, postalCode, intro, pronouns }) => {
+            if (context.user) {
+                return User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    {
+                        username: username,
+                        email: email,
+                        password: password,
+                        image: image,
+                        postalCode: postalCode,
+                        intro: intro,
+                        pronouns: pronouns
+                    },
+                    {
+                        new: true,
+                        runValidators: true
+                    }
+                );
+            }
+            throw new AuthenticationError('You need to be logged in!');
         }
     }
 };
