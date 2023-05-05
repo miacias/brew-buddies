@@ -53,13 +53,14 @@ const resolvers = {
     ) => {
       console.log(context.user)
       if (context.user) {
-        /* const editedUser = */ await User.findOneAndUpdate(
+        const editedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           {
             $set: {
               username,
               email,
               password,
+              birthday,
               profilePic,
               postalCode,
               intro,
@@ -72,7 +73,7 @@ const resolvers = {
           }
         );
         // const token = signToken(editedUser);
-        // return { editedUser, token };
+        return { /* token, */user: editedUser };
       }
       throw new AuthenticationError('You need to be logged in!');
     },
