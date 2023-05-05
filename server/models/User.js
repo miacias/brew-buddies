@@ -13,12 +13,38 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      match: [/.+@.+\..+/, "Must match an email address!"],
+      match: [/.+@.+\..+/, "Please enter a valid email address."],
     },
     password: {
       type: String,
       required: true,
-      minlength: 8,
+      min: [8, 'must be at least 8 characters'],
+      max: [25, 'must be less than 25 characters']
+    },
+    postalCode: {
+        type: String,
+        required: false,
+        trim: true
+    },
+    pronouns: {
+        type: String,
+        enum: ['She/Her', 'He/Him', 'They/Them', 'Other', 'Prefer not to say'],
+        required: false
+    },
+    profilePic: {
+        type: String,
+        required: false,
+    },
+    intro: {
+        type: String,
+        required: false,
+        minlength: 0,
+        maxlength: 250,
+        trim: true
+    },
+    birthday: {
+        type: Date,
+        required: true,
     },
     reviews: [
       {
