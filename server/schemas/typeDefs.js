@@ -6,6 +6,10 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
+    profilePic: String
+    postalCode: Int
+    intro: String
+    pronouns: String
     reviews: [Review]
     favBreweries: [Brewery]
     wishBreweries: [Brewery]
@@ -36,7 +40,7 @@ const typeDefs = gql`
 
   type Query {
     users: [User]
-    user(username: String!): User
+    user(_id: ID, username: String): User
     me: User
     breweries: [Brewery]
     brewery: Brewery

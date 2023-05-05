@@ -45,30 +45,33 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    // be sure to send entire object from front-end so that values are not set to "null" (PUT)
-    //  look into PATCH crud operation via apollo graphql (PUT is for entire object change whereas PATCH is one piece)
+    // not working
     editUser: async (
       parent,
       { username, email, password, profilePic, postalCode, intro, pronouns },
       context
     ) => {
       if (context.user) {
-        return User.findOneAndUpdate(
+        /* const editedUser = */ await User.findOneAndUpdate(
           { _id: context.user._id },
           {
-            username,
-            email,
-            password,
-            profilePic,
-            postalCode,
-            intro,
-            pronouns,
+            $set: {
+              username,
+              email,
+              password,
+              profilePic,
+              postalCode,
+              intro,
+              pronouns,
+            },
           },
           {
             new: true,
             runValidators: true,
           }
         );
+        // const token = signToken(editedUser);
+        // return { editedUser, token };
       }
       throw new AuthenticationError('You need to be logged in!');
     },
