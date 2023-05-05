@@ -15,21 +15,30 @@ export const ALL_USERS = gql`
         users {
             _id
             username
-            pronouns
-            birthdate
+            email
+            password
+            birthday
             friendCount
+            intro
+            postalCode
+            profilePic
+            pronouns
         }
     }
 `;
 
 export const GET_USER = gql`
-    query oneUser {
-        user {
+    query oneUser($username: String) {
+        user(username: $username) {
             _id
             username
-            profilePic
-            birthdate
+            email
+            password
+            birthday
+            friendCount
             intro
+            postalCode
+            profilePic
             pronouns
         }
     }

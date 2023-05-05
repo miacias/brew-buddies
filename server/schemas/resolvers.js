@@ -7,9 +7,9 @@ const resolvers = {
     // shows all users with attached reviews
     users: async () => User.find().populate('reviews'),
     // shows specific user with attached reviews
-    user: async (parent, { username }) => {
-      User.findOne({ username }).populate('reviews');
-    },
+    user: async (parent, { username }) =>
+      User.findOne({ username }).populate('reviews'),
+    // shows specific user who is logged in currently with attached reviews
     me: async (parent, args, context) => {
       console.log(context);
       if (context.user) {
@@ -26,8 +26,29 @@ const resolvers = {
     // }
   },
   Mutation: {
-    addUser: async (parent, { username, email, password, profilePic, birthday, postalCode, intro, pronouns }) => {
-      const newUser = await User.create({ username, email, password, profilePic, birthday, postalCode, intro, pronouns });
+    addUser: async (
+      parent,
+      {
+        username,
+        email,
+        password,
+        profilePic,
+        birthday,
+        postalCode,
+        intro,
+        pronouns,
+      }
+    ) => {
+      const newUser = await User.create({
+        username,
+        email,
+        password,
+        profilePic,
+        birthday,
+        postalCode,
+        intro,
+        pronouns,
+      });
       const token = signToken(newUser);
       return { token, user: newUser };
     },
@@ -48,10 +69,19 @@ const resolvers = {
     // not working
     editUser: async (
       parent,
-      { username, email, password, profilePic, postalCode, intro, pronouns },
+      {
+        username,
+        email,
+        password,
+        birthday,
+        profilePic,
+        postalCode,
+        intro,
+        pronouns,
+      },
       context
     ) => {
-      console.log(context.user)
+      console.log(context.user);
       if (context.user) {
         const editedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
@@ -72,8 +102,7 @@ const resolvers = {
             runValidators: true,
           }
         );
-        // const token = signToken(editedUser);
-        return { /* token, */user: editedUser };
+        return { user: editedUser };
       }
       throw new AuthenticationError('You need to be logged in!');
     },
