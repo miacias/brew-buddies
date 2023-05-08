@@ -18,8 +18,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint-config-wesbos": "^3.2.3",
-    "concurrently": "^5.1.0"
+    "concurrently": "^5.1.0",
+    "eslint-config-wesbos": "^3.2.3"
   },
   "bugs": {
     "url": "https://github.com/miacias/project-3/issues"
