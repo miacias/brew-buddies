@@ -78,7 +78,6 @@ const typeDefs = gql`
     # addWishBrewery()
     # removeWishBrewery()
   }
-
 `;
 
 module.exports = typeDefs;
