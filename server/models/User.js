@@ -44,7 +44,7 @@ const userSchema = new Schema(
       trim: true,
     },
     birthday: {
-      type: Date,
+      type: String,
       required: true,
     },
     reviews: [
