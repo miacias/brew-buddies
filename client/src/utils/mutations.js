@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-const ADD_USER = gql`
+export const ADD_USER = gql`
     mutation addUser($username: String!, $email: String!, $password: String!, $birthday: String!, $profilePic: String, $postalCode: String, $intro: String, $pronouns: String) {
         addUser(username: $username, email: $email, password: $password, birthday: $birthday profilePic: $profilePic, postalCode: $postalCode, intro: $intro, pronouns: $pronouns) {
             token
@@ -17,6 +17,7 @@ const ADD_USER = gql`
             }
         }
     }
+  
 `;
 
 export const LOGIN = gql`
@@ -28,7 +29,7 @@ export const LOGIN = gql`
 `;
 
 // error "context is not defined"
-const EDIT_USER = gql`
+export const EDIT_USER = gql`
     mutation editUser($username: String, $email: String, $password: String, $profilePic: String, $postalCode: Int, $intro: String, $pronouns: String) {
         editUser(username: $username, email: $email, password: $password, profilePic: $profilePic, postalCode: $postalCode, intro: $intro, pronouns: $pronouns) {
             user {
