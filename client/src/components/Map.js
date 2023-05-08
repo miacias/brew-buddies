@@ -1,5 +1,6 @@
 import React from 'react';
-import { useJsApiLoader, GoogleMap } from '@react-google-maps/api';
+import { useState } from 'react'
+import { useJsApiLoader, GoogleMap, Marker } from '@react-google-maps/api';
 
 // oldest brewery in USA: Yuengling headquarters
 const center = { lat: 40.68341779790154, lng:-76.19781267415122}
@@ -8,6 +9,7 @@ export default function Map() {
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: 'AIzaSyB3k4AwapYhD-ByAscJM5DLVe00chcNIOY'
     });
+    const [map, setMap] = useState( /** @type google.maps.Map */ (null));
     // shows a loading message on screen before map renders to page
     if (!isLoaded) {
         return (<div>Map loading in progress!</div>)
@@ -20,9 +22,17 @@ export default function Map() {
                 center={center}
                 zoom={15}
                 mapContainerStyle={{width: '100%', height:'100%'}}
+                onLoad={(map) => setMap(map)}
             >
-                {/* display markers, directions, etc. */}
+                {/* possible to add as many markers as needed. */}
+                {/* dynamically render marker components based on returned array of locations */}
+                <Marker position={center}/>
             </GoogleMap>
+            <button 
+                aria-label='center map'
+                // change onclick "center" to first location in array of breweries
+                onClick={() => map.panTo(center)}
+            >Center Map</button>
             {/* <script async
                 src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyB3k4AwapYhD-ByAscJM5DLVe00chcNIOY&callback=${initMap}`}>
             </script> */}
