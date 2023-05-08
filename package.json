@@ -28,7 +28,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
-    "@googlemaps/js-api-loader": "^1.15.1",
+    "dotenv": "^16.0.3",
     "framer-motion": "^10.12.5"
   }
 }
