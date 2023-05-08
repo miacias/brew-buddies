@@ -22,12 +22,13 @@ const userSchema = new Schema(
       max: [25, 'must be less than 25 characters'],
     },
     postalCode: {
-      type: String,
+      type: Number,
       required: false,
       trim: true,
     },
     pronouns: {
       type: String,
+      // may need to remove this strict array. if user selects "other" and inputs custom pronouns, this will break
       enum: ['She/Her', 'He/Him', 'They/Them', 'Other', 'Prefer not to say'],
       required: false,
     },

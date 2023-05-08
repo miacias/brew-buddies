@@ -5,7 +5,7 @@ const expiration = '2h';
 
 module.exports = {
   // protects routes via authentication
-  authMiddleware: function ({ req }) {
+  authMiddleware({ req }) {
     // allows token to be sent via req.body, req.query, or headers
     let token = req.body.token || req.query.token || req.headers.authorization;
     // removes "Bearer", then returns token string
@@ -26,7 +26,7 @@ module.exports = {
     // returns request object to be passed to resolver as 'context'
     return req;
   },
-  signToken: function ({ email, username, _id }) {
+  signToken({ email, username, _id }) {
     const payload = { email, username, _id };
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
