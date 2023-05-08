@@ -3,13 +3,13 @@ import { useState } from 'react'
 import { useJsApiLoader, GoogleMap, Marker } from '@react-google-maps/api';
 
 // oldest brewery in USA: Yuengling headquarters
-const center = { lat: 40.68341779790154, lng:-76.19781267415122}
+const center = { lat: 40.68341779790154, lng:-76.19781267415122 }
 
 export default function Map() {
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: 'AIzaSyB3k4AwapYhD-ByAscJM5DLVe00chcNIOY'
     });
-    const [map, setMap] = useState( /** @type google.maps.Map */ (null));
+    const [map, setMap] = useState( /** @type google.maps.GoogleMap */ (null));
     // shows a loading message on screen before map renders to page
     if (!isLoaded) {
         return (<div>Map loading in progress!</div>)
@@ -18,16 +18,25 @@ export default function Map() {
     return (
         <>
             <div>hi, this is a map</div>
-            <GoogleMap 
-                center={center}
-                zoom={15}
-                mapContainerStyle={{width: '100%', height:'100%'}}
-                onLoad={(map) => setMap(map)}
+            <div 
+                position='absolute'
+                left={0}
+                top={0}
+                height='100%'
+                width='100%' 
             >
-                {/* possible to add as many markers as needed. */}
-                {/* dynamically render marker components based on returned array of locations */}
-                <Marker position={center}/>
-            </GoogleMap>
+                <GoogleMap 
+                    center={center}
+                    zoom={15}
+                    mapContainerStyle={{width: '100%', height:'100%'}}
+                    onLoad={(map) => setMap(map)}
+                >
+                    {/* possible to add as many markers as needed. */}
+                    {/* dynamically render marker components based on returned array of locations */}
+                    <Marker position={center}/>
+                </GoogleMap>
+            </div>
+            
             <button 
                 aria-label='center map'
                 // change onclick "center" to first location in array of breweries
@@ -43,7 +52,7 @@ export default function Map() {
                     // Use the 'v' parameter to indicate the version to load (alpha, beta, weekly, etc.)
                 })}
             </script> */}
-            <div id='map'></div>
+            {/* <div id='map'></div> */}
         </>
     )
 }
