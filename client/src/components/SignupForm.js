@@ -274,10 +274,10 @@ const Signup = () => {
           value={userFormData.pronouns}
           placeholder="Would you like to share your pronouns?"
         >
-          <Option value="he/him">He/Him</Option>
-          <Option value="she/her">She/Her</Option>
-          <Option value="they/them">They/Them</Option>
-          <Option value="other">Other</Option>
+          <Option value="He/Him">He/Him</Option>
+          <Option value="She/Her">She/Her</Option>
+          <Option value="They/Them">They/Them</Option>
+          <Option value="Other">Other</Option>
           <Option value="Prefer-not-to-say">Prefer not to say</Option>
         </Select>
       </Form.Item>
