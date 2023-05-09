@@ -27,13 +27,12 @@ export default function BeerLogo() {
       }, []);
     
     return (
-        <>
-            {/* <div ref={ref}></div> */}
-            <div className={styles.blocLogo}>
-                <canvas id='logo-canvas' className={styles.blocLogoCanvas}></canvas>
-                <a href="index.html" className={styles.logoMask}><img src={`${process.env.PUBLIC_URL}/android-chrome-192x192.png`} alt='frothy beer mug'/></a>
-            </div>
-        </>
-
+        <div className={styles['bloc-logo']}>
+            <canvas id='logo-canvas' ></canvas>
+            <p
+                className={styles['logo-mask']} 
+                style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/android-chrome-192x192.png)`}}
+            >Brew Buddies</p>
+        </div>
     )
 }

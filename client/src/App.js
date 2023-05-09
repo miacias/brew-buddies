@@ -14,7 +14,6 @@ import SingleBrewery from './pages/SingleBrewery';
 import Results from './pages/Results'
 import Header from './components/Header';
 import Footer from './components/Footer';
-import BeerLogo from './components/BeerLogo';
 
 
 const { Content, Sider } = Layout;
@@ -55,7 +54,6 @@ function App() {
   } = theme.useToken();
   return (
     <ApolloProvider client={client}>
-      <BeerLogo/>
       <ConfigProvider
         theme={{
           token: {
