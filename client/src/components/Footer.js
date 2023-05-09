@@ -26,22 +26,25 @@ export default function Footer() {
         }
     ];
     return (
-        <>
-            <h3>Brew Buddies is brought to you by</h3>
+        <footer>
+            <h3 className={styles.footH}>Brew Buddies is brought to you by:</h3>
+            <div className={styles.developers}>
             {contributors.map((coder) => {
                 return (
-                    <div id='developer'>
-                        <p className={styles.coderName}>{coder.name}</p>
-                        <a href={coder.linkedin} className={styles.contactIcon}>
-                            <LinkedinOutlined />
-                        </a>
-                        <a href={coder.github} className={styles.contactIcon}>
-                            <GithubOutlined />
-                        </a>
+                    <div className={styles.devContainer}>
+                        <p className={styles.devName}>{coder.name}</p>
+                        <div className={styles.contact}>
+                            <a href={coder.linkedin} className={styles.contactIcon}>
+                                <LinkedinOutlined />
+                            </a>
+                            <a href={coder.github} className={styles.contactIcon}>
+                                <GithubOutlined />
+                            </a>
+                        </div>
                     </div>
                 )
             })}
-            <div><a href='https://loading.io/asset/659502'></a></div>
-        </>
+            </div>
+        </footer>
     )
-}
+};
