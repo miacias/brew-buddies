@@ -5,6 +5,11 @@
 Documentation referenced:
 
 - [Google Maps React Wrapper](https://github.com/googlemaps/react-wrapper/tree/main) - load Google Maps with React
+- [GranimJS](https://sarcadass.github.io/granim.js/examples.html) - animated color gradients
+
+Tutorials referenced:
+
+- [Tim Mousk](https://timmousk.com/blog/react-get-element-by-id/) - get element by ID with React useEffect
 
 Artist(s):
 
