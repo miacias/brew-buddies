@@ -66,5 +66,12 @@ export const REMOVE_FAV_BREWERY = gql`
 `;
 
 export const ADD_REVIEW = gql`
-
+    mutation addReview($starRating: Int!, $reviewText: String, $breweryId: String) {
+        addReview(starRating: $starRating, reviewText: $reviewText, breweryId: $breweryId) {
+            user {
+                _id
+                username
+            }
+        }
+    }
 `;
