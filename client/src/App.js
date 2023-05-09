@@ -47,7 +47,6 @@ function App() {
   } = theme.useToken();
   return (
     <ApolloProvider client={client}>
-      <MapPage/>
       {/* sets layout for navigation sidebar */}
       <Layout>
         {/* contains side-view, hamburger button, and menu options */}
@@ -101,6 +100,12 @@ function App() {
                       background: colorBgContainer,
                       }}
                     />}
+                />
+                <Route 
+                  path='/search'
+                  element={
+                    <MapPage/>
+                  }
                 />
                 <Route
                   path='/results'
