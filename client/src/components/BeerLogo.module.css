@@ -1,0 +1,21 @@
+.blocLogo {
+    position: relative;
+    width: 130px;
+    height: 49px;
+    float: left;
+}
+
+.blocLogoCanvas,
+.blocLogo .logoMask {
+    display: block;
+    width: 130px;
+    height: 49px;
+}
+
+.blocLogo .logoMask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: 130px;
+    text-indent: -9999px;
+}
