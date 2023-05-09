@@ -8,14 +8,17 @@
   .bloc-logo canvas,
   .bloc-logo .logo-mask {
     display: block;
-    width: 130px;
-    height: 146px;
+    width: 110px;
+    height: 110px;
+    border-radius: 20%;
+    margin: .5em;
   }
   
   .bloc-logo .logo-mask {
     position: absolute;
-    top: 0;
-    left: 0;
-    background-size: 130px;
+    top: 10px;
+    left: 12px;
+    background-size: 90px;
+    background-repeat: no-repeat;
     text-indent: -9999px;
   }
