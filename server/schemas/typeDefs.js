@@ -69,18 +69,12 @@ const typeDefs = gql`
       intro: String
       pronouns: String
     ): Auth
-    # addReview(): Auth
+    addReview(reviewText: String, starRating: Int!, breweryId: String): Auth
     # editReview()
     # addFriend(): User
-    # removeFriend(): User    
-    addFavBrewery(
-      _id: ID!      
-      breweryId: String!
-    ): User
-    removeFavBrewery(
-      _id: ID!
-      breweryId: String!
-    ): User
+    # removeFriend(): User
+    addFavBrewery(_id: ID!, breweryId: String!): User
+    removeFavBrewery(_id: ID!, breweryId: String!): User
     # addWishBrewery()
     # removeWishBrewery()
   }

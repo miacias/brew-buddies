@@ -13,10 +13,10 @@ const reviewSchema = new Schema({
     type: Number,
     required: true,
     min: 1,
-    max: 5
+    max: 5,
   },
   reviewAuthor: {
-    //make functionality to attach username automatically
+    // make functionality to attach username automatically
     type: String,
     required: true,
     trim: true,
@@ -27,9 +27,9 @@ const reviewSchema = new Schema({
     get: (timestamp) => dateFormat(timestamp),
   },
   breweryId: {
-      type: Schema.Types.ObjectId,
-      ref: "Brewery",
-  }
+    type: Schema.Types.ObjectId,
+    ref: 'Brewery',
+  },
 });
 
 const Review = model('Review', reviewSchema);
