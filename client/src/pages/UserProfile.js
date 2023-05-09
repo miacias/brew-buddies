@@ -6,7 +6,7 @@ import Review from "../components/Review";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
 import Auth from "../utils/auth";
-import { ExclamationCircleFilled } from "@ant-design/icons";
+// import { ExclamationCircleFilled } from "@ant-design/icons";
 import styles from './UserProfile.module.css';
 
 export function UserProfile() {
