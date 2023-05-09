@@ -26,10 +26,9 @@ brewerySchema.virtual('avgRating').get(function () {
     let ratingSum = 0;
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < this.reviews.length; i++) {
-      ratingSum += this.reviews[i];
+      ratingSum += this.reviews[i].starRating;
     }
-    // eslint-disable-next-line no-undef
-    return (ratingSum / reviews.length).toFixed(1);
+    return (ratingSum / this.reviews.length).toFixed(1);
   }
   return null;
 });

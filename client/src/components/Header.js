@@ -1,9 +1,12 @@
 import React from 'react';
+import BeerLogo from './BeerLogo';
+
 
 export default function Header() {
     return (
-        <>
-            <h1>This will be a header component.</h1>
-        </>
+        <header>
+            <BeerLogo/>
+            <h1>Brew Buddies</h1>
+        </header>
     )
 }

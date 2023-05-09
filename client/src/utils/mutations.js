@@ -17,7 +17,6 @@ export const ADD_USER = gql`
             }
         }
     }
-  
 `;
 
 export const LOGIN = gql`
@@ -45,4 +44,27 @@ export const EDIT_USER = gql`
             }
         }
     }
+`;
+
+export const ADD_FAV_BREWERY = gql`
+    mutation addFavBrewery($id: ID!, $breweryId: String!) {
+        addFavBrewery(_id: $id, breweryId: $breweryId) {
+            _id
+        favBreweries {
+            _id
+        }
+        }
+    }
+`;
+
+export const REMOVE_FAV_BREWERY = gql`
+    mutation removeFavBrewery($id: ID!, $breweryId: String!) {
+        removeFavBrewery(_id: $id, breweryId: $breweryId) {
+            _id
+        }
+    }
+`;
+
+export const ADD_REVIEW = gql`
+
 `;

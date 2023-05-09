@@ -1,0 +1,32 @@
+footer {
+    font-family: 'g Guargum', sans-serif;
+}
+
+.footH {
+    text-align: center;
+    font-size: x-large;
+}
+
+.developers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.devContainer {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.devName {
+    font-size: x-large;
+    text-align: center;
+}
+
+.contact {
+    font-size: xx-large;
+}
+
+.contactIcon {
+    padding: 1em;
+}
