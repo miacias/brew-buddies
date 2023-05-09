@@ -72,8 +72,11 @@ const typeDefs = gql`
     # addReview(): Auth
     # editReview()
     # addFriend(): User
-    # removeFriend(): User
-    # addFavBrewery()
+    # removeFriend(): User    
+    addFavBrewery(
+      _id: ID!      
+      breweryId: String!
+    ): User
     # removeFavBrewery()
     # addWishBrewery()
     # removeWishBrewery()
