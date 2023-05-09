@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Brewery } = require('../models');
+const { User, Brewery, Review } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -21,9 +21,7 @@ const resolvers = {
     breweries: async () => Brewery.find().populate('reviews'),
     brewery: async ({ breweryId }) =>
       Brewery.findOne({ breweryId }).populate('reviews'),
-    // reviews: async () => {
-    //     return Reviews.find();
-    // }
+    reviews: async () => Review.find(),
   },
   Mutation: {
     addUser: async (
@@ -66,7 +64,6 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    // not working
     editUser: async (
       parent,
       {
@@ -115,6 +112,38 @@ const resolvers = {
             },
           }
         );
+      }
+    },
+    addReview: async (
+      parent,
+      { reviewText, starRating, createdAt, breweryId },
+      context
+    ) => {
+      if (context.user) {
+        const newReview = await Review.create({
+          reviewText,
+          starRating,
+          reviewAuthor: context.user.username,
+          createdAt,
+          breweryId,
+        });
+        const newUserRev = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $addToSet: {
+              reviews: newReview._id,
+            },
+          }
+        );
+        const newBrewRev = await Brewery.findOneAndUpdate(
+          { breweryId },
+          {
+            $addToSet: {
+              reviews: newReview._id,
+            },
+          }
+        );
+        return { review: newReview, user: newUserRev, brewery: newBrewRev };
       }
     },
   },
