@@ -75,3 +75,6 @@ export const ADD_REVIEW = gql`
         }
     }
 `;
+
+export const EDIT_REVIEW = gql`
+`;
