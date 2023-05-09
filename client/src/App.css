@@ -1,5 +1,11 @@
+:root {
+    --amber: #F4900C;
+    --yellow-shadow: #FFAC33;
+    --yellow: #FFCC4D;
+    --foam: #EEEEEE;
+}
+
 .profilePic{
     width: 300px;
     border-radius: 100%;
-   
 }

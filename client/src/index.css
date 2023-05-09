@@ -1,0 +1,16 @@
+:root {
+    --amber: #F4900C;
+    --yellow-shadow: #FFAC33;
+    --yellow: #FFCC4D;
+    --foam: #EEEEEE;
+}
+
+h1 {
+    font-family: 'Braton Composer Stamp Rough', sans-serif;
+    font-size: 2.5em;
+    color: var(--amber);
+}
+
+body {
+    background-color: var(--foam);
+}
