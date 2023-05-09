@@ -77,7 +77,10 @@ const typeDefs = gql`
       _id: ID!      
       breweryId: String!
     ): User
-    # removeFavBrewery()
+    removeFavBrewery(
+      _id: ID!
+      breweryId: String!
+    ): User
     # addWishBrewery()
     # removeWishBrewery()
   }
