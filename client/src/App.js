@@ -8,6 +8,7 @@ import './App.css';
 import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
+import { UserProfile } from './pages/UserProfile';
 import MapPage from './pages/MapPage';
 import SingleBrewery from './pages/SingleBrewery';
 import Results from './pages/Results'
@@ -65,14 +66,20 @@ function App() {
             theme="dark"
             mode="inline"
             defaultSelectedKeys={['4']}
-            items={[UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].map(
-              (icon, index) => ({
-                key: String(index + 1),
-                icon: React.createElement(icon),
-                label: `nav ${index + 1}`,
-              }),
-            )}
-          />
+            ><Menu.Item key="1">
+            <a href="/">Home</a>
+          </Menu.Item>
+          <Menu.Item key="2">
+            <a href="/getMe">Profile Page</a>
+          </Menu.Item>
+          <Menu.Item key="3">
+            <a href="/signup">Sign Up</a>
+          </Menu.Item>
+          <Menu.Item key="4">
+            <a href="/connect">Login</a>
+          </Menu.Item>
+        </Menu>
+
         </Sider>
         {/* sets layout for header, content, and footer */}
         <Layout>
@@ -94,6 +101,17 @@ function App() {
                   path='/'
                   element={
                     <HomePage 
+                      style={{
+                      padding: 24,
+                      minHeight: 360,
+                      background: colorBgContainer,
+                      }}
+                    />}
+                />
+                <Route
+                  path='/getme'
+                  element={
+                    <UserProfile
                       style={{
                       padding: 24,
                       minHeight: 360,
