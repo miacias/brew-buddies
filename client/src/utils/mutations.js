@@ -57,6 +57,13 @@ export const ADD_FAV_BREWERY = gql`
     }
 `;
 
+export const REMOVE_FAV_BREWERY = gql`
+    mutation removeFavBrewery($id: ID!, $breweryId: String!) {
+        removeFavBrewery(_id: $id, breweryId: $breweryId) {
+            _id
+        }
+    }
+`;
 
 export const ADD_REVIEW = gql`
 

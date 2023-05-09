@@ -109,12 +109,16 @@ const resolvers = {
     // adds brewery to user favorites list
     addFavBrewery: async (parent, { breweryId }, context) => {
       if (context.user) {
+        console.log(breweryId);
         return User.findOneAndUpdate(
           { _id: context.user._id },
           {
             $addToSet: {
               favBreweries: breweryId,
             },
+          },
+          {
+            new: true,
           }
         );
       }
@@ -155,6 +159,18 @@ const resolvers = {
           }
         );
         return { review: newReview, user: newUserRev, brewery: newBrewRev };
+      }
+    },
+    removeFavBrewery: async (parent, { breweryId }, context) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $pull: {
+              favBreweries: breweryId,
+            },
+          }
+        );
       }
     },
   },
