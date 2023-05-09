@@ -19,8 +19,7 @@ const resolvers = {
     // shows all breweries with attached reviews
     breweries: async () => Brewery.find().populate('reviews'),
     // shows specific brewery with attached reviews
-    brewery: async ({ breweryId }) =>
-      Brewery.findOne({ breweryId }).populate('reviews'),
+    brewery: async (id) => Brewery.findOne({ id }).populate('reviews'),
     // shows all reviews from Review model
     reviews: async () => Review.find(),
   },
