@@ -1,10 +1,11 @@
 import React from 'react';
+import styles from './App.module.css';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
+// import './App.css';
 import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
@@ -60,6 +61,7 @@ function App() {
           onCollapse={(collapsed, type) => {
             console.log(collapsed, type);
           }}
+          className={styles.nav}
         >
           <div className="logo" />
           <Menu
