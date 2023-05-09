@@ -6,8 +6,8 @@ import Review from "../components/Review";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
 import Auth from "../utils/auth";
-import { ExclamationCircleFilled } from "@ant-design/icons";
-import "../App.css";
+// import { ExclamationCircleFilled } from "@ant-design/icons";
+import styles from './UserProfile.module.css';
 
 export function UserProfile() {
   const { loading, data } = useQuery(GET_ME);
@@ -27,15 +27,15 @@ export function UserProfile() {
           <div>
             {imageData ? (
               <img
-                className="profilePic"
+                className={styles.profilePic}
                 src={imageData}
-                alt="Database Image"
+                alt="Database profile"
               />
             ) : (
               <img
-                className="profilePic"
+                className={styles.profilePic}
                 src={profilePic}
-                alt="Default Image"
+                alt="Default profile"
               />
             )}
           </div>

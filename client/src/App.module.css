@@ -7,13 +7,3 @@
     --pale-ale: #FFE84D;
     --lavender: #C7A5D9;
 }
-
-h1 {
-    font-family: 'Braton Composer Stamp Rough', sans-serif;
-    font-size: 2.5em;
-    color: var(--amber);
-}
-
-body {
-    background-color: var(--foam);
-}
