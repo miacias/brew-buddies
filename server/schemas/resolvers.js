@@ -105,6 +105,24 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    addFavBrewery: async (
+      parent,
+      {
+        breweryId
+      },
+      context
+    ) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $addToSet: {
+              favBreweries:  breweryId 
+            }
+          },
+        )
+      }
+    },
   },
 };
 
