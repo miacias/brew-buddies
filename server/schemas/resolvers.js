@@ -113,16 +113,36 @@ const resolvers = {
       context
     ) => {
       if (context.user) {
+        console.log(breweryId);
         return User.findOneAndUpdate(
           { _id: context.user._id },
           {
             $addToSet: {
-              favBreweries:  breweryId 
+              favBreweries:  breweryId
             }
           },
+          {
+            new:true
+          }
         )
       }
     },
+    removeFavBrewery: async (
+      parent,
+      { breweryId },
+      context
+    ) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          { 
+            $pull: { 
+            favBreweries: breweryId
+            }
+          }
+        )
+      }
+    }
   },
 };
 
