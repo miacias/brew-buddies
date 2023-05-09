@@ -69,13 +69,7 @@ const typeDefs = gql`
       intro: String
       pronouns: String
     ): Auth
-    addReview(
-      reviewText: String
-      starRating: Int!
-      reviewAuthor: String!
-      createdAt: String
-      breweryId: ID
-    ): Auth
+    addReview(reviewText: String, starRating: Int!, breweryId: ID): Auth
     # editReview()
     # addFriend(): User
     # removeFriend(): User

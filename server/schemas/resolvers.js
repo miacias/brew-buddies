@@ -11,7 +11,6 @@ const resolvers = {
       User.findOne({ username }).populate('reviews'),
     // shows specific user who is logged in currently with attached reviews
     me: async (parent, args, context) => {
-      console.log(context);
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('reviews');
       }
@@ -123,7 +122,7 @@ const resolvers = {
     // adds review to User, Brewery, and Review models
     addReview: async (
       parent,
-      { reviewText, starRating, createdAt, breweryId },
+      { reviewText, starRating, breweryId },
       context
     ) => {
       if (context.user) {
@@ -131,7 +130,6 @@ const resolvers = {
           reviewText,
           starRating,
           reviewAuthor: context.user.username,
-          createdAt,
           breweryId,
         });
         const newUserRev = await User.findOneAndUpdate(
@@ -140,14 +138,20 @@ const resolvers = {
             $addToSet: {
               reviews: newReview._id,
             },
+          },
+          {
+            new: true,
           }
         );
         const newBrewRev = await Brewery.findOneAndUpdate(
-          { breweryId },
+          { _id: breweryId },
           {
             $addToSet: {
               reviews: newReview._id,
             },
+          },
+          {
+            new: true,
           }
         );
         return { review: newReview, user: newUserRev, brewery: newBrewRev };

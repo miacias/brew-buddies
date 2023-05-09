@@ -56,3 +56,8 @@ export const ADD_FAV_BREWERY = gql`
         }
     }
 `;
+
+
+export const ADD_REVIEW = gql`
+
+`;
