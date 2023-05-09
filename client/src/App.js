@@ -8,6 +8,7 @@ import './App.css';
 import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
+import MapPage from './pages/MapPage';
 import SingleBrewery from './pages/SingleBrewery';
 import Results from './pages/Results'
 import Header from './components/Header';
@@ -99,6 +100,12 @@ function App() {
                       background: colorBgContainer,
                       }}
                     />}
+                />
+                <Route 
+                  path='/search'
+                  element={
+                    <MapPage/>
+                  }
                 />
                 <Route
                   path='/results'
