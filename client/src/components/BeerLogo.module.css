@@ -17,9 +17,12 @@
 .bloc-logo .logo-mask {
     position: absolute;
     top: 10px;
-    left: -12px;
+    /* right-facing mug */
+    /* left: -12px;
+    transform: rotateY(180deg); */
+    /* left-facing mug */
+    left: 12px;
     background-size: 90px;
     background-repeat: no-repeat;
     text-indent: -9999px;
-    transform: rotateY(180deg);
 }
