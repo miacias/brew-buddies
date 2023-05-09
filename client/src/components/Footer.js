@@ -30,8 +30,8 @@ export default function Footer() {
             <h3>Brew Buddies is brought to you by</h3>
             {contributors.map((coder) => {
                 return (
-                    <div>
-                        <p className={styles.coder}>{coder.name}</p>
+                    <div id='developer'>
+                        <p className={styles.coderName}>{coder.name}</p>
                         <a href={coder.linkedin} className={styles.contactIcon}>
                             <LinkedinOutlined />
                         </a>
@@ -41,6 +41,7 @@ export default function Footer() {
                     </div>
                 )
             })}
+            <div><a href='https://loading.io/asset/659502'></a></div>
         </>
     )
 }

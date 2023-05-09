@@ -1,0 +1,114 @@
+<svg 
+    xml:space='preserve' 
+    viewBox='0 0 100 100' 
+    y="0" 
+    x="0" 
+    xmlns="http://www.w3.org/2000/svg"
+    id="圖層_1"
+    version="1.1"
+    style="height: 100%; width: 100%; background: rgb(255, 255, 255);"
+    width="203px"
+    height="203px"
+>
+    <g
+        class="ldl-scale"
+        style="transform-origin: 50% 50%; transform: rotate(0deg) scale(0.8, 0.8);"
+    >
+        <animate attributeName="rx" values="0;50;0" dur="5s" repeatCount="indefinite" />
+
+        <g
+            class="ldl-ani"
+            style="transform: scale(1); transform-origin: 50px 50px; animation: 1.11111s linear 0s infinite reverse forwards running beat-05cdc1ab-27ed-425b-bbcd-c3f0d1634685;"
+        >
+            <g class="ldl-layer">
+                <g class="ldl-ani">
+                    <path 
+                        stroke-miterlimit="10" 
+                        stroke-width="3.5" 
+                        stroke="#333" 
+                        fill="#e0e0e0" 
+                        d="M73.22 36.959H60.015v8.733H73.22a3.634 3.634 0 0 1 3.63 3.629v14.033a3.633 3.633 0 0 1-3.63 3.629H60.015v8.733H73.22c6.817 0 12.363-5.546 12.363-12.362V49.321c0-6.816-5.546-12.362-12.363-12.362z" 
+                        style="fill: rgb(224, 224, 224); stroke: rgb(51, 51, 51);"
+                    ></path>
+                </g>
+            </g>
+            <g class="ldl-layer">
+                <g class="ldl-ani">
+                    <path 
+                        stroke-miterlimit="10" 
+                        stroke-width="3.5" 
+                        stroke="#333" 
+                        fill="#e0e0e0" 
+                        d="M59.256 90H29.898a8.28 8.28 0 0 1-8.28-8.28V30.424h45.917V81.72A8.278 8.278 0 0 1 59.256 90z" 
+                        style="fill: rgb(224, 224, 224); stroke: rgb(51, 51, 51);"
+                    ></path>
+                </g>
+            </g>
+            <g class="ldl-layer">
+                <g class="ldl-ani">
+                    <path 
+                    fill="#f8b26a" 
+                    d="M56.702 84.814h-24.25a5.373 5.373 0 0 1-5.373-5.373V37.654c0-.325.263-.588.588-.588h33.82c.325 0 .588.263.588.588V79.44a5.374 5.374 0 0 1-5.373 5.374z" 
+                    style="fill: rgb(248, 178, 106);"
+                ></path>
+                </g>
+            </g>
+            <g class="ldl-layer">
+                <g class="ldl-ani">
+                    <path 
+                        stroke-miterlimit="10" 
+                        stroke-width="3.5" 
+                        stroke="#000" 
+                        opacity=".2" 
+                        d="M73.22 36.959h-5.684v-6.535H44.577V90h14.679a8.28 8.28 0 0 0 8.28-8.28v-6.004h5.684c6.817 0 12.363-5.546 12.363-12.362V49.321c0-6.816-5.546-12.362-12.363-12.362zm3.629 26.395a3.633 3.633 0 0 1-3.63 3.629h-5.684V45.692h5.684a3.634 3.634 0 0 1 3.63 3.629v14.033z" 
+                        style=""
+                    ></path>
+                </g>
+            </g>
+            <g class="ldl-layer">
+                <g class="ldl-ani">
+                    <path 
+                        stroke-miterlimit="10" 
+                        stroke-width="3.5" 
+                        stroke="#333" 
+                        fill="#fff" 
+                        d="M61.418 12.399c-4.536 0-8.375 2.971-9.686 7.072a5.932 5.932 0 0 0-4.525-2.092 5.95 5.95 0 0 0-5.462 3.591 10.138 10.138 0 0 0-4.251-.938c-.288 0-.572.02-.854.043a7.34 7.34 0 0 0 .515-2.696 7.375 7.375 0 0 0-14.728-.6l-.03-.002a7.98 7.98 0 0 0 0 15.96 7.943 7.943 0 0 0 4.949-1.727c.088 1.144.375 2.23.809 3.237V46.95a4.459 4.459 0 1 0 8.918 0v-6.563c.141.006.279.02.422.02 2.65 0 5.056-1.02 6.868-2.678.262.239.539.461.824.673v30.919a4.459 4.459 0 1 0 8.918 0V39.987a10.203 10.203 0 0 0 6.992-7.265c.108.003.214.016.322.016 5.616 0 10.17-4.553 10.17-10.17-.001-5.616-4.554-10.169-10.171-10.169z" 
+                        style="fill: rgb(255, 255, 255); stroke: rgb(51, 51, 51);"
+                    ></path>
+                </g>
+            </g>
+            <g class="ldl-layer">
+                <g class="ldl-ani">
+                    <path 
+                        d="M31.5 59v10.5" 
+                        stroke-miterlimit="10" 
+                        stroke-linecap="round" 
+                        stroke-width="3.5" 
+                        stroke="#fff" 
+                        fill="none" 
+                        style="stroke: rgb(255, 255, 255);"
+                    ></path>
+                </g>
+            </g>
+            <g class="ldl-layer">
+                <g class="ldl-ani">
+                    <path 
+                        d="M31.5 75.717v1.613" 
+                        stroke-miterlimit="10" 
+                        stroke-linecap="round" 
+                        stroke-width="3.5" 
+                        stroke="#fff" 
+                        fill="none" 
+                        style="stroke: rgb(255, 255, 255);"
+                    ></path>
+                </g>
+            </g>
+            <metadata xmlns:d="https://loading.io/stock/">
+                <d:name>beer</d:name>
+                <d:tags>beer,brew,brewage,cheer,bar,party,knock back,ale,lager,stout,shandy,bitter,cup</d:tags>
+                <d:license>by</d:license>
+                <d:slug>j06th1</d:slug>
+            </metadata>  
+        </g>      
+    </g>
+</svg>
