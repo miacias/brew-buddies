@@ -5,20 +5,21 @@
     float: left;
   }
   
-  .bloc-logo canvas,
-  .bloc-logo .logo-mask {
+.bloc-logo canvas,
+.bloc-logo .logo-mask {
     display: block;
     width: 110px;
     height: 110px;
     border-radius: 20%;
     margin: .5em;
-  }
+}
   
-  .bloc-logo .logo-mask {
+.bloc-logo .logo-mask {
     position: absolute;
     top: 10px;
-    left: 12px;
+    left: -12px;
     background-size: 90px;
     background-repeat: no-repeat;
     text-indent: -9999px;
-  }
+    transform: rotateY(180deg);
+}
