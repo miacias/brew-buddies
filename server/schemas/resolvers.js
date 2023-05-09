@@ -17,13 +17,16 @@ const resolvers = {
       }
       throw new AuthenticationError('Please log in to do this.');
     },
-    // probably won't use "breweries"
+    // shows all breweries with attached reviews
     breweries: async () => Brewery.find().populate('reviews'),
+    // shows specific brewery with attached reviews
     brewery: async ({ breweryId }) =>
       Brewery.findOne({ breweryId }).populate('reviews'),
+    // shows all reviews from Review model
     reviews: async () => Review.find(),
   },
   Mutation: {
+    // creates new user and connects user to site
     addUser: async (
       parent,
       {
@@ -50,6 +53,7 @@ const resolvers = {
       const token = signToken(newUser);
       return { token, user: newUser };
     },
+    // connects returning user to site
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
       if (!user) {
@@ -64,6 +68,7 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    // edits user data
     editUser: async (
       parent,
       {
@@ -102,6 +107,7 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    // adds brewery to user favorites list
     addFavBrewery: async (parent, { breweryId }, context) => {
       if (context.user) {
         return User.findOneAndUpdate(
@@ -114,6 +120,7 @@ const resolvers = {
         );
       }
     },
+    // adds review to User, Brewery, and Review models
     addReview: async (
       parent,
       { reviewText, starRating, createdAt, breweryId },
