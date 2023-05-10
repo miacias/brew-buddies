@@ -1,6 +1,7 @@
 import React from 'react';
 import { AudioOutlined } from '@ant-design/icons';
-import { Input, Space, Row } from 'antd';
+import { Input, Space, Row} from 'antd';
+import LogoutButton from './LogoutButton';
 const { Search } = Input;
 
 export default function Header() {
@@ -17,6 +18,7 @@ export default function Header() {
                 width: 200,
             }}
             />
+            <LogoutButton/>
             </Row>
         </>
     )
