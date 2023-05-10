@@ -17,14 +17,17 @@
 
 
 import { Card, Col, Row } from 'antd';
-const breweryCard = () => (
+
+const breweryCard = (props) => {
+  return (
     <Col span={8}>
-      <Card title="Brewery name (brewery_type)" bordered={false}>
-        address_1
-        city
-        <a href="/SingleBrewery">Click here for more information!</a>
+      <Card title={props.brewery.name} bordered={false}>
+        <p>Brewery Type: {props.brewery.brewery_type}</p>
+        <p>Address: {props.brewery.street}, {props.brewery.city}, {props.brewery.state} {props.brewery.postal_code}</p>
+        <p><a href="/SingleBrewery">Click here for more information!</a></p>
       </Card>
     </Col>
+  )
+};
 
-);
 export default breweryCard;

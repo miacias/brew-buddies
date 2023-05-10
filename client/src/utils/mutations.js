@@ -65,6 +65,6 @@ export const REMOVE_FAV_BREWERY = gql`
     }
 `;
 
-export const ADD_REVIEW = gql`
+// export const ADD_REVIEW = gql`
 
-`;
+// `;
