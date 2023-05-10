@@ -11,7 +11,7 @@ import SignupPage from './pages/SignupPage';
 import { UserProfile } from './pages/UserProfile';
 import MapPage from './pages/MapPage';
 import SingleBrewery from './pages/SingleBrewery';
-import Results from './pages/Results'
+import BreweryApi from './components/BreweryApi'
 import { AccountPage } from './pages/AccountPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -61,14 +61,18 @@ function App() {
     },
     {
       key: "2",
-      label: (<a href="/getMe">Profile Page</a>)
+      label: (<a href="/breweries">Breweries</a>)
     },
     {
       key: "3",
-      label: (<a href="/signup">Sign Up</a>)
+      label: (<a href="/profile">Profile Page</a>)
     },
     {
       key: "4",
+      label: (<a href="/signup">Sign Up</a>)
+    },
+    {
+      key: "5",
       label: (<a href="/connect">Login</a>)
     }
   ]
@@ -134,7 +138,7 @@ function App() {
                       />}
                   />
                   <Route
-                    path='/getme'
+                    path='/profile'
                     element={
                       <AccountPage
                         style={{
@@ -144,16 +148,16 @@ function App() {
                         }}
                       />}
                   />
-                  <Route 
+                  {/* <Route 
                     path='/search'
                     element={
                       <MapPage/>
                     }
-                  />
+                  /> */}
                   <Route
-                    path='/results'
+                    path='/breweries'
                     element={
-                      <Results
+                      <BreweryApi
                         style={{
                         padding: 24,
                         minHeight: 360,

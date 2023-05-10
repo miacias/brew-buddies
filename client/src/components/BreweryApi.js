@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import BreweryCard from '../components/BreweryCard'
+import BreweryCard from './BreweryCard'
 
-export default function Results() {
+export default function BreweryApi() {
     const [breweryList, setBreweryList] = useState(null);
     const [zipInput, setZipInput] = useState('');
     const searchByZipAPI = `https://api.openbrewerydb.org/v1/breweries?by_postal=${zipInput}&per_page=5`;
