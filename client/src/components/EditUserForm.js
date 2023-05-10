@@ -38,8 +38,7 @@ const tailFormItemLayout = {
 };
 export const EditUserForm = () => {
   const [form] = Form.useForm();
- 
-  
+
   // set initial form state
   const [userFormData, setUserFormData] = useState({
     username: "",
@@ -52,10 +51,10 @@ export const EditUserForm = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [editUser, { error }] = useMutation(EDIT_USER);
   const { loading, data } = useQuery(GET_ME);
-    const userData = data?.me || {};
-    if (!userData) {
-      return <h2>Please log in!</h2>;
-    }
+  const userData = data?.me || {};
+  if (!userData) {
+    return <h2>Please log in!</h2>;
+  }
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -123,7 +122,6 @@ export const EditUserForm = () => {
             required: false,
             message: "Please input your E-mail!",
           },
-
         ]}
       >
         <Input
@@ -148,7 +146,7 @@ export const EditUserForm = () => {
       >
         <Input.Password
           className="site-form-item-icon"
-        //   type="password"
+          //   type="password"
           placeholder="Password"
           name="password"
           onChange={handleInputChange}
@@ -180,7 +178,7 @@ export const EditUserForm = () => {
       >
         <Input.Password
           className="site-form-item-icon"
-        //   type="password"
+          //   type="password"
           placeholder="Confirm Password"
           name="confirm"
           onChange={handleInputChange}
@@ -311,7 +309,7 @@ export const EditUserForm = () => {
 
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
-            Update
+          Update
         </Button>
       </Form.Item>
     </Form>
