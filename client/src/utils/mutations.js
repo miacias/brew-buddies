@@ -77,4 +77,9 @@ export const ADD_REVIEW = gql`
 `;
 
 export const EDIT_REVIEW = gql`
+    mutation editReview($reviewId: ID!, $reviewText: String, $starRating: Int) {
+        editReview(id: $reviewId, reviewText: $reviewText, starRating: $starRating) {
+            _id
+        }
+    }
 `;
