@@ -38,7 +38,6 @@ const tailFormItemLayout = {
 };
 export const EditUserForm = () => {
   const [form] = Form.useForm();
-
   // set initial form state
   const [userFormData, setUserFormData] = useState({
     // username: "",
@@ -60,6 +59,7 @@ export const EditUserForm = () => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
+
   const handleSelectChange = (value) => {
     setUserFormData({
       ...userFormData,
@@ -67,19 +67,22 @@ export const EditUserForm = () => {
     });
   };
 
-
   const handleFormSubmit = async (event) => {
+    ////////////// FILTERS OUT EMPTY STRINGS SO WE CAN SEND THE DATA OVER AND NOT BREAK APOLLO
+    const filteredData = Object.entries(userFormData)
+      .filter(([_, value]) => value !== "")
+      .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
     try {
       console.log(userFormData);
       const { data } = await editUser({
-        variables: { ...userFormData },
+        variables: { input: { ...filteredData } },
       });
 
       if (!data) {
         throw new Error("something went wrong!");
       }
 
-      Auth.login(data.editUser.token);
+      // Auth.login(data.editUser.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
@@ -89,7 +92,7 @@ export const EditUserForm = () => {
       profilePic: "",
       postalCode: "",
       intro: "",
-      pronouns: ""
+      pronouns: "",
     });
   };
   return (
