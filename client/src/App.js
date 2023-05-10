@@ -1,5 +1,4 @@
 import React from 'react';
-// import styles from './App.module.css';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 // import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Layout, Menu, ConfigProvider, theme } from 'antd';
@@ -9,7 +8,7 @@ import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
 import { UserProfile } from './pages/UserProfile';
-import MapPage from './pages/SearchPage';
+// import MapPage from './pages/SearchPage';
 import SingleBrewery from './pages/SingleBrewery';
 import BreweryApi from './components/BreweryApi'
 import { AccountPage } from './pages/AccountPage';
