@@ -12,6 +12,7 @@ import { UserProfile } from './pages/UserProfile';
 import MapPage from './pages/MapPage';
 import SingleBrewery from './pages/SingleBrewery';
 import Results from './pages/Results'
+import { AccountPage } from './pages/AccountPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -52,6 +53,24 @@ function App() {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  const items = [
+    {
+      key: "1",
+      label: (<a href="/">Home</a>)
+    },
+    {
+      key: "2",
+      label: (<a href="/getMe">Profile Page</a>)
+    },
+    {
+      key: "3",
+      label: (<a href="/signup">Sign Up</a>)
+    },
+    {
+      key: "4",
+      label: (<a href="/connect">Login</a>)
+    }
+  ]
   return (
     <ApolloProvider client={client}>
       <ConfigProvider
@@ -82,19 +101,8 @@ function App() {
               theme="dark"
               mode="inline"
               defaultSelectedKeys={['4']}
-              ><Menu.Item key="1">
-              <a href="/">Home</a>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <a href="/getMe">Profile Page</a>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <a href="/signup">Sign Up</a>
-            </Menu.Item>
-            <Menu.Item key="4">
-              <a href="/connect">Login</a>
-            </Menu.Item>
-          </Menu>
+              items={items} />
+
 
           </Sider>
           {/* sets layout for header, content, and footer */}
@@ -127,7 +135,7 @@ function App() {
                   <Route
                     path='/getme'
                     element={
-                      <UserProfile
+                      <AccountPage
                         style={{
                         padding: 24,
                         minHeight: 360,
