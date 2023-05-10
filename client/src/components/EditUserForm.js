@@ -226,7 +226,7 @@ export const EditUserForm = () => {
       </Form.Item>
       <Form.Item
         name="postalCode"
-        label="postalCode"
+        label="Postal Code"
         rules={[
           {
             required: false,
