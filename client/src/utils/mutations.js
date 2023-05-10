@@ -65,6 +65,7 @@ export const REMOVE_FAV_BREWERY = gql`
     }
 `;
 
+<<<<<<< HEAD
 export const ADD_REVIEW = gql`
     mutation addReview($starRating: Int!, $reviewText: String, $breweryId: String) {
         addReview(starRating: $starRating, reviewText: $reviewText, breweryId: $breweryId) {
@@ -83,3 +84,8 @@ export const EDIT_REVIEW = gql`
         }
     }
 `;
+=======
+// export const ADD_REVIEW = gql`
+
+// `;
+>>>>>>> 1ce30e7a41219e090af4893bb32c72f14c4c1b5a
