@@ -39,12 +39,10 @@ export function UserProfile() {
               />
             )}
           </div>
-          {/* <div>{userData.birthday}</div> */}
         </Col>
         <Col>
           <h2>{userData.username} {userData.postalCode}</h2>
           <div>{userData.birthday}</div>
-          {/* <h2>{userData.postalCode}</h2> */}
           <div>{userData.pronouns}</div>
           <div>{userData.intro}</div>
         </Col>

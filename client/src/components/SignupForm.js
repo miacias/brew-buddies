@@ -214,9 +214,9 @@ const Signup = () => {
       >
         <Input
           placeholder="Image Link"
-          name="image"
+          name="profilePic"
           onChange={handleInputChange}
-          value={userFormData.image}
+          value={userFormData.profilePic}
         />
       </Form.Item>
       <Form.Item
