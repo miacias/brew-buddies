@@ -9,7 +9,7 @@ import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
 import { UserProfile } from './pages/UserProfile';
-import MapPage from './pages/MapPage';
+import MapPage from './pages/SearchPage';
 import SingleBrewery from './pages/SingleBrewery';
 import BreweryApi from './components/BreweryApi'
 import { AccountPage } from './pages/AccountPage';

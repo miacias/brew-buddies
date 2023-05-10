@@ -23,6 +23,25 @@ export default function BreweryApi() {
         setZipInput('');
     };
 
+    if (breweryList === null) {
+        return (
+            <div>
+                <form>
+                    <input
+                        value={zipInput}
+                        onChange={handleInput}
+                        id="searchInput"
+                        type="text"
+                        placeholder="Search by Postal Code"
+                        name="search"
+                    />
+                    <button htmlFor="search" onClick={searchAPI}>Search 🔍</button>
+            </form>
+                <p>No results to show!</p>
+            </div>
+        )
+    }
+
     return (
         <div>
             <form>
@@ -36,10 +55,18 @@ export default function BreweryApi() {
                 />
                 <button htmlFor="search" onClick={searchAPI}>Search 🔍</button>
             </form>
-            {breweryList ? <p>Showing results for: {(breweryList[0].postal_code).slice(0, 5)}</p> : ""}
-            {breweryList && breweryList.map((brewery) => (
-                <BreweryCard brewery={brewery} key={brewery.id}/>
-            ))}
+            {breweryList.length > 0 ? 
+            (
+                <>
+                    <p>Showing results for: {(breweryList[0].postal_code).slice(0, 5)}</p>
+                    {breweryList && breweryList.map((brewery) => (
+                        <BreweryCard brewery={brewery} key={brewery.id}/>
+                    ))}
+                </>
+            ) :
+            (
+                <p>No results to show!</p>
+            )}
         </div>
     )
 };
