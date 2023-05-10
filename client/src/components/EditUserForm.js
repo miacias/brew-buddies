@@ -86,12 +86,10 @@ export const EditUserForm = () => {
     }
 
     setUserFormData({
-      input: {
       profilePic: "",
       postalCode: "",
       intro: "",
       pronouns: ""
-      }
     });
   };
   return (
@@ -218,9 +216,9 @@ export const EditUserForm = () => {
       >
         <Input
           placeholder={userData.profilePic}
-          name="image"
+          name="profilePic"
           onChange={handleInputChange}
-          value={userFormData.image}
+          value={userFormData.profilePic}
         />
       </Form.Item>
       <Form.Item
