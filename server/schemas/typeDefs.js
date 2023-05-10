@@ -44,7 +44,7 @@ const typeDefs = gql`
     user(username: String): User
     me: User
     breweries: [Brewery]
-    brewery: Brewery
+    brewery(breweryId: String): Brewery
     reviews: [Review]
   }
 
