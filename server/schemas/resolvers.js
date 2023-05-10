@@ -122,6 +122,19 @@ const resolvers = {
         );
       }
     },
+    // removes brewery from user favorites list
+    removeFavBrewery: async (parent, { breweryId }, context) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $pull: {
+              favBreweries: breweryId,
+            },
+          }
+        );
+      }
+    },
     // adds review to User, Brewery, and Review models
     addReview: async (
       parent,
@@ -160,16 +173,25 @@ const resolvers = {
         return { review: newReview, user: newUserRev, brewery: newBrewRev };
       }
     },
-    removeFavBrewery: async (parent, { breweryId }, context) => {
+    // allows user to change review for a brewery
+    editReview: async (
+      parent,
+      { reviewId, reviewText, starRating },
+      context
+    ) => {
       if (context.user) {
-        return User.findOneAndUpdate(
-          { _id: context.user._id },
+        // edits Review model
+        const revEdit = await Review.findOneAndUpdate(
+          { _id: reviewId },
           {
-            $pull: {
-              favBreweries: breweryId,
-            },
+            reviewText: reviewText ? `Edited: ${reviewText}` : reviewText,
+            starRating,
+          },
+          {
+            new: true,
           }
         );
+        return revEdit;
       }
     },
   },

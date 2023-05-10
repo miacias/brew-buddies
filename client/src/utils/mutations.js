@@ -65,6 +65,28 @@ export const REMOVE_FAV_BREWERY = gql`
     }
 `;
 
-// export const ADD_REVIEW = gql`
+export const ADD_REVIEW = gql`
+    mutation addReview($starRating: Int!, $reviewText: String, $breweryId: String) {
+        addReview(starRating: $starRating, reviewText: $reviewText, breweryId: $breweryId) {
+            user {
+                _id
+                username
+            }
+        }
+    }
+`;
 
-// `;
+export const EDIT_REVIEW = gql`
+    mutation editReview($reviewId: ID!, $starRating: Int, $reviewText: String) {
+        editReview(reviewId: $reviewId, starRating: $starRating, reviewText: $reviewText) {
+            _id
+            reviewText
+            starRating
+            reviewAuthor
+            createdAt
+            breweryId {
+                _id
+            }
+        }
+    }
+`;
