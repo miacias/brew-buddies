@@ -1,7 +1,8 @@
 import { AutoComplete, Button, Form, Input, Select } from "antd";
 import { useState } from "react";
-import { useMutation } from "@apollo/client";
-import { ADD_USER } from "../utils/mutations";
+import { useMutation, useQuery } from "@apollo/client";
+import { EDIT_USER } from "../utils/mutations";
+import { GET_ME } from "../utils/queries";
 import Auth from "../utils/auth";
 const { Option } = Select;
 
@@ -35,25 +36,30 @@ const tailFormItemLayout = {
     },
   },
 };
-const Signup = () => {
+export const EditUserForm = () => {
   const [form] = Form.useForm();
-
   // set initial form state
   const [userFormData, setUserFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
+    // username: "",
+    // email: "",
+    // password: "",
   });
   // set state for form validation
   const [validated] = useState(false);
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
-  const [addUser, { error }] = useMutation(ADD_USER);
+  const [editUser, { error }] = useMutation(EDIT_USER);
+  const { loading, data } = useQuery(GET_ME);
+  const userData = data?.me || {};
+  if (!userData) {
+    return <h2>Please log in!</h2>;
+  }
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
+
   const handleSelectChange = (value) => {
     setUserFormData({
       ...userFormData,
@@ -62,39 +68,38 @@ const Signup = () => {
   };
 
   const handleFormSubmit = async (event) => {
+    ////////////// FILTERS OUT EMPTY STRINGS SO WE CAN SEND THE DATA OVER AND NOT BREAK APOLLO
+    const filteredData = Object.entries(userFormData)
+      .filter(([_, value]) => value !== "")
+      .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
     try {
       console.log(userFormData);
-      const { data } = await addUser({
-        variables: { ...userFormData },
+      const { data } = await editUser({
+        variables: { input: { ...filteredData } },
       });
 
       if (!data) {
         throw new Error("something went wrong!");
       }
 
-      Auth.login(data.addUser.token);
+      // Auth.login(data.editUser.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
 
     setUserFormData({
-      email: "",
-      password: "",
-      confirm: "",
-      username: "",
       profilePic: "",
       postalCode: "",
       intro: "",
       pronouns: "",
-      birthday: "",
     });
   };
   return (
     <Form
       {...formItemLayout}
       form={form}
-      name="register"
+      name="update"
       onFinish={handleFormSubmit}
       initialValues={{
         prefix: "86",
@@ -104,7 +109,7 @@ const Signup = () => {
       }}
       scrollToFirstError
     >
-      <Form.Item
+      {/* <Form.Item
         name="email"
         label="E-mail"
         rules={[
@@ -113,7 +118,7 @@ const Signup = () => {
             message: "The input is not valid E-mail!",
           },
           {
-            required: true,
+            required: false,
             message: "Please input your E-mail!",
           },
         ]}
@@ -121,18 +126,18 @@ const Signup = () => {
         <Input
           className="site-form-item-icon"
           name="email"
-          placeholder="Email"
+          placeholder={userData.email}
           onChange={handleInputChange}
           value={userFormData.email}
         />
-      </Form.Item>
+      </Form.Item> */}
 
-      <Form.Item
+      {/* <Form.Item
         name="password"
         label="Password"
         rules={[
           {
-            required: true,
+            required: false,
             message: "Please input your password!",
           },
         ]}
@@ -140,23 +145,23 @@ const Signup = () => {
       >
         <Input.Password
           className="site-form-item-icon"
-          type="password"
+          //   type="password"
           placeholder="Password"
           name="password"
           onChange={handleInputChange}
           value={userFormData.password}
         />
-      </Form.Item>
+      </Form.Item> */}
 
-      <Form.Item
+      {/* <Form.Item
         name="confirm"
-        label="Confirm Password"
+        label="Confirm new Password"
         dependencies={["password"]}
         hasFeedback
         rules={[
           {
-            required: true,
-            message: "Please confirm your password!",
+            required: false,
+            message: "Please confirm your new password!",
           },
           ({ getFieldValue }) => ({
             validator(_, value) {
@@ -172,33 +177,33 @@ const Signup = () => {
       >
         <Input.Password
           className="site-form-item-icon"
-          type="password"
+          //   type="password"
           placeholder="Confirm Password"
           name="confirm"
           onChange={handleInputChange}
           value={userFormData.confirm}
         />
-      </Form.Item>
+      </Form.Item> */}
 
-      <Form.Item
+      {/* <Form.Item
         name="username"
         label="Username"
         tooltip="What do you want others to call you?"
         rules={[
           {
-            required: true,
+            required: false,
             message: "Please input your username!",
             whitespace: true,
           },
         ]}
       >
         <Input
-          placeholder="Username"
+          placeholder={userData.username}
           name="username"
           onChange={handleInputChange}
           value={userFormData.username}
         />
-      </Form.Item>
+      </Form.Item> */}
 
       <Form.Item
         name="profilePic"
@@ -213,7 +218,7 @@ const Signup = () => {
         ]}
       >
         <Input
-          placeholder="Image Link"
+          placeholder={userData.profilePic}
           name="profilePic"
           onChange={handleInputChange}
           value={userFormData.profilePic}
@@ -224,14 +229,14 @@ const Signup = () => {
         label="postalCode"
         rules={[
           {
-            required: true,
+            required: false,
             message: "Please put the postal code for where you live.",
             whitespace: true,
           },
         ]}
       >
         <Input
-          placeholder="Postal Code"
+          placeholder={userData.postalCode}
           name="postalCode"
           onChange={handleInputChange}
           value={userFormData.postalCode}
@@ -249,7 +254,7 @@ const Signup = () => {
         ]}
       >
         <Input.TextArea
-          placeholder="Intro"
+          placeholder={userData.intro}
           name="intro"
           onChange={handleInputChange}
           value={userFormData.intro}
@@ -263,7 +268,7 @@ const Signup = () => {
         label="Pronouns"
         rules={[
           {
-            required: true,
+            required: false,
             message: "Please select one",
           },
         ]}
@@ -281,12 +286,12 @@ const Signup = () => {
           <Option value="Prefer-not-to-say">Prefer not to say</Option>
         </Select>
       </Form.Item>
-      <Form.Item
+      {/* <Form.Item
         name="birthday"
         label="Enter your birthday"
         rules={[
           {
-            required: true,
+            required: false,
             message:
               "Please enter your birthdate as MM/DD/YYYY, you must be 21 years of age to use this site.",
             whitespace: true,
@@ -299,14 +304,13 @@ const Signup = () => {
           onChange={handleInputChange}
           value={userFormData.birthday}
         />
-      </Form.Item>
+      </Form.Item> */}
 
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
-          Register
+          Update
         </Button>
       </Form.Item>
     </Form>
   );
 };
-export default Signup;

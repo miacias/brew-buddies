@@ -66,30 +66,14 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    // edits user data
-    editUser: async (
-      parent,
-      {
-        username,
-        email,
-        password,
-        birthday,
-        profilePic,
-        postalCode,
-        intro,
-        pronouns,
-      },
-      context
-    ) => {
+    // not working
+    editUser: async (parent, { input }, context) => {
+      const { profilePic, postalCode, intro, pronouns } = input;
       if (context.user) {
         const editedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           {
             $set: {
-              username,
-              email,
-              password,
-              birthday,
               profilePic,
               postalCode,
               intro,
