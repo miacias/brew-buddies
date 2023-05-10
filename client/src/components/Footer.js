@@ -31,7 +31,7 @@ export default function Footer() {
             <div className={styles.developers}>
             {contributors.map((coder) => {
                 return (
-                    <div className={styles.devContainer}>
+                    <div className={styles.devContainer} key={coder.name}>
                         <p className={styles.devName}>{coder.name}</p>
                         <div className={styles.contact}>
                             <a href={coder.linkedin} className={styles.contactIcon}>

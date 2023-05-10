@@ -1,0 +1,28 @@
+.bloc-logo {
+    position: relative;
+    width: 130px;
+    height: 49px;
+    float: left;
+  }
+  
+.bloc-logo canvas,
+.bloc-logo .logo-mask {
+    display: block;
+    width: 110px;
+    height: 110px;
+    border-radius: 20%;
+    margin: .5em;
+}
+  
+.bloc-logo .logo-mask {
+    position: absolute;
+    top: 10px;
+    /* right-facing mug */
+    /* left: -12px;
+    transform: rotateY(180deg); */
+    /* left-facing mug */
+    left: 12px;
+    background-size: 90px;
+    background-repeat: no-repeat;
+    text-indent: -9999px;
+}

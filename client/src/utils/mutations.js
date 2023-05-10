@@ -38,5 +38,49 @@ mutation editUser($input: UpdateUser!) {
         pronouns
       }
     }
-  }
+`;
+
+export const ADD_FAV_BREWERY = gql`
+    mutation addFavBrewery($id: ID!, $breweryId: String!) {
+        addFavBrewery(_id: $id, breweryId: $breweryId) {
+            _id
+        favBreweries {
+            _id
+        }
+        }
+    }
+`;
+
+export const REMOVE_FAV_BREWERY = gql`
+    mutation removeFavBrewery($id: ID!, $breweryId: String!) {
+        removeFavBrewery(_id: $id, breweryId: $breweryId) {
+            _id
+        }
+    }
+`;
+
+export const ADD_REVIEW = gql`
+    mutation addReview($starRating: Int!, $reviewText: String, $breweryId: String) {
+        addReview(starRating: $starRating, reviewText: $reviewText, breweryId: $breweryId) {
+            user {
+                _id
+                username
+            }
+        }
+    }
+`;
+
+export const EDIT_REVIEW = gql`
+    mutation editReview($reviewId: ID!, $starRating: Int, $reviewText: String) {
+        editReview(reviewId: $reviewId, starRating: $starRating, reviewText: $reviewText) {
+            _id
+            reviewText
+            starRating
+            reviewAuthor
+            createdAt
+            breweryId {
+                _id
+            }
+        }
+    }
 `;
