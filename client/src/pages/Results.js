@@ -36,7 +36,7 @@ export default function Results() {
                 />
                 <button htmlFor="search" onClick={searchAPI}>Search 🔍</button>
             </form>
-            {breweryList ? <p>Showing results for: {breweryList[0].postal_code}</p> : ""}
+            {breweryList ? <p>Showing results for: {(breweryList[0].postal_code).slice(0, 5)}</p> : ""}
             {breweryList && breweryList.map((brewery) => (
                 <BreweryCard brewery={brewery} key={brewery.id}/>
             ))}
