@@ -4,7 +4,7 @@ import BreweryCard from '../components/BreweryCard'
 export default function Results() {
     const [breweryList, setBreweryList] = useState(null);
     const searchTerm = '44107'; // Need to grab user search input
-    const searchByZipAPI = `https://api.openbrewerydb.org/v1/breweries?by_postal=${searchTerm}`;
+    const searchByZipAPI = `https://api.openbrewerydb.org/v1/breweries?by_postal=${searchTerm}&per_page=5`;
 
     function searchAPI(event) {
         event.preventDefault();
