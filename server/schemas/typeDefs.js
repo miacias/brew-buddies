@@ -20,9 +20,9 @@ const typeDefs = gql`
 
   input UpdateUser {
     _id: ID
-    username: String
-    email: String
-    password: String
+    # username: String
+    # email: String
+    # password: String
     profilePic: String
     postalCode: Int
     intro: String
@@ -71,7 +71,7 @@ const typeDefs = gql`
       pronouns: String
     ): Auth
     login(email: String!, password: String!): Auth
-    editUser(input: UpdateUser!): User
+    editUser(input: UpdateUser!): Auth
     # addReview(): Auth
     # editReview()
     # addFriend(): User

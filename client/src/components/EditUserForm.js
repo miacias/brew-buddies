@@ -41,9 +41,9 @@ export const EditUserForm = () => {
 
   // set initial form state
   const [userFormData, setUserFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
+    // username: "",
+    // email: "",
+    // password: "",
   });
   // set state for form validation
   const [validated] = useState(false);
@@ -86,15 +86,12 @@ export const EditUserForm = () => {
     }
 
     setUserFormData({
-      email: "",
-      password: "",
-      confirm: "",
-      username: "",
+      input: {
       profilePic: "",
       postalCode: "",
       intro: "",
-      pronouns: "",
-      birthday: "",
+      pronouns: ""
+      }
     });
   };
   return (
@@ -111,7 +108,7 @@ export const EditUserForm = () => {
       }}
       scrollToFirstError
     >
-      <Form.Item
+      {/* <Form.Item
         name="email"
         label="E-mail"
         rules={[
@@ -132,9 +129,9 @@ export const EditUserForm = () => {
           onChange={handleInputChange}
           value={userFormData.email}
         />
-      </Form.Item>
+      </Form.Item> */}
 
-      <Form.Item
+      {/* <Form.Item
         name="password"
         label="Password"
         rules={[
@@ -153,9 +150,9 @@ export const EditUserForm = () => {
           onChange={handleInputChange}
           value={userFormData.password}
         />
-      </Form.Item>
+      </Form.Item> */}
 
-      <Form.Item
+      {/* <Form.Item
         name="confirm"
         label="Confirm new Password"
         dependencies={["password"]}
@@ -185,9 +182,9 @@ export const EditUserForm = () => {
           onChange={handleInputChange}
           value={userFormData.confirm}
         />
-      </Form.Item>
+      </Form.Item> */}
 
-      <Form.Item
+      {/* <Form.Item
         name="username"
         label="Username"
         tooltip="What do you want others to call you?"
@@ -205,7 +202,7 @@ export const EditUserForm = () => {
           onChange={handleInputChange}
           value={userFormData.username}
         />
-      </Form.Item>
+      </Form.Item> */}
 
       <Form.Item
         name="profilePic"
@@ -288,7 +285,7 @@ export const EditUserForm = () => {
           <Option value="Prefer-not-to-say">Prefer not to say</Option>
         </Select>
       </Form.Item>
-      <Form.Item
+      {/* <Form.Item
         name="birthday"
         label="Enter your birthday"
         rules={[
@@ -306,7 +303,7 @@ export const EditUserForm = () => {
           onChange={handleInputChange}
           value={userFormData.birthday}
         />
-      </Form.Item>
+      </Form.Item> */}
 
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">

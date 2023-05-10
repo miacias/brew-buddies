@@ -29,16 +29,14 @@ export const LOGIN = gql`
 
 // error "context is not defined"
 export const EDIT_USER = gql`
-    mutation editUser($input: UpdateUser!) {
-        editUser(input: $input) {
-            _id
-            username
-            email
-            password
-            profilePic
-            postalCode
-            intro
-            pronouns
-        }
+mutation editUser($input: UpdateUser!) {
+    editUser(input: $input) {
+      user {
+        profilePic
+        postalCode
+        intro
+        pronouns
+      }
     }
+  }
 `;

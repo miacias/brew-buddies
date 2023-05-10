@@ -11,7 +11,6 @@ const resolvers = {
       User.findOne({ username }).populate('reviews'),
     // shows specific user who is logged in currently with attached reviews
     me: async (parent, args, context) => {
-      console.log(context);
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('reviews');
       }
@@ -67,29 +66,13 @@ const resolvers = {
       return { token, user };
     },
     // not working
-    editUser: async (
-      parent,
-      {
-        username,
-        email,
-        password,
-        birthday,
-        profilePic,
-        postalCode,
-        intro,
-        pronouns,
-      },
-      context
-    ) => {
+    editUser: async (parent, { input }, context) => {
+      const { profilePic, postalCode, intro, pronouns } = input;
       if (context.user) {
         const editedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           {
             $set: {
-              username,
-              email,
-              password,
-              birthday,
               profilePic,
               postalCode,
               intro,
