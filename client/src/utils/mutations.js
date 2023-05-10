@@ -38,6 +38,7 @@ mutation editUser($input: UpdateUser!) {
         pronouns
       }
     }
+}
 `;
 
 export const ADD_FAV_BREWERY = gql`
@@ -83,4 +84,5 @@ export const EDIT_REVIEW = gql`
             }
         }
     }
+
 `;
