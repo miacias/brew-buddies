@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
-
+const svgMarker = require('./beerMug.svg').default;
 
 // rendered status: loading, error, or success
 const render = (status) => {
@@ -15,10 +15,9 @@ const render = (status) => {
     }
 };
 
-// oldest brewery in USA: Yuengling headquarters in PA
+// oldest brewery in USA: Yuengling headquarters in PA (17901)
 const center = { lat: 40.68341779790154, lng:-76.19781267415122 };
-const zoom = 15;
-
+const zoom = 14.2;
 // creates Google map
 function MyMapComponent({center, zoom, breweryList}) {
     const ref = useRef();
@@ -26,16 +25,24 @@ function MyMapComponent({center, zoom, breweryList}) {
     useEffect(() => {
         if (breweryList && breweryList.length > 0) {
             const map = new window.google.maps.Map(ref.current, {
-                center: { lat: +(breweryList[0].latitude), lng: +(breweryList[0].longitude) } || center,
+                // centers on first result or default location if null
+                center: { 
+                    lat: +breweryList[0].latitude !== null ? +breweryList[0].latitude : center.lat, 
+                    lng: +breweryList[0].longitude !== null ? +breweryList[0].longitude : center.lng 
+                },
                 zoom,
             });
             // creates a map marker for each brewery
             breweryList.forEach(brewery => {
                 new window.google.maps.Marker({
-                    // make case for if lat/lng is null
-                    position: { lat: +(brewery.latitude), lng: +(brewery.longitude) },
+                    // make case for if lat/lng is nullEA4335
+                    position: { 
+                        lat: +(brewery.latitude) ? +(brewery.latitude) : null, 
+                        lng: +(brewery.longitude) ? +(brewery.longitude) : null
+                    },
                     map,
-                    title: brewery.name
+                    title: brewery.name,
+                    icon: svgMarker
                 })
             });
         }
@@ -58,4 +65,3 @@ export default function Map({ breweryList }) {
         </Wrapper>
     )
 }
-
