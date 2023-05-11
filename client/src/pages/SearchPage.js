@@ -14,5 +14,4 @@ export default function MapPage() {
 }
 
 // lift state
-// pass breweryList and setBreweryList as props to BreweryAPI
 // pass breweryList as props to Map
