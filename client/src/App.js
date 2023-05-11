@@ -17,6 +17,7 @@ import Footer from './components/Footer';
 import Auth from './utils/auth'
 
 
+
 const { Content, Sider } = Layout;
 
 // sets endpoint for main GraphQL API
@@ -184,7 +185,13 @@ function App() {
                     element={
                       <MapPage/>
                     }
-                  /> */}
+                  />*/}
+                  <Route 
+                    path='/:breweryId'
+                    element={
+                      <SingleBrewery/>
+                    }
+                  />
                   <Route
                     path='/breweries'
                     element={
@@ -196,7 +203,7 @@ function App() {
                         }}
                       />}
                   />
-                  <Route
+                  {/* <Route
                     path='/SingleBrewery'
                     element={
                       <SingleBrewery 
@@ -206,7 +213,7 @@ function App() {
                         background: colorBgContainer,
                         }}
                       />}
-                  />
+                  /> */}
                   <Route
                     path='/connect'
                     element={

@@ -1,5 +1,5 @@
-const { Schema, model } = require('mongoose');
-const bcrypt = require('bcrypt');
+const { Schema, model } = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const userSchema = new Schema(
   {
@@ -13,13 +13,13 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      match: [/.+@.+\..+/, 'Please enter a valid email address.'],
+      match: [/.+@.+\..+/, "Please enter a valid email address."],
     },
     password: {
       type: String,
       required: true,
-      min: [8, 'must be at least 8 characters'],
-      max: [25, 'must be less than 25 characters'],
+      min: [8, "must be at least 8 characters"],
+      max: [25, "must be less than 25 characters"],
     },
     postalCode: {
       type: Number,
@@ -29,7 +29,7 @@ const userSchema = new Schema(
     pronouns: {
       type: String,
       // may need to remove this strict array. if user selects "other" and inputs custom pronouns, this will break
-      enum: ['She/Her', 'He/Him', 'They/Them', 'Other', 'Prefer not to say'],
+      enum: ["She/Her", "He/Him", "They/Them", "Other", "Prefer not to say"],
       required: false,
     },
     profilePic: {
@@ -50,26 +50,28 @@ const userSchema = new Schema(
     reviews: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Review',
+        ref: "Review",
       },
     ],
     favBreweries: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Brewery',
-        required: false,
-      },
+      // {
+      //   // type: Schema.Types.ObjectId,
+      //   // ref: 'Brewery',
+      //   // required: false,
+      // },
+
+      { type: String, required: false },
     ],
     wishBreweries: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Brewery',
+        ref: "Brewery",
       },
     ],
     friends: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: "User",
       },
     ],
   },
@@ -80,12 +82,12 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.virtual('friendCount').get(function () {
+userSchema.virtual("friendCount").get(function () {
   return this.friends.length;
 });
 
-userSchema.pre('save', async function (next) {
-  if (this.isNew || this.isModified('password')) {
+userSchema.pre("save", async function (next) {
+  if (this.isNew || this.isModified("password")) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
@@ -96,6 +98,6 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-const User = model('User', userSchema);
+const User = model("User", userSchema);
 
 module.exports = User;

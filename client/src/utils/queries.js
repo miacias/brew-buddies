@@ -3,36 +3,29 @@ import { gql } from '@apollo/client';
 export const GET_ME = gql`
 query me {
     me {
-      username
-      email
-      password
-      birthday
-      profilePic
-      postalCode
-      intro
-      pronouns
-      reviews {
+        _id
+        username
+        email
+        password
+        birthday
+        profilePic
+        postalCode
+        intro
+        pronouns
+        reviews {
+        _id
         reviewText
         starRating
         reviewAuthor
         createdAt
         breweryId {
-          breweryId
+            _id
         }
-      }
-      favBreweries {
-        breweryId
-      }
-      wishBreweries {
-        breweryId
-      }
-      friends {
-        _id
-      }
-      friendCount
+        }
+        favBreweries
     }
-  }
-`;
+}`
+
 
 export const ALL_USERS = gql`
     query allUsers {
