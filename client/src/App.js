@@ -1,5 +1,4 @@
 import React from 'react';
-// import styles from './App.module.css';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 // import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Layout, Menu, ConfigProvider, theme } from 'antd';
@@ -8,13 +7,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
-import { UserProfile } from './pages/UserProfile';
-import MapPage from './pages/MapPage';
+// this page will render any user profile (future development)
+// import { UserProfile } from './pages/UserProfile';
+import SearchPage from './pages/SearchPage';
 import SingleBrewery from './pages/SingleBrewery';
-import Results from './pages/Results'
 import { AccountPage } from './pages/AccountPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Auth from './utils/auth'
 
 
 
@@ -55,23 +55,52 @@ function App() {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  const items = [
+
+  const itemsLoggedOut = [
     {
       key: "1",
       label: (<a href="/">Home</a>)
     },
     {
       key: "2",
-      label: (<a href="/getMe">Profile Page</a>)
+      label: (<a href="/breweries">Breweries</a>)
     },
     {
       key: "3",
-      label: (<a href="/signup">Sign Up</a>)
+      label: (<a href="/profile">Profile Page</a>)
     },
     {
       key: "4",
       label: (<a href="/connect">Login</a>)
+    },
+    {
+      key: "5",
+      label: (<a href="/signup">Sign Up</a>)
     }
+  ]
+  const itemsLoggedIn = [
+    {
+      key: "1",
+      label: (<a href="/">Home</a>)
+    },
+    {
+      key: "2",
+      label: (<a href="/breweries">Breweries</a>)
+    },
+    {
+      key: "3",
+      label: (<a href="/profile">Profile Page</a>)
+    },
+    {
+      key: "4",
+      label: (<a href="/" onClick={() => Auth.logout()}>
+      Logout
+    </a>)
+    },
+    {
+      key: "5",
+      label: (<a href="/signup">Sign Up</a>)
+    },
   ]
   return (
     <ApolloProvider client={client}>
@@ -92,19 +121,25 @@ function App() {
             breakpoint="lg"
             collapsedWidth="0"
             onBreakpoint={(broken) => {
-              console.log(broken);
+              // console.log(broken);
             }}
             onCollapse={(collapsed, type) => {
-              console.log(collapsed, type);
+              // console.log(collapsed, type);
             }}
           >
             <div className="logo" />
-            <Menu
+            {Auth.loggedIn() ?
+              (<Menu
               theme="dark"
               mode="inline"
               defaultSelectedKeys={['4']}
-              items={items} />
-
+              items={itemsLoggedIn} />) :
+              (<Menu
+                theme="dark"
+                mode="inline"
+                defaultSelectedKeys={['4']}
+                items={itemsLoggedOut} />)
+}
 
           </Sider>
           {/* sets layout for header, content, and footer */}
@@ -135,7 +170,7 @@ function App() {
                       />}
                   />
                   <Route
-                    path='/getme'
+                    path='/profile'
                     element={
                       <AccountPage
                         style={{
@@ -145,12 +180,12 @@ function App() {
                         }}
                       />}
                   />
-                  <Route 
+                  {/* <Route 
                     path='/search'
                     element={
                       <MapPage/>
                     }
-                  />
+                  />*/}
                   <Route 
                     path='/:breweryId'
                     element={
@@ -158,9 +193,9 @@ function App() {
                     }
                   />
                   <Route
-                    path='/results'
+                    path='/breweries'
                     element={
-                      <Results
+                      <SearchPage
                         style={{
                         padding: 24,
                         minHeight: 360,
@@ -168,7 +203,7 @@ function App() {
                         }}
                       />}
                   />
-                  <Route
+                  {/* <Route
                     path='/SingleBrewery'
                     element={
                       <SingleBrewery 
@@ -178,7 +213,7 @@ function App() {
                         background: colorBgContainer,
                         }}
                       />}
-                  />
+                  /> */}
                   <Route
                     path='/connect'
                     element={
