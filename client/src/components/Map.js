@@ -27,7 +27,7 @@ function MyMapComponent({center, zoom}) {
     return <div ref={ref} id='map' style={{width: '100%', height: '80vh'}} />
 }
 
-export default function Map() {
+export default function Map({ breweryList }) {
     // oldest brewery in USA: Yuengling headquarters in PA
     const center = { lat: 40.68341779790154, lng:-76.19781267415122 };
     const zoom = 15;
