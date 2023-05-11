@@ -8,9 +8,9 @@ import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
 import { UserProfile } from './pages/UserProfile';
-// import MapPage from './pages/SearchPage';
+import SearchPage from './pages/SearchPage';
 import SingleBrewery from './pages/SingleBrewery';
-import BreweryApi from './components/BreweryApi'
+// import BreweryApi from './components/BreweryApi'
 import { AccountPage } from './pages/AccountPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -156,7 +156,7 @@ function App() {
                   <Route
                     path='/breweries'
                     element={
-                      <BreweryApi
+                      <SearchPage
                         style={{
                         padding: 24,
                         minHeight: 360,
