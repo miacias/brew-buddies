@@ -27,39 +27,7 @@ query me {
     }
   }
 }`
-// export const GET_ME = gql`
-// query me {
-//     me {
-//       username
-//       email
-//       password
-//       birthday
-//       profilePic
-//       postalCode
-//       intro
-//       pronouns
-//       reviews {
-//         reviewText
-//         starRating
-//         reviewAuthor
-//         createdAt
-//         breweryId {
-//           breweryId
-//         }
-//       }
-//       favBreweries {
-//         breweryId
-//       }
-//       wishBreweries {
-//         breweryId
-//       }
-//       friends {
-//         _id
-//       }
-//       friendCount
-//     }
-//   }
-// `;
+
 
 export const ALL_USERS = gql`
     query allUsers {

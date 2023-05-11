@@ -69,11 +69,11 @@ export function AccountPage() {
           </Col>
         </Row>
         <Row>
-          {/* <h2>My fav breweries</h2>
+          <h2>My fav breweries</h2>
           {breweryList ? <p>My fav breweries {(breweryList[0].postal_code).slice(0, 5)}</p> : ""}
             {breweryList && breweryList.map((brewery) => (
                 <BreweryCard brewery={brewery} key={brewery.id}/>
-            ))} */}
+            ))}
         </Row>
       </>
     );
