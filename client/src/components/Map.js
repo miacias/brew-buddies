@@ -1,14 +1,14 @@
 import React, { useEffect, useRef } from 'react';
-import { Wrapper, Status, Spinner, ErrorComponent } from "@googlemaps/react-wrapper";
+import { Wrapper, Status/*, Spinner, ErrorComponent*/ } from "@googlemaps/react-wrapper";
 
 
 // rendered status: loading, error, or success
 const render = (status) => {
     switch (status) {
-      case Status.LOADING:
-        return <Spinner />;
-      case Status.FAILURE:
-        return <ErrorComponent />;
+    //   case Status.LOADING:
+        // return <Spinner />;
+    //   case Status.FAILURE:
+        // return <ErrorComponent />;
       case Status.SUCCESS:
         return <MyMapComponent />;
       default: return null
