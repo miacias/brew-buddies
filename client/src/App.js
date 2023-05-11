@@ -17,6 +17,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 
+
 const { Content, Sider } = Layout;
 
 // sets endpoint for main GraphQL API
@@ -148,6 +149,12 @@ function App() {
                     path='/search'
                     element={
                       <MapPage/>
+                    }
+                  />
+                  <Route 
+                    path='/:breweryId'
+                    element={
+                      <SingleBrewery/>
                     }
                   />
                   <Route

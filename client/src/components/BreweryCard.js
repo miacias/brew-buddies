@@ -19,12 +19,14 @@
 import { Card, Col, Row } from 'antd';
 
 const breweryCard = (props) => {
+  const breweryId = props.brewery.id
+  const url = `/${breweryId}`
   return (
     <Col span={8}>
       <Card title={props.brewery.name} bordered={false}>
         <p>Brewery Type: {props.brewery.brewery_type}</p>
         <p>Address: {props.brewery.street}, {props.brewery.city}, {props.brewery.state} {props.brewery.postal_code}</p>
-        <p><a href="/SingleBrewery">Click here for more information!</a></p>
+        <p><a href={url}>Click here for more information!</a></p>
       </Card>
     </Col>
   )
