@@ -12,7 +12,7 @@ const typeDefs = gql`
     intro: String
     pronouns: String
     reviews: [Review]
-    favBreweries: [Brewery]
+    favBreweries: [String]
     wishBreweries: [Brewery]
     friends: [User]
     friendCount: Int
@@ -20,9 +20,6 @@ const typeDefs = gql`
 
   input UpdateUser {
     _id: ID
-    # username: String
-    # email: String
-    # password: String
     profilePic: String
     postalCode: String
     intro: String
@@ -82,8 +79,8 @@ const typeDefs = gql`
     ): Review
     # addFriend(): User
     # removeFriend(): User
-    addFavBrewery(_id: ID!, breweryId: String!): User
-    removeFavBrewery(_id: ID!, breweryId: String!): User
+    addFavBrewery(breweryId: String!): User
+    removeFavBrewery(breweryId: String!): User
     # addWishBrewery()
     # removeWishBrewery()
   }

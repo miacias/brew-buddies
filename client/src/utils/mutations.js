@@ -42,15 +42,11 @@ mutation editUser($input: UpdateUser!) {
 `;
 
 export const ADD_FAV_BREWERY = gql`
-    mutation addFavBrewery($id: ID!, $breweryId: String!) {
-        addFavBrewery(_id: $id, breweryId: $breweryId) {
-            _id
-        favBreweries {
-          #  _id
-            breweryId
-        }
-        }
+mutation addFavBrewery($breweryId: String!) {
+    addFavBrewery(breweryId: $breweryId) {
+      favBreweries
     }
+  }
 `;
 
 export const REMOVE_FAV_BREWERY = gql`

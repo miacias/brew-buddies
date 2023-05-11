@@ -7,13 +7,13 @@ import { ADD_REVIEW } from "../utils/mutations";
 import { useParams } from "react-router-dom";
 import { Col, Card, Button, Row } from "antd";
 import { GET_ME } from "../utils/queries";
-const  ObjectId  = require('bson-objectid');
+const ObjectId = require("bson-objectid");
 
 export default function SingleBrewery() {
   const { breweryId } = useParams();
   const formattedId = breweryId.substring(1);
   const [breweryData, setBreweryData] = useState();
-  
+
   useEffect(() => {
     const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${formattedId}`;
     fetch(searchByIdApi)
@@ -21,7 +21,7 @@ export default function SingleBrewery() {
       .then((data) => setBreweryData(data))
       .catch((error) => console.error(error));
   }, [formattedId]);
-  
+
   const [addBrewery] = useMutation(ADD_FAV_BREWERY);
   const { loading, data } = useQuery(GET_ME);
   const userData = data?.me || {};
@@ -29,17 +29,16 @@ export default function SingleBrewery() {
     return <h2>Please log in!</h2>;
   }
   //   const [ addReview ] = useMutation(ADD_REVIEW)
-  
+
   const handleAddBrewery = async (event) => {
-    const _id = userData._id
-    const objectId = new ObjectId(_id)
+    // const _id = userData._id;
+    // const objectId = new ObjectId(_id);
     // const breweryObject = new ObjectId(formattedId)
-    console.log(formattedId)
+    console.log(formattedId);
     try {
       const { data } = await addBrewery({
         variables: {
-          id: objectId,
-          breweryId: formattedId
+          breweryId: formattedId,
         },
       });
       if (!data) {

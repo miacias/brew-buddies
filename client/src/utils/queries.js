@@ -23,9 +23,7 @@ query me {
       }
     }
     favBreweries {
-      _id
-      breweryId
-      avgRating
+        breweryId
     }
   }
 }`
