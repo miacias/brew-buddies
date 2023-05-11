@@ -54,6 +54,7 @@ function App() {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
   const itemsLoggedOut = [
     {
       key: "1",
@@ -126,7 +127,7 @@ function App() {
             }}
           >
             <div className="logo" />
-            {Auth.loggedIn ?
+            {Auth.loggedIn() ?
               (<Menu
               theme="dark"
               mode="inline"
