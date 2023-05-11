@@ -25,7 +25,8 @@ function MyMapComponent({center, zoom, breweryList}) {
     const ref = useRef();
 
     useEffect(() => {
-        // if (!breweryList === null ) {
+        console.log(breweryList)
+        if (breweryList && breweryList.length > 0) {
             const map = new window.google.maps.Map(ref.current, {
                 center: { lat: +(breweryList[0].latitude), lng: +(breweryList[0].longitude) } || center,
                 zoom,
@@ -38,7 +39,7 @@ function MyMapComponent({center, zoom, breweryList}) {
                     title: brewery.name
                 })
             });
-        // }
+        }
     }, [breweryList, center, zoom]);
     return <div ref={ref} id='map' style={{width: '100%', height: '80vh'}} />
 }
