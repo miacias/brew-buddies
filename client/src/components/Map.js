@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Wrapper, Status, Spinner, ErrorComponent } from "@googlemaps/react-wrapper";
+import { Wrapper, Status/*, Spinner, ErrorComponent*/ } from "@googlemaps/react-wrapper";
 
 
 // rendered status: loading, error, or success

@@ -7,10 +7,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
-import { UserProfile } from './pages/UserProfile';
+// this page will render any user profile (future development)
+// import { UserProfile } from './pages/UserProfile';
 import SearchPage from './pages/SearchPage';
 import SingleBrewery from './pages/SingleBrewery';
-// import BreweryApi from './components/BreweryApi'
 import { AccountPage } from './pages/AccountPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
