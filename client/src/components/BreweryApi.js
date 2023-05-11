@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
-import BreweryCard from './BreweryCard'
+import React, { useState } from 'react';
+import BreweryCard from './BreweryCard';
 
-export default function BreweryApi() {
-    const [breweryList, setBreweryList] = useState(null);
+export default function BreweryApi({ breweryList, setBreweryList }) {
 
     const [zipInput, setZipInput] = useState('');
     const searchByZipAPI = `https://api.openbrewerydb.org/v1/breweries?by_postal=${zipInput}&per_page=5`;
@@ -18,8 +17,8 @@ export default function BreweryApi() {
         fetch(searchByZipAPI)
             .then(response => response.json())
             .then(data => {
-                // console.log(data);
-                setBreweryList(data);
+                console.log(data);
+                data.length ? setBreweryList(data) : setBreweryList(null);
         });
         setZipInput('');
     };
