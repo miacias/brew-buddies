@@ -46,7 +46,8 @@ export const ADD_FAV_BREWERY = gql`
         addFavBrewery(_id: $id, breweryId: $breweryId) {
             _id
         favBreweries {
-            _id
+          #  _id
+            breweryId
         }
         }
     }

@@ -2,37 +2,66 @@ import { gql } from '@apollo/client';
 
 export const GET_ME = gql`
 query me {
-    me {
-      username
-      email
-      password
-      birthday
-      profilePic
-      postalCode
-      intro
-      pronouns
-      reviews {
-        reviewText
-        starRating
-        reviewAuthor
-        createdAt
-        breweryId {
-          breweryId
-        }
-      }
-      favBreweries {
-        breweryId
-      }
-      wishBreweries {
-        breweryId
-      }
-      friends {
+  me {
+    _id
+    username
+    email
+    password
+    birthday
+    profilePic
+    postalCode
+    intro
+    pronouns
+    reviews {
+      _id
+      reviewText
+      starRating
+      reviewAuthor
+      createdAt
+      breweryId {
         _id
       }
-      friendCount
+    }
+    favBreweries {
+      _id
+      breweryId
+      avgRating
     }
   }
-`;
+}`
+// export const GET_ME = gql`
+// query me {
+//     me {
+//       username
+//       email
+//       password
+//       birthday
+//       profilePic
+//       postalCode
+//       intro
+//       pronouns
+//       reviews {
+//         reviewText
+//         starRating
+//         reviewAuthor
+//         createdAt
+//         breweryId {
+//           breweryId
+//         }
+//       }
+//       favBreweries {
+//         breweryId
+//       }
+//       wishBreweries {
+//         breweryId
+//       }
+//       friends {
+//         _id
+//       }
+//       friendCount
+//     }
+//   }
+// `;
 
 export const ALL_USERS = gql`
     query allUsers {

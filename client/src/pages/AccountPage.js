@@ -17,23 +17,23 @@ export function AccountPage() {
   if (!userData) {
     return <h2>Please log in!</h2>;
   }
-
+  console.log(userData)
   const imageData = userData.profilePic;
   let profilePic =
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
   console.log(userData);
 
 
-    const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${userData.favBreweries.breweryId}`
-    function searchAPI(e) {
-        e.preventDefault();
-        fetch(searchByIdApi)
-            .then(response => response.json())
-            .then(data => {
-                // console.log(data);
-                setBreweryList(data);
-        });
-    };
+    // const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${userData.favBreweries.breweryId}`
+    // function searchAPI(e) {
+    //     e.preventDefault();
+    //     fetch(searchByIdApi)
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             // console.log(data);
+    //             setBreweryList(data);
+    //     });
+    // };
   if (Auth.loggedIn()) {
     return (
       <>

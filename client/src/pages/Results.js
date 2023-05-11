@@ -18,7 +18,7 @@ export default function Results() {
         fetch(searchByZipAPI)
             .then(response => response.json())
             .then(data => {
-                // console.log(data);
+                console.log(data);
                 setBreweryList(data);
         });
         setZipInput('');
