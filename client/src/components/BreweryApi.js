@@ -17,8 +17,8 @@ export default function BreweryApi({ breweryList, setBreweryList }) {
         fetch(searchByZipAPI)
             .then(response => response.json())
             .then(data => {
-                // console.log(data);
-                setBreweryList(data);
+                console.log(data);
+                data.length ? setBreweryList(data) : setBreweryList(null);
         });
         setZipInput('');
     };

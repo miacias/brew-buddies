@@ -29,6 +29,13 @@ app.get('/', (req, res) => {
 const startApolloServer = async () => {
   await server.start();
   server.applyMiddleware({ app });
+  // sets cache control headers to prevent caching
+  // server.applyMiddleware({
+  //   app,
+  //   cors: false,
+  //   setHeaders: (res) =>
+  //     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate'),
+  // });
 
   db.once('open', () => {
     app.listen(PORT, () => {
