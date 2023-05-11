@@ -10,7 +10,6 @@ export default function Header() {
             <Row>
             <BeerLogo/>
             <h1>Brew Buddies</h1>
-            <LogoutButton/>
             </Row>
         </header>
     )

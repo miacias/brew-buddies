@@ -14,6 +14,7 @@ import SingleBrewery from './pages/SingleBrewery';
 import { AccountPage } from './pages/AccountPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Auth from './utils/auth'
 
 
 const { Content, Sider } = Layout;
@@ -53,7 +54,7 @@ function App() {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  const items = [
+  const itemsLoggedOut = [
     {
       key: "1",
       label: (<a href="/">Home</a>)
@@ -68,12 +69,36 @@ function App() {
     },
     {
       key: "4",
-      label: (<a href="/signup">Sign Up</a>)
+      label: (<a href="/connect">Login</a>)
     },
     {
       key: "5",
-      label: (<a href="/connect">Login</a>)
+      label: (<a href="/signup">Sign Up</a>)
     }
+  ]
+  const itemsLoggedIn = [
+    {
+      key: "1",
+      label: (<a href="/">Home</a>)
+    },
+    {
+      key: "2",
+      label: (<a href="/breweries">Breweries</a>)
+    },
+    {
+      key: "3",
+      label: (<a href="/profile">Profile Page</a>)
+    },
+    {
+      key: "4",
+      label: (<a href="/" onClick={() => Auth.logout()}>
+      Logout
+    </a>)
+    },
+    {
+      key: "5",
+      label: (<a href="/signup">Sign Up</a>)
+    },
   ]
   return (
     <ApolloProvider client={client}>
@@ -101,12 +126,18 @@ function App() {
             }}
           >
             <div className="logo" />
-            <Menu
+            {Auth.loggedIn ?
+              (<Menu
               theme="dark"
               mode="inline"
               defaultSelectedKeys={['4']}
-              items={items} />
-
+              items={itemsLoggedIn} />) :
+              (<Menu
+                theme="dark"
+                mode="inline"
+                defaultSelectedKeys={['4']}
+                items={itemsLoggedOut} />)
+}
 
           </Sider>
           {/* sets layout for header, content, and footer */}
