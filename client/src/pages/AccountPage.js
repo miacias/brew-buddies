@@ -49,6 +49,11 @@ export function AccountPage() {
           breweryId: breweryId
         }
       })
+      setBreweryList(current => {
+        // Create a new set of breweries excluding the deleted brewery
+        const updatedBreweries = new Set([...current].filter(brewery => brewery.id !== breweryId))
+        return updatedBreweries
+      })
       
     } catch (err) {
       console.log(err)
