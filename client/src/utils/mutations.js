@@ -83,3 +83,11 @@ export const EDIT_REVIEW = gql`
     }
 
 `;
+
+export const ADD_FRIEND = gql`
+    mutation AddFriend($friendId: ID!) {
+        addFriend(friendId: $friendId) {
+        _id
+        }
+    }
+`;

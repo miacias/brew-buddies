@@ -5,11 +5,14 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     // shows all users with attached reviews
-    users: async () => User.find().populate('reviews'),
+    // do we want to also populate favBreweries?
+    users: async () => User.find().populate(['reviews', 'friends']),
     // shows specific user with attached reviews
+    // do we want to also populate favBreweries?
     user: async (parent, { username }) =>
-      User.findOne({ username }).populate('reviews'),
+      User.findOne({ username }).populate(['reviews', 'friends']),
     // shows specific user who is logged in currently with attached reviews
+    // do we want to also populate favBreweries & friends?
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('reviews');
@@ -176,6 +179,24 @@ const resolvers = {
           }
         );
         return revEdit;
+      }
+    },
+    // allows user to add another user as a friend
+    addFriend: async (parent, { friendId }, context) => {
+      // console.log(context.user);
+      if (context.user) {
+        console.log(friendId);
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $addToSet: {
+              friends: friendId,
+            },
+          },
+          {
+            new: true,
+          }
+        );
       }
     },
   },
