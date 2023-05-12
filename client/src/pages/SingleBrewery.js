@@ -6,7 +6,7 @@ import AddReviewForm from '../components/AddReviewForm';
 import { ADD_FAV_BREWERY } from "../utils/mutations";
 import { ADD_REVIEW } from "../utils/mutations";
 import { useParams } from "react-router-dom";
-import { Col, Card, Button, Row, Rate } from "antd";
+import { Col, Card, Button/*, Row*/ } from "antd";
 import { GET_ME } from "../utils/queries";
 const ObjectId = require("bson-objectid");
 
@@ -18,17 +18,17 @@ export default function SingleBrewery() {
 
   // calls OpenBreweryDB API and sets breweryData State
   useEffect(() => {
-    const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${breweryId}`;
+    const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${formattedId}`;
     fetch(searchByIdApi)
       .then((response) => response.json())
       .then((data) => setBreweryData(data))
       .catch((error) => console.error(error));
-  }, [breweryId]);
+  }, [formattedId]);
 
   // adds brewery to user favorites list
   const [addFavBrewery, { error }] = useMutation(ADD_FAV_BREWERY);
   // adds review to brewery page and to user profile
-  const [ addReview ] = useMutation(ADD_REVIEW);
+  // const [ addReview ] = useMutation(ADD_REVIEW);
   // retrieves user ID so user can add favorites
   const { loading, data } = useQuery(GET_ME);
 
@@ -43,7 +43,7 @@ export default function SingleBrewery() {
     try {
       const { data } = await addFavBrewery({
         variables: {
-          breweryId: breweryId,
+          breweryId: formattedId,
         },
       });
       if (!data) {
