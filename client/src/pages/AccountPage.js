@@ -8,11 +8,13 @@ import BreweryCard from "../components/BreweryCard";
 import Review from "../components/Review";
 import styles from "./UserProfile.module.css";
 import Auth from "../utils/auth";
+import { REMOVE_FAV_BREWERY } from "../utils/mutations";
 // import { set } from "mongoose";
 // const myBreweryList = []
 export function AccountPage() {
   const [showForm, setShowForm] = useState(false);
   const [breweryList, setBreweryList] = useState(new Set([]));
+  const [removeFavBrewery] = useMutation(REMOVE_FAV_BREWERY)
   const [Loading, setLoading] = useState(true);
   const { loading, data } = useQuery(GET_ME);
   const userData = data?.me || {};
@@ -37,6 +39,21 @@ export function AccountPage() {
       }
     }
   }, [userData.favBreweries]);
+
+  // const [removeFavBrewery] = useMutation(REMOVE_FAV_BREWERY)
+  const handleRemoveBrewery = async (breweryId) => {
+    console.log(breweryId)
+    try {
+      const { data } = await removeFavBrewery({
+        variables: {
+          breweryId: breweryId
+        }
+      })
+      
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const imageData = userData.profilePic;
   let profilePic =
@@ -78,7 +95,7 @@ export function AccountPage() {
               //
               <Row>
               <BreweryCard brewery={brewery} key={brewery.id}/>
-                <Button>Delete Favorite Brewery</Button>
+                <Button onClick={() => handleRemoveBrewery(brewery.id)}>Delete Favorite Brewery</Button>
             
               </Row>
             ))}
