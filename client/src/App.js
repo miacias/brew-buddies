@@ -96,11 +96,7 @@ function App() {
       label: (<a href="/" onClick={() => Auth.logout()}>
       Logout
     </a>)
-    },
-    {
-      key: "5",
-      label: (<a href="/signup">Sign Up</a>)
-    },
+    }
   ]
   return (
     <ApolloProvider client={client}>

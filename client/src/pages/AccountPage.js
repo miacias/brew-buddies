@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Form, Input, Button } from "antd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
 import { EditUserForm } from "../components/EditUserForm";
@@ -8,32 +8,62 @@ import BreweryCard from "../components/BreweryCard";
 import Review from "../components/Review";
 import styles from "./UserProfile.module.css";
 import Auth from "../utils/auth";
-
+import { REMOVE_FAV_BREWERY } from "../utils/mutations";
+// import { set } from "mongoose";
+// const myBreweryList = []
 export function AccountPage() {
   const [showForm, setShowForm] = useState(false);
-  const [breweryList, setBreweryList] = useState(null);
+  const [breweryList, setBreweryList] = useState(new Set([]));
+  const [removeFavBrewery] = useMutation(REMOVE_FAV_BREWERY)
+  const [Loading, setLoading] = useState(true);
   const { loading, data } = useQuery(GET_ME);
   const userData = data?.me || {};
-  if (!userData) {
-    return <h2>Please log in!</h2>;
+
+  useEffect(() => {
+    if (!userData) {
+      return <h2>Please log in!</h2>;
+    }
+    if (userData.favBreweries && userData.favBreweries.length > 0) {
+      for (let i = 0; i < userData.favBreweries.length; i++) {
+        const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${userData.favBreweries[i]}`;
+        setLoading(true);
+        fetch(searchByIdApi)
+          .then((response) => response.json())
+          .then((data) => {
+            setLoading(false);
+            //////We set a new set, saving the data as a new set in the array every time
+            setBreweryList((current) => {
+              return new Set([...current, data]);
+            });
+          });
+      }
+    }
+  }, [userData.favBreweries]);
+
+  // const [removeFavBrewery] = useMutation(REMOVE_FAV_BREWERY)
+  const handleRemoveBrewery = async (breweryId) => {
+    console.log(breweryId)
+    try {
+      const { data } = await removeFavBrewery({
+        variables: {
+          breweryId: breweryId
+        }
+      })
+      setBreweryList(current => {
+        // Create a new set of breweries excluding the deleted brewery
+        const updatedBreweries = new Set([...current].filter(brewery => brewery.id !== breweryId))
+        return updatedBreweries
+      })
+      
+    } catch (err) {
+      console.log(err)
+    }
   }
-  console.log(userData)
+
   const imageData = userData.profilePic;
   let profilePic =
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
-  console.log(userData);
 
-
-    // const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${userData.favBreweries.breweryId}`
-    // function searchAPI(e) {
-    //     e.preventDefault();
-    //     fetch(searchByIdApi)
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             // console.log(data);
-    //             setBreweryList(data);
-    //     });
-    // };
   if (Auth.loggedIn()) {
     return (
       <>
@@ -66,14 +96,15 @@ export function AccountPage() {
             <div>{userData.birthday}</div>
             <div>{userData.pronouns}</div>
             <div>{userData.intro}</div>
-          </Col>
-        </Row>
-        <Row>
-          <h2>My fav breweries</h2>
-          {breweryList ? <p>My fav breweries {(breweryList[0].postal_code).slice(0, 5)}</p> : ""}
-            {breweryList && breweryList.map((brewery) => (
-                <BreweryCard brewery={brewery} key={brewery.id}/>
+            {Array.from(breweryList).map((brewery) => (
+              //
+              <Row>
+              <BreweryCard brewery={brewery} key={brewery.id}/>
+                <Button onClick={() => handleRemoveBrewery(brewery.id)}>Delete Favorite Brewery</Button>
+            
+              </Row>
             ))}
+          </Col>
         </Row>
       </>
     );
@@ -81,5 +112,3 @@ export function AccountPage() {
     return <h2>Please log in!</h2>;
   }
 }
-
-
