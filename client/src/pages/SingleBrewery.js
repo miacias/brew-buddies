@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
-import BreweryCard from "../components/BreweryCard";
+// import BreweryCard from "../components/BreweryCard";
 import Review from "../components/Review";
 import { ADD_FAV_BREWERY } from "../utils/mutations";
 import { ADD_REVIEW } from "../utils/mutations";
@@ -13,7 +13,9 @@ export default function SingleBrewery() {
   const { breweryId } = useParams();
   const formattedId = breweryId.substring(1);
   const [breweryData, setBreweryData] = useState();
+  const [showForm, setShowForm] = useState(false);
 
+  // calls OpenBreweryDB API and sets breweryData State
   useEffect(() => {
     const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${formattedId}`;
     fetch(searchByIdApi)
@@ -22,32 +24,42 @@ export default function SingleBrewery() {
       .catch((error) => console.error(error));
   }, [formattedId]);
 
-  const [addBrewery] = useMutation(ADD_FAV_BREWERY);
+  // adds brewery to user favorites list
+  const [addFavBrewery, { error }] = useMutation(ADD_FAV_BREWERY);
+  // adds review to brewery page and to user profile
+  const [ addReview ] = useMutation(ADD_REVIEW);
+  // retrieves user ID so user can add favorites
   const { loading, data } = useQuery(GET_ME);
+
   const userData = data?.me || {};
   if (!userData) {
     return <h2>Please log in!</h2>;
   }
-  //   const [ addReview ] = useMutation(ADD_REVIEW)
+  const _id = new ObjectId(userData._id);
 
-  const handleAddBrewery = async (event) => {
-    // const _id = userData._id;
-    // const objectId = new ObjectId(_id);
+  const handleAddFavBrewery = async (event) => {
     // const breweryObject = new ObjectId(formattedId)
-    console.log(formattedId);
     try {
-      const { data } = await addBrewery({
+      const { data } = await addFavBrewery({
         variables: {
           breweryId: formattedId,
         },
       });
       if (!data) {
-        throw new Error("something went wrong!");
+        throw new Error('Something went wrong!');
       }
     } catch (err) {
       console.error(err);
     }
   };
+
+  const handleAddReview = async (event) => {
+    try {
+
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   return (
     <>
@@ -59,10 +71,12 @@ export default function SingleBrewery() {
               Address: {breweryData.street}, {breweryData.city},{" "}
               {breweryData.state} {breweryData.postal_code}
             </p>
-            <Button onClick={handleAddBrewery}>
+            <Button onClick={handleAddFavBrewery}>
               Save Brewery to Favorites
             </Button>
-            <Button>Add Review</Button>
+            <Button onClick={() => setShowForm(!showForm)}>
+              {showForm ? 'Save' : 'Add Review'}
+            </Button>
           </Card>
         </Col>
       )}
