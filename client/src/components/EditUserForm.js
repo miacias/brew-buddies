@@ -45,11 +45,11 @@ export const EditUserForm = () => {
     // password: "",
   });
   // set state for form validation
-  const [validated] = useState(false);
+  // const [validated] = useState(false);
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
-  const [editUser, { error }] = useMutation(EDIT_USER);
-  const { loading, data } = useQuery(GET_ME);
+  const [editUser/*, { error }*/] = useMutation(EDIT_USER);
+  const { /*loading,*/ data } = useQuery(GET_ME);
   const userData = data?.me || {};
   if (!userData) {
     return <h2>Please log in!</h2>;
@@ -68,7 +68,7 @@ export const EditUserForm = () => {
   };
 
   const handleFormSubmit = async (event) => {
-    ////////////// FILTERS OUT EMPTY STRINGS SO WE CAN SEND THE DATA OVER AND NOT BREAK APOLLO
+    // FILTERS OUT EMPTY STRINGS SO WE CAN SEND THE DATA OVER AND NOT BREAK APOLLO
     const filteredData = Object.entries(userFormData)
       .filter(([_, value]) => value !== "")
       .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});

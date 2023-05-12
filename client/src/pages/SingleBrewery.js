@@ -18,12 +18,12 @@ export default function SingleBrewery() {
 
   // calls OpenBreweryDB API and sets breweryData State
   useEffect(() => {
-    const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${formattedId}`;
+    const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${breweryId}`;
     fetch(searchByIdApi)
       .then((response) => response.json())
       .then((data) => setBreweryData(data))
       .catch((error) => console.error(error));
-  }, [formattedId]);
+  }, [breweryId]);
 
   // adds brewery to user favorites list
   const [addFavBrewery, { error }] = useMutation(ADD_FAV_BREWERY);
@@ -43,7 +43,7 @@ export default function SingleBrewery() {
     try {
       const { data } = await addFavBrewery({
         variables: {
-          breweryId: formattedId,
+          breweryId: breweryId,
         },
       });
       if (!data) {
@@ -70,11 +70,9 @@ export default function SingleBrewery() {
               </Button>
               {showForm && <AddReviewForm/>}
               <Button onClick={() => setShowForm(!showForm)}>
-                {showForm ? 'Save' : 'Add Review'}
+                {showForm ? 'Cancel' : 'Add Review'}
               </Button>
             </Card>
-          </Col>
-          <Col>
           </Col>
         </>
       )}
