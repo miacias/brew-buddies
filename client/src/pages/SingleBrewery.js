@@ -10,7 +10,7 @@ import { GET_ME } from "../utils/queries";
 const ObjectId = require("bson-objectid");
 
 export default function SingleBrewery() {
-  const { breweryId } = useParams();;
+  const { breweryId } = useParams();
   const [breweryData, setBreweryData] = useState();
 
   useEffect(() => {
@@ -33,7 +33,6 @@ export default function SingleBrewery() {
     // const _id = userData._id;
     // const objectId = new ObjectId(_id);
     // const breweryObject = new ObjectId(formattedId)
-    
     try {
       const { data } = await addBrewery({
         variables: {

@@ -1,5 +1,32 @@
 # Brew Buddies
 
+## Description
+
+Brew Buddies is a review site for lovers of beer, breweries, barley, and buddies. This application allows you to search nearby breweries and see user reviews, or take up a pen (so to speak) and write your own! You can also add breweries to your favorites list, so no matter how good a time you have, you'll never forget your favorite hangout hops spots. If a review catches your eye, save it to your favorites so you can try it next Saturday night. The site display is as crisp, classy and fun as...
+
+## Table of Contents
+
+- [Links](#links)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
+- [Features](#features)
+
+## Links
+
+Website Link: https://fierce-basin-42875.herokuapp.com/
+
+GitHub Repo Link: https://github.com/miacias/brew-buddies
+
+## Installation
+
+No installation required! This application is deployed to a live Heroku site.
+
+## Usage
+
+![alt text](assets/images/screenshot.png)
+
 ## Credits
 
 Documentation referenced:
@@ -20,3 +47,7 @@ Artist(s):
 - font(s)
   - [GuarGum](https://www.cdnfonts.com/g-guargum.font) - by Wahyu Eka Prasetya
   - [Braton Composer Stamp Rough](https://www.cdnfonts.com/braton-composer-stamp-rough.font) - [Alit Suarnegara](https://alitdesign.net/)
+
+## License
+
+## Features
