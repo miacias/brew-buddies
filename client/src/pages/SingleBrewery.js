@@ -10,17 +10,16 @@ import { GET_ME } from "../utils/queries";
 const ObjectId = require("bson-objectid");
 
 export default function SingleBrewery() {
-  const { breweryId } = useParams();
-  const formattedId = breweryId.substring(1);
+  const { breweryId } = useParams();;
   const [breweryData, setBreweryData] = useState();
 
   useEffect(() => {
-    const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${formattedId}`;
+    const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${breweryId}`;
     fetch(searchByIdApi)
       .then((response) => response.json())
       .then((data) => setBreweryData(data))
       .catch((error) => console.error(error));
-  }, [formattedId]);
+  }, [breweryId]);
 
   const [addBrewery] = useMutation(ADD_FAV_BREWERY);
   const { loading, data } = useQuery(GET_ME);
@@ -34,11 +33,11 @@ export default function SingleBrewery() {
     // const _id = userData._id;
     // const objectId = new ObjectId(_id);
     // const breweryObject = new ObjectId(formattedId)
-    console.log(formattedId);
+    
     try {
       const { data } = await addBrewery({
         variables: {
-          breweryId: formattedId,
+          breweryId: breweryId,
         },
       });
       if (!data) {

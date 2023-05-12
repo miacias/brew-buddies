@@ -20,7 +20,7 @@ import { Card, Col, Row } from 'antd';
 
 const breweryCard = (props) => {
   const breweryId = props.brewery.id
-  const url = `/:${breweryId}`
+  const url = `/${breweryId}`
   return (
     <Col span={8}>
       <Card title={props.brewery.name} bordered={false}>
