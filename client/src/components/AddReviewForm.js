@@ -9,7 +9,7 @@ import { GET_ME } from "../utils/queries";
 
 export default function AddReviewForm({ showForm, setShowForm }) {
     let { breweryId } = useParams();
-    console.log(breweryId.slice(1))
+    const formattedBrewId = breweryId.slice(1);
     const [form] = Form.useForm();
     const [reviewFormData, setUserFormData] = useState({});
     const [addReview, { error }] = useMutation(ADD_REVIEW);
@@ -30,13 +30,14 @@ export default function AddReviewForm({ showForm, setShowForm }) {
     const handleReviewSubmit = async (values) => {
         console.log('form values here:', values);
         try {
-            const { data } = await addReview({
-                variables: { ...reviewFormData, userId }
-            });
-            console.log(data)
-            if (!data) {
-                throw new Error('Unable to add review.');
-            }
+            console.log(...reviewFormData, formattedBrewId)
+            // const { data } = await addReview({
+            //     variables: { ...reviewFormData, formattedBrewId }
+            // });
+            // console.log(data)
+            // if (!data) {
+            //     throw new Error('Unable to add review.');
+            // }
         } catch (err) {
           console.error(err);
           Form.resetFields();
@@ -46,7 +47,7 @@ export default function AddReviewForm({ showForm, setShowForm }) {
             rate: 0
         });
         setShowForm(!showForm);
-    }
+    };
 
 
     return (
