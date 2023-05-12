@@ -68,7 +68,7 @@ export default function SingleBrewery() {
               <Button onClick={handleAddFavBrewery}>
                 Save Brewery to Favorites
               </Button>
-              {showForm && <AddReviewForm/>}
+              {showForm && <AddReviewForm showForm={showForm} setShowForm={setShowForm}/>}
               <Button onClick={() => setShowForm(!showForm)}>
                 {showForm ? 'Cancel' : 'Add Review'}
               </Button>
