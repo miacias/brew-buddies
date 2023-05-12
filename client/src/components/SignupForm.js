@@ -223,7 +223,7 @@ const Signup = () => {
       </Form.Item>
       <Form.Item
         name="postalCode"
-        label="postalCode"
+        label="Postal Code"
         rules={[
           {
             required: true,

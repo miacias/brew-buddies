@@ -1,24 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { Form, Rate, Input, Button } from 'antd';
 import { ADD_REVIEW } from '../utils/mutations';
 import { GET_ME } from "../utils/queries";
+import Auth from "../utils/auth";
+
 
 
 
 export default function AddReviewForm({ showForm, setShowForm }) {
     let { breweryId } = useParams();
-    const formattedBrewId = breweryId.slice(1);
     const [form] = Form.useForm();
     const [reviewFormData, setUserFormData] = useState({});
+
     const [addReview, { error }] = useMutation(ADD_REVIEW);
     // gathers user ID from logged in data
-    const { loading, data } = useQuery(GET_ME);
-    const userId = data?.me._id || {};
-    if (!userId) {
-        return <h2>Please log in!</h2>;
-    }
+    // const { loading, data } = useQuery(GET_ME);
+    // const user = data?.me || {};
+    // if (!user) {
+    //     return <h2>Please log in!</h2>;
+    // }
+
+    useEffect(() => {
+        setUserFormData({ ...reviewFormData, breweryId });
+    }, [])
 
     // sets State to track user input
     const handleInputChange = (event) => {
@@ -28,9 +34,9 @@ export default function AddReviewForm({ showForm, setShowForm }) {
 
     // adds review to database and empties form
     const handleReviewSubmit = async (values) => {
-        console.log('form values here:', values);
+        console.log('state value here:', reviewFormData);
         try {
-            console.log(...reviewFormData, formattedBrewId)
+            console.log('sending these', ...reviewFormData)
             // const { data } = await addReview({
             //     variables: { ...reviewFormData, formattedBrewId }
             // });
@@ -49,34 +55,38 @@ export default function AddReviewForm({ showForm, setShowForm }) {
         setShowForm(!showForm);
     };
 
-
-    return (
-        <Form
-            name='add-review'
-            form={form}
-            onFinish={handleReviewSubmit}
-            initialValues={{rate: 0}}
-            style={{maxWidth: 600}}
-        >
-            <Form.Item name='rate' label='Rate'>
-                <Rate />
-            </Form.Item>
-            <Form.Item name={['brewery', 'review']} label='Review Details'>
-                <Input.TextArea
-                    placeholder=''
-                    name='reviewText'
-                    onChange={handleInputChange}
-                    value={reviewFormData.reviewText}
-                />
-            </Form.Item>
-            <Form.Item>
-                <Button
-                    type='primary'
-                    htmlType='submit'
-                >
-                    Save
-                </Button>
-            </Form.Item>
-        </Form>
-    )
+    // prevents user from adding review
+    if (Auth.loggedIn()) {
+        return (
+            <Form
+                name='add-review'
+                form={form}
+                onFinish={handleReviewSubmit}
+                initialValues={{rate: 0}}
+                style={{maxWidth: 600}}
+            >
+                <Form.Item name='rate' label='Rate'>
+                    <Rate />
+                </Form.Item>
+                <Form.Item name='review' label='Review Details'>
+                    <Input.TextArea
+                        placeholder=''
+                        name='reviewText'
+                        onChange={handleInputChange}
+                        value={reviewFormData.reviewText}
+                    />
+                </Form.Item>
+                <Form.Item>
+                    <Button
+                        type='primary'
+                        htmlType='submit'
+                    >
+                        Save
+                    </Button>
+                </Form.Item>
+            </Form>
+        )
+    } else {
+        return (<h2>Please log in!</h2>);
+    };
 }
