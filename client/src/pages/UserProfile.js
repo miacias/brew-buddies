@@ -1,25 +1,29 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { Row, Col } from "antd";
 // import 'antd/dist/antd.css';
 import BreweryCard from "../components/BreweryCard";
 import Review from "../components/Review";
 import { useMutation, useQuery } from "@apollo/client";
-import { GET_ME } from "../utils/queries";
+import { GET_USER } from "../utils/queries";
 import Auth from "../utils/auth";
 // import { ExclamationCircleFilled } from "@ant-design/icons";
 import styles from './UserProfile.module.css';
 
 export function UserProfile() {
-  const { loading, data } = useQuery(GET_ME);
-  const userData = data?.me || {};
-  if (!userData) {
-    return <h2>Please log in!</h2>;
-  }
-  const imageData = userData.profilePic;
+  const { username } = useParams();
+  const { loading, error, data } = useQuery(GET_USER, {
+    variables: { username },
+  }); 
+  const userData = data?.user
+  const imageData = userData?.profilePic;
   let profilePic =
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
   console.log(userData);
-
+  if (!userData) {
+    return <div>Loading...</div>; // return a loading state if userData is falsy
+  }
+  
   return (
     <>
       <Row>
@@ -49,15 +53,15 @@ export function UserProfile() {
       </Row>
       <Row>
         <h2>My most recent reviews</h2>
+        {/* <Review/>
         <Review/>
-        <Review/>
-        <Review/>
+        <Review/> */}
       </Row>
       <Row>
         <h2>Places I hope to go</h2>
+        {/* <BreweryCard/>
         <BreweryCard/>
-        <BreweryCard/>
-        <BreweryCard/>
+        <BreweryCard/> */}
       </Row>
     </>
   );

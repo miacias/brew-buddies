@@ -7,7 +7,7 @@ import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
 // this page will render any user profile (future development)
-// import { UserProfile } from './pages/UserProfile';
+import { UserProfile } from './pages/UserProfile';
 import SearchPage from './pages/SearchPage';
 import SingleBrewery from './pages/SingleBrewery';
 import { AccountPage } from './pages/AccountPage';
@@ -175,6 +175,17 @@ function App() {
                         }}
                       />}
                   />
+                   <Route
+                    path='/:username'
+                    element={
+                      <UserProfile
+                        style={{
+                        padding: 24,
+                        minHeight: 360,
+                        background: colorBgContainer,
+                        }}
+                      />}
+                  />
                   {/* <Route 
                     path='/search'
                     element={
@@ -198,17 +209,6 @@ function App() {
                         }}
                       />}
                   />
-                  {/* <Route
-                    path='/SingleBrewery'
-                    element={
-                      <SingleBrewery 
-                        style={{
-                        padding: 24,
-                        minHeight: 360,
-                        background: colorBgContainer,
-                        }}
-                      />}
-                  /> */}
                   <Route
                     path='/connect'
                     element={
