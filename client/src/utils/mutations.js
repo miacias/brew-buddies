@@ -50,9 +50,9 @@ mutation addFavBrewery($breweryId: String!) {
 `;
 
 export const REMOVE_FAV_BREWERY = gql`
-    mutation removeFavBrewery($id: ID!, $breweryId: String!) {
-        removeFavBrewery(_id: $id, breweryId: $breweryId) {
-            _id
+    mutation removeFavBrewery($breweryId: String!) {
+        removeFavBrewery(breweryId: $breweryId) {
+            favBreweries
         }
     }
 `;
