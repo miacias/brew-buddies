@@ -81,5 +81,3 @@ export function AccountPage() {
     return <h2>Please log in!</h2>;
   }
 }
-
-

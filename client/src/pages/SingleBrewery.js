@@ -2,10 +2,11 @@ import { React, useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 // import BreweryCard from "../components/BreweryCard";
 import Review from "../components/Review";
+import AddReviewForm from '../components/AddReviewForm';
 import { ADD_FAV_BREWERY } from "../utils/mutations";
 import { ADD_REVIEW } from "../utils/mutations";
 import { useParams } from "react-router-dom";
-import { Col, Card, Button, Row } from "antd";
+import { Col, Card, Button, Row, Rate } from "antd";
 import { GET_ME } from "../utils/queries";
 const ObjectId = require("bson-objectid");
 
@@ -53,32 +54,29 @@ export default function SingleBrewery() {
     }
   };
 
-  const handleAddReview = async (event) => {
-    try {
-
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
   return (
     <>
       {breweryData && (
-        <Col span={8}>
-          <Card title={breweryData.name} bordered={false}>
-            <p>Brewery Type: {breweryData.brewery_type}</p>
-            <p>
-              Address: {breweryData.street}, {breweryData.city},{" "}
-              {breweryData.state} {breweryData.postal_code}
-            </p>
-            <Button onClick={handleAddFavBrewery}>
-              Save Brewery to Favorites
-            </Button>
-            <Button onClick={() => setShowForm(!showForm)}>
-              {showForm ? 'Save' : 'Add Review'}
-            </Button>
-          </Card>
-        </Col>
+        <>
+          <Col span={8}>
+            <Card title={breweryData.name} bordered={false}>
+              <p>Brewery Type: {breweryData.brewery_type}</p>
+              <p>
+                Address: {breweryData.street}, {breweryData.city},{" "}
+                {breweryData.state} {breweryData.postal_code}
+              </p>
+              <Button onClick={handleAddFavBrewery}>
+                Save Brewery to Favorites
+              </Button>
+              {showForm && <AddReviewForm/>}
+              <Button onClick={() => setShowForm(!showForm)}>
+                {showForm ? 'Save' : 'Add Review'}
+              </Button>
+            </Card>
+          </Col>
+          <Col>
+          </Col>
+        </>
       )}
 
       <div>Google Maps API here</div>

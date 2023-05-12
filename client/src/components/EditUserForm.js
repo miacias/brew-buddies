@@ -1,9 +1,9 @@
-import { AutoComplete, Button, Form, Input, Select } from "antd";
+import { /*AutoComplete,*/ Button, Form, Input, Select } from "antd";
 import { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { EDIT_USER } from "../utils/mutations";
 import { GET_ME } from "../utils/queries";
-import Auth from "../utils/auth";
+// import Auth from "../utils/auth";
 const { Option } = Select;
 
 const formItemLayout = {
@@ -82,7 +82,6 @@ export const EditUserForm = () => {
         throw new Error("something went wrong!");
       }
 
-      // Auth.login(data.editUser.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
