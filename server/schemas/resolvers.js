@@ -199,6 +199,22 @@ const resolvers = {
         );
       }
     },
+    // removes user from friends list
+    removeFriend: async (parent, { friendId }, context) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $pull: {
+              friends: friendId,
+            },
+          },
+          {
+            new: true,
+          }
+        );
+      }
+    },
   },
 };
 

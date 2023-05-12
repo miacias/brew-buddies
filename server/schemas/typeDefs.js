@@ -78,7 +78,7 @@ const typeDefs = gql`
       breweryId: String
     ): Review
     addFriend(friendId: ID!): User
-    # removeFriend(): User
+    removeFriend(friendId: ID!): User
     addFavBrewery(breweryId: String!): User
     removeFavBrewery(breweryId: String!): User
     # addWishBrewery()

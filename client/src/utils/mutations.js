@@ -91,3 +91,11 @@ export const ADD_FRIEND = gql`
         }
     }
 `;
+
+export const REMOVE_FRIEND = gql`
+mutation RemoveFriend($friendId: ID!) {
+    removeFriend(friendId: $friendId) {
+      friendCount
+    }
+  }
+`;
