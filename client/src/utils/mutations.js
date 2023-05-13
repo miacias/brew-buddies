@@ -86,10 +86,9 @@ export const ADD_REVIEW = gql`
       starRating: $starRating
       reviewText: $reviewText
       breweryId: $breweryId
-    ) {
+    ) { 
       user {
         _id
-        username
       }
     }
   }

@@ -69,7 +69,7 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    // not working
+    // allows the user to change their information
     editUser: async (parent, { input }, context) => {
       const { profilePic, postalCode, intro, pronouns } = input;
       if (context.user) {
@@ -125,9 +125,10 @@ const resolvers = {
     // adds review to User, Brewery, and Review models
     addReview: async (
       parent,
-      { reviewText, starRating, breweryId },
+      { breweryId, starRating, reviewText },
       context
     ) => {
+      console.log('hi from addReview resolver');
       if (context.user) {
         const newReview = await Review.create({
           reviewText,
@@ -146,18 +147,10 @@ const resolvers = {
             new: true,
           }
         );
-        const newBrewRev = await Brewery.findOneAndUpdate(
-          { _id: breweryId },
-          {
-            $addToSet: {
-              reviews: newReview._id,
-            },
-          },
-          {
-            new: true,
-          }
-        );
-        return { review: newReview, user: newUserRev, brewery: newBrewRev };
+        return {
+          review: newReview,
+          user: newUserRev,
+        };
       }
     },
     // allows user to change review for a brewery

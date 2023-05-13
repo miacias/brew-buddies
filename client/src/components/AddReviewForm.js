@@ -26,7 +26,7 @@ export default function AddReviewForm({ showForm, setShowForm }) {
     const handleInputChange = (event) => {
         let value = event;
         if (typeof value === 'number') {
-            setUserFormData({...reviewFormData, rate: value});
+            setUserFormData({...reviewFormData, starRating: value.toString()});
         } else {
             let { value } = event.target;
             setUserFormData({ ...reviewFormData, reviewText: value });
@@ -36,6 +36,7 @@ export default function AddReviewForm({ showForm, setShowForm }) {
     // adds review to database and empties form
     const handleReviewSubmit = async (values) => {
         // setUserFormData({...reviewFormData, values});
+        console.log(reviewFormData)
         try {
             const { data } = await addReview({
                 variables: { ...reviewFormData }
