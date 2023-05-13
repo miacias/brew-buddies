@@ -5,16 +5,15 @@ import { useMutation, useQuery } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
 import { EditUserForm } from "../components/EditUserForm";
 import BreweryCard from "../components/BreweryCard";
-import Review from "../components/Review";
+// import Review from "../components/Review";
 import styles from "./UserProfile.module.css";
 import Auth from "../utils/auth";
 import { REMOVE_FAV_BREWERY } from "../utils/mutations";
-// import { set } from "mongoose";
-// const myBreweryList = []
+
 export function AccountPage() {
   const [showForm, setShowForm] = useState(false);
   const [breweryList, setBreweryList] = useState(new Set([]));
-  const [removeFavBrewery] = useMutation(REMOVE_FAV_BREWERY)
+  const [removeFavBrewery] = useMutation(REMOVE_FAV_BREWERY);
   const [Loading, setLoading] = useState(true);
   const { loading, data } = useQuery(GET_ME);
   const userData = data?.me || {};
@@ -31,7 +30,7 @@ export function AccountPage() {
           .then((response) => response.json())
           .then((data) => {
             setLoading(false);
-            //////We set a new set, saving the data as a new set in the array every time
+            //////We set a new Set, saving the data as a new item in the array every time
             setBreweryList((current) => {
               return new Set([...current, data]);
             });
@@ -42,23 +41,23 @@ export function AccountPage() {
 
   // const [removeFavBrewery] = useMutation(REMOVE_FAV_BREWERY)
   const handleRemoveBrewery = async (breweryId) => {
-    console.log(breweryId)
     try {
       const { data } = await removeFavBrewery({
         variables: {
-          breweryId: breweryId
-        }
-      })
-      setBreweryList(current => {
+          breweryId: breweryId,
+        },
+      });
+      setBreweryList((current) => {
         // Create a new set of breweries excluding the deleted brewery
-        const updatedBreweries = new Set([...current].filter(brewery => brewery.id !== breweryId))
-        return updatedBreweries
-      })
-      
+        const updatedBreweries = new Set(
+          [...current].filter((brewery) => brewery.id !== breweryId)
+        );
+        return updatedBreweries;
+      });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   const imageData = userData.profilePic;
   let profilePic =
@@ -99,9 +98,7 @@ export function AccountPage() {
             {Array.from(breweryList).map((brewery) => (
               //
               <Row>
-              <BreweryCard brewery={brewery} key={brewery.id}/>
-                <Button onClick={() => handleRemoveBrewery(brewery.id)}>Delete Favorite Brewery</Button>
-            
+                <BreweryCard brewery={brewery} key={brewery.id} handleRemoveBrewery={handleRemoveBrewery}/>
               </Row>
             ))}
           </Col>
