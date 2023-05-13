@@ -19,7 +19,7 @@ export default function HomePage() {
                 .catch((error) => console.error(error));
             });
         }
-    }, []);
+    }, [data]);
 
     if(!loading && data && breweryData) {
         return (
