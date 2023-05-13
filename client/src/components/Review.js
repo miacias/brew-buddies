@@ -6,9 +6,9 @@ import { Avatar, Card, } from 'antd';
 const { Meta } = Card;
 
 
-const Review = ({ oneReview }) => (
+const Review = ({ oneReview, breweryData }) => (
   <Card>
-    {console.log(oneReview)}
+    {/* {console.log(oneReview)} */}
     <Meta
           avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1" />}
           title="Review Creator"
@@ -19,7 +19,7 @@ const Review = ({ oneReview }) => (
         marginTop: 16,
       }}
       type="inner"
-      title={`Brewery name link`}
+      title={`Brewery name ${breweryData.name}`}
     //   extra={<a href="#">More</a>}  <<<<  a more link
     >
       Star Review {oneReview.starRating}
