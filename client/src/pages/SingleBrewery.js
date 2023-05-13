@@ -89,6 +89,7 @@ export default function SingleBrewery() {
               return <ReviewCard 
                 oneReview={oneReview} 
                 key={oneReview._id}
+                breweryData={breweryData}
               />
             })}
             </>

@@ -40,7 +40,7 @@ const typeDefs = gql`
     starRating: String!
     reviewAuthor: String!
     createdAt: String
-    breweryId: Brewery
+    breweryId: String
   }
 
   type Auth {

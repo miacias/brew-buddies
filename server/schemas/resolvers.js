@@ -8,7 +8,6 @@ const resolvers = {
     // do we want to also populate favBreweries?
     users: async () => User.find().populate(['reviews', 'friends']),
     // shows specific user with attached reviews
-    // do we want to also populate favBreweries?
     user: async (parent, { username }) =>
       User.findOne({ username }).populate(['reviews', 'friends']),
     // shows specific user who is logged in currently with attached reviews
@@ -23,8 +22,8 @@ const resolvers = {
     breweries: async () => Brewery.find().populate('reviews'),
     // shows specific brewery with attached reviews
     brewery: async (id) => Brewery.findOne({ id }).populate('reviews'),
-    // shows all reviews from Review model
-    reviews: async () => Review.find(),
+    // shows three most recent reviews from Review model
+    reviews: async () => Review.find().sort({ createdAt: -1 }).limit(3),
     // finds review by ID
     review: async (parent, { breweryId }) => {
       const reviewSet = await Review.find({
