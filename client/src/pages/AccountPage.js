@@ -30,7 +30,7 @@ export function AccountPage() {
           .then((response) => response.json())
           .then((data) => {
             setLoading(false);
-            //////We set a new Set, saving the data as a new item in the array every time
+            // We set a new set, saving the data as a new set in the array every time
             setBreweryList((current) => {
               return new Set([...current, data]);
             });

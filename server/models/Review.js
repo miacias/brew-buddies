@@ -27,8 +27,8 @@ const reviewSchema = new Schema({
     get: (timestamp) => dateFormat(timestamp),
   },
   breweryId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Brewery',
+    type: String,
+    required: true,
   },
 });
 
