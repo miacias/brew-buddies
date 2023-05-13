@@ -9,7 +9,9 @@ Brew Buddies is a hybrid review site and social media for lovers of beer, brewer
 - [Links](#links)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Contributors](#contributors)
 - [Credits](#credits)
+- [Technologies](#technologies)
 - [License](#license)
 - [Features](#features)
 - [Screenshots](#screenshots)
@@ -27,6 +29,24 @@ No installation required! This application is deployed to a live Heroku site (se
 ## Usage
 
 The landing page of the website presents a list of recent brewery reviews. For full functionality, a user with have to sign up and login. Once logged in, users can search breweries by postal code and is presented with a list of breweries in that area and a map display with their locations. A user can click on any brewery's link to see its page. It will display the brewery info, as well as any available reviews and its average star rating. A user can click on the "Add to Favorites" button to save a list of breweries. They can also add a review of their own. Users can also add another user as a friend to see their reviews or favorites.
+
+## Contributors
+
+Mia Ciasullo
+~ [GitHub](https://github.com/miacias)
+~ [LinkedIn](https://www.linkedin.com/in/miaciasullo)
+
+Stevie O'Connell
+~ [GitHub](https://github.com/OConnell-Coder)
+~ [LinkedIn](https://www.linkedin.com/in/stephanie-o-connell-965051274)
+
+Margaret Saylor
+~ [GitHub](https://github.com/msaylorphila)
+~ [LinkedIn](https://www.linkedin.com/in/margaret-saylor)
+
+Fred Chang
+~ [GitHub](https://github.com/LearnedDr)
+~ [LinkedIn](https://www.linkedin.com/in/fredrick-chang-85987672)
 
 ## Credits
 
@@ -48,6 +68,18 @@ Artist(s):
 - font(s)
   - [GuarGum](https://www.cdnfonts.com/g-guargum.font) - by Wahyu Eka Prasetya
   - [Braton Composer Stamp Rough](https://www.cdnfonts.com/braton-composer-stamp-rough.font) - [Alit Suarnegara](https://alitdesign.net/)
+
+## Technologies
+
+- React
+- GraphQL, Node.js, Express.js, Apollo
+- MongoDB, Mongoose
+- Bcrypt, Auth.js, JWT, Dotenv
+- Ant Design, Granim, Framer Motion
+- BSON
+- Heroku
+- Google Maps API
+- Open Brewery DB API
 
 ## License
 
