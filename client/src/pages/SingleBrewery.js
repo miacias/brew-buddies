@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 // import BreweryCard from "../components/BreweryCard";
-import Review from "../components/Review";
+import ReviewCard from "../components/ReviewCard";
 import AddReviewForm from '../components/AddReviewForm';
 import Auth from '../utils/auth'
 import { ADD_FAV_BREWERY } from "../utils/mutations";
@@ -86,7 +86,10 @@ export default function SingleBrewery() {
           {!loading && data.review && (
             <>
             {data.review.map((oneReview) => {
-              return <Review oneReview={oneReview} breweryData={breweryData}/>
+              return <ReviewCard 
+                oneReview={oneReview} 
+                key={oneReview._id}
+              />
             })}
             </>
           )}

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Row, Col } from "antd";
 // import 'antd/dist/antd.css';
 import BreweryCard from "../components/BreweryCard";
-import Review from "../components/Review";
+import ReviewCard from "../components/ReviewCard";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_USER } from "../utils/queries";
 import Auth from "../utils/auth";
@@ -53,9 +53,9 @@ export function UserProfile() {
       </Row>
       <Row>
         <h2>My most recent reviews</h2>
-        {/* <Review/>
-        <Review/>
-        <Review/> */}
+        {/* <ReviewCard/>
+        <ReviewCard/>
+        <ReviewCard/> */}
       </Row>
       <Row>
         <h2>Places I hope to go</h2>

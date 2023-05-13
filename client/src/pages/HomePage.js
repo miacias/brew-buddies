@@ -1,8 +1,8 @@
 import React from 'react';
-import Review from '../components/Review'
+import ReviewCard from '../components/ReviewCard'
 
 export default function Header() {
     return (
-        <Review/>
+        <ReviewCard/>
     )
 }

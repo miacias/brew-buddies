@@ -108,6 +108,7 @@ export const ALL_REVIEWS = gql`
 export const BREWERY_REVIEW = gql`
     query Review($breweryId: String) {
         review(breweryId: $breweryId) {
+            _id
             reviewAuthor
             createdAt
             reviewText
