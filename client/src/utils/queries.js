@@ -104,3 +104,14 @@ export const ALL_REVIEWS = gql`
         }
     }
 `;
+
+export const BREWERY_REVIEW = gql`
+    query Review($breweryId: String) {
+        review(breweryId: $breweryId) {
+            reviewAuthor
+            createdAt
+            reviewText
+            starRating
+        }
+    }
+`;

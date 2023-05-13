@@ -55,6 +55,7 @@ const typeDefs = gql`
     breweries: [Brewery]
     brewery(breweryId: String): Brewery
     reviews: [Review]
+    review(breweryId: String): [Review]
   }
 
   type Mutation {

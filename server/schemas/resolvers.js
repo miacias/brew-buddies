@@ -25,6 +25,13 @@ const resolvers = {
     brewery: async (id) => Brewery.findOne({ id }).populate('reviews'),
     // shows all reviews from Review model
     reviews: async () => Review.find(),
+    // finds review by ID
+    review: async (parent, { breweryId }, context) => {
+      const reviewSet = await Review.find({
+        breweryId,
+      });
+      return reviewSet;
+    },
   },
   Mutation: {
     // creates new user and connects user to site

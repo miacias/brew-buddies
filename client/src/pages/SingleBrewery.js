@@ -6,9 +6,10 @@ import AddReviewForm from '../components/AddReviewForm';
 import Auth from '../utils/auth'
 import { ADD_FAV_BREWERY } from "../utils/mutations";
 import { ADD_REVIEW } from "../utils/mutations";
+import { BREWERY_REVIEW } from '../utils/queries';
 import { useParams } from "react-router-dom";
 import { Col, Card, Button/*, Row*/ } from "antd";
-import { GET_ME } from "../utils/queries";
+// import { GET_ME } from "../utils/queries";
 
 export default function SingleBrewery() {
   const { breweryId } = useParams();
@@ -26,15 +27,21 @@ export default function SingleBrewery() {
 
   // adds brewery to user favorites list
   const [addFavBrewery, { error }] = useMutation(ADD_FAV_BREWERY);
+  const { loading, data } = useQuery(BREWERY_REVIEW, { variables: { breweryId }});
   // adds review to brewery page and to user profile
   // const [ addReview ] = useMutation(ADD_REVIEW);
-  // retrieves user ID so user can add favorites
-  const { loading, data } = useQuery(GET_ME);
+  // retrieves user ID so user can add favorites -> refactor. get ID from token.
+  /*
+  - server side is using _id in the payload during SignToken, so _id can be retrieved through the token instead of GET_ME
+  - client side utils auth.js can use getToken() to decode the token and retrieve this value from localStorage  
+  
+  */
+  // const { loading, data } = useQuery(GET_ME);
 
-  const userData = data?.me || {};
-  if (!userData) {
-    return <h2>Please log in!</h2>;
-  }
+  // const userData = data?.me || {};
+  // if (!userData) {
+  //   return <h2>Please log in!</h2>;
+  // }
   // const _id = new ObjectId(userData._id);
 
   const handleAddFavBrewery = async (event) => {
@@ -79,6 +86,13 @@ export default function SingleBrewery() {
       <div>Google Maps API here</div>
       <ul>
         <div>reviews by review.length</div>
+        {!loading && data.review && (
+          <>
+          {data.review.map((oneReview) => {
+            return <Review oneReview={oneReview}/>
+          })}
+          </>
+        )}
         {/* <li><Review/></li>
                 <li><Review/></li>
                 <li><Review/></li> */}
