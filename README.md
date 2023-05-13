@@ -55,7 +55,12 @@ MIT License
 
 ## Features
 
-- 
+- Search breweries by postal code
+- See user reviews on each brewery
+- Write a review with a star rating
+- Add breweries to a favorites list
+- Add and remove friends
+- View user profiles with their reviews
 
 ## Screenshots
 
