@@ -40,19 +40,3 @@ export default function ReviewCard({ oneReview, breweryData }) {
     </Card>
   )
 };
-
-
-
-/*
-- if pathname contains something (single page), show stars as title
-- if pathname is home, show breweryname as title and put stars elsewhere
-
-- home page will show the three most recent reviews
-  - change resolver query to have a .sort() that gets most recent first
-  - possibly put limit of three reviews here in the resolver
-- set returned api data into State so that it can be rendered on the card with the ratings from the local DB
-- with new State, attempt to render name and website_url
-- DONE
-
-
-*/
