@@ -1,13 +1,12 @@
 import { React, useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
-import BreweryCard from "../components/BreweryCard";
 import Review from "../components/Review";
+import Auth from '../utils/auth'
 import { ADD_FAV_BREWERY } from "../utils/mutations";
 import { ADD_REVIEW } from "../utils/mutations";
 import { useParams } from "react-router-dom";
 import { Col, Card, Button, Row } from "antd";
 import { GET_ME } from "../utils/queries";
-const ObjectId = require("bson-objectid");
 
 export default function SingleBrewery() {
   const { breweryId } = useParams();
@@ -30,9 +29,6 @@ export default function SingleBrewery() {
   //   const [ addReview ] = useMutation(ADD_REVIEW)
 
   const handleAddBrewery = async (event) => {
-    // const _id = userData._id;
-    // const objectId = new ObjectId(_id);
-    // const breweryObject = new ObjectId(formattedId)
     try {
       const { data } = await addBrewery({
         variables: {
@@ -42,11 +38,12 @@ export default function SingleBrewery() {
       if (!data) {
         throw new Error("something went wrong!");
       }
+      console.log("woohoo")
     } catch (err) {
       console.error(err);
     }
   };
-
+  if(Auth.loggedIn()) {
   return (
     <>
       {breweryData && (
@@ -74,4 +71,6 @@ export default function SingleBrewery() {
       </ul>
     </>
   );
-}
+} else {
+ return <div>Please log in!</div>
+}}

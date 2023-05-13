@@ -1,6 +1,5 @@
 import React from 'react';
 import BeerLogo from './BeerLogo';
-import LogoutButton from './LogoutButton';
 import { Row, Col } from 'antd'
 
 

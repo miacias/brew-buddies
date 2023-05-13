@@ -1,6 +1,5 @@
 import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
-// import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Layout, Menu, ConfigProvider, theme } from 'antd';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -65,10 +64,10 @@ function App() {
       key: "2",
       label: (<a href="/breweries">Breweries</a>)
     },
-    {
-      key: "3",
-      label: (<a href="/profile">Profile Page</a>)
-    },
+    // {
+    //   key: "3",
+    //   label: (<a href="/profile">Profile Page</a>)
+    // },
     {
       key: "4",
       label: (<a href="/connect">Login</a>)
@@ -96,11 +95,7 @@ function App() {
       label: (<a href="/" onClick={() => Auth.logout()}>
       Logout
     </a>)
-    },
-    {
-      key: "5",
-      label: (<a href="/signup">Sign Up</a>)
-    },
+    }
   ]
   return (
     <ApolloProvider client={client}>
