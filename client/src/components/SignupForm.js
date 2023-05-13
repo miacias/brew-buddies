@@ -64,6 +64,7 @@ const Signup = () => {
   const handleFormSubmit = async (event) => {
     try {
       console.log(userFormData);
+      userFormData.username = userFormData.username.toLowerCase()
       const { data } = await addUser({
         variables: { ...userFormData },
       });
