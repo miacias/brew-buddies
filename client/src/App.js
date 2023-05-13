@@ -176,7 +176,8 @@ function App() {
                       />}
                   />
                    <Route
-                    path='/:username'
+                    path='/profile/:username'
+                    exact
                     element={
                       <UserProfile
                         style={{
@@ -194,6 +195,7 @@ function App() {
                   />*/}
                   <Route 
                     path='/:breweryId'
+                    exact
                     element={
                       <SingleBrewery/>
                     }

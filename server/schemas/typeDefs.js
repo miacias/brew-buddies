@@ -40,7 +40,7 @@ const typeDefs = gql`
     starRating: String!
     reviewAuthor: String!
     createdAt: String
-    breweryId: Brewery
+    breweryId: String
   }
 
   type Auth {
@@ -55,6 +55,7 @@ const typeDefs = gql`
     breweries: [Brewery]
     brewery(breweryId: String): Brewery
     reviews: [Review]
+    review(breweryId: String): [Review]
   }
 
   type Mutation {
