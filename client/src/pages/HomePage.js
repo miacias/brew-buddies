@@ -7,18 +7,18 @@ import ReviewCard from '../components/ReviewCard';
 export default function HomePage() {
     const [breweryData, setBreweryData] = useState();
     const { loading, data } = useQuery(ALL_REVIEWS);
-    console.log(data)
 
     // calls OpenBreweryDB API and sets breweryData State for all breweries
     useEffect(() => {
-        const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/`;
-        fetch(searchByIdApi)
-        .then((response) => response.json())
-        .then((data) => {
-            // console.log(data)
-            setBreweryData(data)
-        })
-        .catch((error) => console.error(error));
+        if (!loading && data.reviews && data.reviews.length > 0) {
+            data.reviews.forEach(review => {     
+                const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${review.breweryId}`;
+                fetch(searchByIdApi)
+                .then((response) => response.json())
+                .then((data) => setBreweryData(data))
+                .catch((error) => console.error(error));
+            });
+        }
     }, []);
 
     if(!loading && data && breweryData) {
