@@ -1,6 +1,4 @@
-// change name to review card
-
-// We are using both the "loading card" and "inner card" components from ANT.  The Meta tag comes from "loading card" that we attached to an "inner card"
+// using both "loading card" and "inner card" components from ANT.  The Meta tag comes from "loading card" is attached to an "inner card"
 
 import { Avatar, Card, Rate } from 'antd';
 const { Meta } = Card;
@@ -26,4 +24,5 @@ const ReviewCard = ({ oneReview }) => (
     </Card>
   </Card>
 );
+
 export default ReviewCard;
