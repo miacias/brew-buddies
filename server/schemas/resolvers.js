@@ -26,7 +26,7 @@ const resolvers = {
     // shows all reviews from Review model
     reviews: async () => Review.find(),
     // finds review by ID
-    review: async (parent, { breweryId }, context) => {
+    review: async (parent, { breweryId }) => {
       const reviewSet = await Review.find({
         breweryId,
       });

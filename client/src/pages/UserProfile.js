@@ -2,11 +2,11 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Row, Col } from "antd";
 // import 'antd/dist/antd.css';
-import BreweryCard from "../components/BreweryCard";
-import ReviewCard from "../components/ReviewCard";
-import { useMutation, useQuery } from "@apollo/client";
+// import BreweryCard from "../components/BreweryCard";
+// import ReviewCard from "../components/ReviewCard";
+import { /*useMutation,*/ useQuery } from "@apollo/client";
 import { GET_USER } from "../utils/queries";
-import Auth from "../utils/auth";
+// import Auth from "../utils/auth";
 // import { ExclamationCircleFilled } from "@ant-design/icons";
 import styles from './UserProfile.module.css';
 
