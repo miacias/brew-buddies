@@ -23,6 +23,7 @@ export default function ReviewCard({ oneReview, breweryData }) {
         type="inner"
         title={<a href={breweryData.website_url ? breweryData.website_url : ''}>{breweryData?.name}</a>}
         >
+          <Rate disabled defaultValue={oneReview.starRating}/>
           <p>{oneReview.reviewText}</p>
         </Card>
       : // else render card with brewery star rating as title
