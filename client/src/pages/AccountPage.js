@@ -41,7 +41,6 @@ export function AccountPage() {
 
   // const [removeFavBrewery] = useMutation(REMOVE_FAV_BREWERY)
   const handleRemoveBrewery = async (breweryId) => {
-    console.log(breweryId);
     try {
       const { data } = await removeFavBrewery({
         variables: {
@@ -99,10 +98,7 @@ export function AccountPage() {
             {Array.from(breweryList).map((brewery) => (
               //
               <Row>
-                <BreweryCard brewery={brewery} key={brewery.id} />
-                <Button onClick={() => handleRemoveBrewery(brewery.id)}>
-                  Delete Favorite Brewery
-                </Button>
+                <BreweryCard brewery={brewery} key={brewery.id} handleRemoveBrewery={handleRemoveBrewery}/>
               </Row>
             ))}
           </Col>
