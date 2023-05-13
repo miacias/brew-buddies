@@ -1,6 +1,5 @@
 import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
-// import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Layout, Menu, ConfigProvider, theme } from 'antd';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -8,7 +7,7 @@ import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
 // this page will render any user profile (future development)
-// import { UserProfile } from './pages/UserProfile';
+import { UserProfile } from './pages/UserProfile';
 import SearchPage from './pages/SearchPage';
 import SingleBrewery from './pages/SingleBrewery';
 import { AccountPage } from './pages/AccountPage';
@@ -65,10 +64,10 @@ function App() {
       key: "2",
       label: (<a href="/breweries">Breweries</a>)
     },
-    {
-      key: "3",
-      label: (<a href="/profile">Profile Page</a>)
-    },
+    // {
+    //   key: "3",
+    //   label: (<a href="/profile">Profile Page</a>)
+    // },
     {
       key: "4",
       label: (<a href="/connect">Login</a>)
@@ -176,6 +175,17 @@ function App() {
                         }}
                       />}
                   />
+                   <Route
+                    path='/:username'
+                    element={
+                      <UserProfile
+                        style={{
+                        padding: 24,
+                        minHeight: 360,
+                        background: colorBgContainer,
+                        }}
+                      />}
+                  />
                   {/* <Route 
                     path='/search'
                     element={
@@ -199,17 +209,6 @@ function App() {
                         }}
                       />}
                   />
-                  {/* <Route
-                    path='/SingleBrewery'
-                    element={
-                      <SingleBrewery 
-                        style={{
-                        padding: 24,
-                        minHeight: 360,
-                        background: colorBgContainer,
-                        }}
-                      />}
-                  /> */}
                   <Route
                     path='/connect'
                     element={

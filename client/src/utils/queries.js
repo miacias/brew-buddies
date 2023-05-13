@@ -45,22 +45,20 @@ export const ALL_USERS = gql`
 `;
 
 export const GET_USER = gql`
-    query oneUser($username: String) {
-        user(username: $username) {
-            _id
-            username
-            email
-            password
-            birthday
-            friendCount
-            intro
-            postalCode
-            profilePic
-            pronouns
-        }
+query getUser($username: String) {
+    user(username: $username) {
+      username
+      email
+      password
+      birthday
+      profilePic
+      postalCode
+      intro
+      pronouns
+      favBreweries
     }
+  }
 `;
-
 export const ALL_BREWERIES = gql`
     query allBreweries {
         breweries {
