@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Auth from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { ALL_REVIEWS } from '../utils/queries';
 import ReviewCard from '../components/ReviewCard';
