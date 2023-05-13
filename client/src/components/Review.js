@@ -7,7 +7,7 @@ const Review = () => (
     <Meta
           avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1" />}
           title="Review Creator"
-          description="Review CreatedAt"
+          description="Review posted on"
         />
     <Card
       style={{

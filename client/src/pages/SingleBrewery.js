@@ -1,17 +1,21 @@
 import { React, useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
+// import BreweryCard from "../components/BreweryCard";
 import Review from "../components/Review";
+import AddReviewForm from '../components/AddReviewForm';
 import Auth from '../utils/auth'
 import { ADD_FAV_BREWERY } from "../utils/mutations";
 import { ADD_REVIEW } from "../utils/mutations";
 import { useParams } from "react-router-dom";
-import { Col, Card, Button, Row } from "antd";
+import { Col, Card, Button/*, Row*/ } from "antd";
 import { GET_ME } from "../utils/queries";
 
 export default function SingleBrewery() {
   const { breweryId } = useParams();
   const [breweryData, setBreweryData] = useState();
+  const [showForm, setShowForm] = useState(false);
 
+  // calls OpenBreweryDB API and sets breweryData State
   useEffect(() => {
     const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${breweryId}`;
     fetch(searchByIdApi)
@@ -20,23 +24,28 @@ export default function SingleBrewery() {
       .catch((error) => console.error(error));
   }, [breweryId]);
 
-  const [addBrewery] = useMutation(ADD_FAV_BREWERY);
+  // adds brewery to user favorites list
+  const [addFavBrewery, { error }] = useMutation(ADD_FAV_BREWERY);
+  // adds review to brewery page and to user profile
+  // const [ addReview ] = useMutation(ADD_REVIEW);
+  // retrieves user ID so user can add favorites
   const { loading, data } = useQuery(GET_ME);
+
   const userData = data?.me || {};
   if (!userData) {
     return <h2>Please log in!</h2>;
   }
-  //   const [ addReview ] = useMutation(ADD_REVIEW)
+  // const _id = new ObjectId(userData._id);
 
-  const handleAddBrewery = async (event) => {
+  const handleAddFavBrewery = async (event) => {
     try {
-      const { data } = await addBrewery({
+      const { data } = await addFavBrewery({
         variables: {
           breweryId: breweryId,
         },
       });
       if (!data) {
-        throw new Error("something went wrong!");
+        throw new Error('Something went wrong!');
       }
       console.log("woohoo")
     } catch (err) {
@@ -47,19 +56,24 @@ export default function SingleBrewery() {
   return (
     <>
       {breweryData && (
-        <Col span={8}>
-          <Card title={breweryData.name} bordered={false}>
-            <p>Brewery Type: {breweryData.brewery_type}</p>
-            <p>
-              Address: {breweryData.street}, {breweryData.city},{" "}
-              {breweryData.state} {breweryData.postal_code}
-            </p>
-            <Button onClick={handleAddBrewery}>
-              Save Brewery to Favorites
-            </Button>
-            <Button>Add Review</Button>
-          </Card>
-        </Col>
+        <>
+          <Col span={8}>
+            <Card title={breweryData.name} bordered={false}>
+              <p>Brewery Type: {breweryData.brewery_type}</p>
+              <p>
+                Address: {breweryData.street}, {breweryData.city},{" "}
+                {breweryData.state} {breweryData.postal_code}
+              </p>
+              <Button onClick={handleAddFavBrewery}>
+                Save Brewery to Favorites
+              </Button>
+              {showForm && <AddReviewForm showForm={showForm} setShowForm={setShowForm}/>}
+              <Button onClick={() => setShowForm(!showForm)}>
+                {showForm ? 'Cancel' : 'Add Review'}
+              </Button>
+            </Card>
+          </Col>
+        </>
       )}
 
       <div>Google Maps API here</div>
