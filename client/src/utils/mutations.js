@@ -78,7 +78,7 @@ export const REMOVE_FAV_BREWERY = gql`
 
 export const ADD_REVIEW = gql`
   mutation addReview(
-    $starRating: Int!
+    $starRating: String!
     $reviewText: String
     $breweryId: String
   ) {
@@ -96,7 +96,7 @@ export const ADD_REVIEW = gql`
 `;
 
 export const EDIT_REVIEW = gql`
-  mutation editReview($reviewId: ID!, $starRating: Int, $reviewText: String) {
+  mutation editReview($reviewId: ID!, $starRating: String, $reviewText: String) {
     editReview(
       reviewId: $reviewId
       starRating: $starRating
