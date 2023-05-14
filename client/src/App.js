@@ -1,7 +1,7 @@
 // client-side packages
 import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
-import { Layout, Menu, Avatar, Space, ConfigProvider, theme } from 'antd';
+import { Layout, Menu, Avatar, Space, Divider, ConfigProvider, theme } from 'antd';
 import { setContext } from '@apollo/client/link/context';
 import { Link, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // client-side utils, pages, components
@@ -15,7 +15,6 @@ import { UserProfile } from './pages/UserProfile';
 import { AccountPage } from './pages/AccountPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
-
 
 
 const { Content, Sider } = Layout;
@@ -61,35 +60,34 @@ function App() {
   const items = [
     {
       key: "/",
-      label: <Link to="/">Home</Link>
+      label: <Link to="/">Home</Link>,
     },
     {
       key: "/breweries",
-      label: <Link to="/breweries">Breweries</Link>
+      label: <Link to="/breweries">Breweries</Link>,
     },
     ...Auth.loggedIn() ? 
       [
         {
         key: "/profile",
-        label: <Link to="/profile">Profile Page</Link>
+        label: <Link to="/profile">Profile Page</Link>,
         },
         {
-          key: "/",
-          label: (<Link to="/" onClick={() => Auth.logout()}>
-          Logout
-        </Link>)
+          key: "4",
+          label: (<Link to="/" onClick={() => Auth.logout()}>Logout</Link>),
         }
       ] : [
         {
           key: "/signup",
-          label: <Link to="/signup">Sign Up</Link>
+          label: <Link to="/signup">Sign Up</Link>,
         },
         {
           key: "/connect",
-          label: <Link to="/connect">Login</Link>
+          label: <Link to="/connect">Login</Link>,
         }
       ],
   ]
+
 
   return (
     <ApolloProvider client={client}>
@@ -122,19 +120,16 @@ function App() {
                 <Menu
                   theme="dark"
                   mode="inline"
-                  defaultSelectedKeys={window.location.pathname} // highlights based on pathname & item key
+                  defaultSelectedKeys={window.location.pathname} // highlights based on when pathname matches item key
                   items={items} 
                 />
-                {Auth.loggedIn() ? (
-                  <Space align='end' direction='vertical'>
+                {/* shows user profile picture when logged in */}
+                {/* {Auth.loggedIn() ? (
                     <Avatar
                       src={'https://images4-f.ravelrycache.com/uploads/LightningCat/163663408/DSCN1058_medium2.JPG'}/>
-                  </Space>
                 ) : (
                   ''
-                )}
-              {/* </Space> */}
-             
+                )}              */}
             </Sider>
             {/* sets inner layout for header, content, and footer */}
             <Layout>

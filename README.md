@@ -3,7 +3,7 @@
 
 ## Description
 
-Brew Buddies is a hybrid review site and social media for lovers of beer, breweries, barley, and buddies. This application allows you to search nearby breweries and see user reviews, or take up a pen (so to speak) and write your own! You can also add breweries to your favorites list, so no matter how good a time you have, you'll never forget your favorite hangout hops spots. If a review catches your eye, save it to your favorites so you can try it next Saturday night. You can also add friends, who you might want to share a pint with. The site display is as fresh and fun as your favorite distillery pull. Please drink responsibly! Cheers! 🍻
+Brew Buddies is a hybrid review site and social media for lovers of beer, breweries, barley, and buddies. This application allows you to search nearby breweries and see user reviews, or take up a pen (so to speak) and write your own! You can also add breweries to your Favorites list, so no matter how good a time you have, you'll never forget your favorite hangout hops spots. If a review catches your eye, save it to your favorites so you can try it next Saturday night. You can also add Friends, who you might want to share a pint with. The site display is as fresh and fun as your favorite distillery pull. Please drink responsibly! Cheers! 🍻
 
 
 ## Table of Contents
@@ -11,6 +11,7 @@ Brew Buddies is a hybrid review site and social media for lovers of beer, brewer
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributors](#contributors)
+- [Roadmap](#roadmap)
 - [Credits](#credits)
 - [Technologies](#technologies)
 - [License](#license)
@@ -47,13 +48,33 @@ The landing page of the website presents a list of recent brewery reviews. For f
 ~ [LinkedIn](https://www.linkedin.com/in/fredrick-chang-85987672)
 
 
+## Roadmap
+
+Content will be added and adjusted as new coding projects are available! Some projects may phase out over time as contrubitors' work becomes more specialized.
+1. user experience:
+    - users can save breweries to their wishlist for future travels and exploration
+2. site quality:
+    - add validators on sign up for birthdate (ages 21 and up!)
+    - display total number of reviews and average rating on single brewery page
+    - custom Ant Design Theme using craco
+    - maximize homepage OpenBreweryDB API call and incorporate pagination
+3. future feature(s): 
+    - cocktails
+      - search cocktail recipes with names, ingredients, and instructions through api-ninjas.com/api/cocktail
+      - users can save favorite cocktail recipes
+      - users can save custom cocktails
+    - interaction
+      - user actions save to profile feed where friends can add "likes" and/or "comments"
+      - add geolocation tools to promote local micro breweries, distilleries, etc.
+
+
 ## Credits
 
 Documentation referenced:
 
 - [OpenBreweryDB API](https://www.openbrewerydb.org/)
 - [MongoDB](https://www.mongodb.com/docs/manual/)
-- Mongoose
+- [Mongoose](https://mongoosejs.com/docs/)
 - [Google Maps React Wrapper](https://github.com/googlemaps/react-wrapper/tree/main) - load Google Maps with React
 - [GranimJS](https://sarcadass.github.io/granim.js/examples.html) - animated color gradients
 - Mozilla Developer Network (MDN)
@@ -95,7 +116,7 @@ Artist(s):
 - GraphQL, [Node.js](https://nodejs.org/en/), Express.js, Apollo
 - MongoDB, Mongoose
 - Bcrypt, JWT, Dotenv
-- Ant Design, Granim, Framer Motion
+- Ant Design, Granim.js
 - BSON
 - Heroku
 - Google Maps API
