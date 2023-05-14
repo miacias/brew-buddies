@@ -1,8 +1,9 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { Layout, Menu, ConfigProvider, theme } from 'antd';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
@@ -45,6 +46,11 @@ const client = new ApolloClient({
 
 
 function App() {
+  const [clickNav, setClickNav] = useState();
+  const onClick = (e) => {
+    console.log('click ', e);
+    setClickNav(e.key);
+  };
   const token = {
     colorPrimary: "#f4900c", // amber
     colorSuccess: "#ffe84d", // pale ale
@@ -58,37 +64,33 @@ function App() {
   const itemsLoggedOut = [
     {
       key: "1",
-      label: (<a href="/">Home</a>)
+      label: <Link to="/">Home</Link>
     },
     {
       key: "2",
-      label: (<a href="/breweries">Breweries</a>)
+      label: <Link to="/breweries">Breweries</Link>
     },
-    // {
-    //   key: "3",
-    //   label: (<a href="/profile">Profile Page</a>)
-    // },
+    {
+      key: "3",
+      label: <Link to="/signup">Sign Up</Link>
+    },
     {
       key: "4",
-      label: (<a href="/connect">Login</a>)
-    },
-    {
-      key: "5",
-      label: (<a href="/signup">Sign Up</a>)
+      label: <Link to="/connect">Login</Link>
     }
   ]
   const itemsLoggedIn = [
     {
       key: "1",
-      label: (<a href="/">Home</a>)
+      label: <Link to="/">Home</Link>
     },
     {
       key: "2",
-      label: (<a href="/breweries">Breweries</a>)
+      label: <Link to="/breweries">Breweries</Link>
     },
     {
       key: "3",
-      label: (<a href="/profile">Profile Page</a>)
+      label: <Link to="/profile">Profile Page</Link>
     },
     {
       key: "4",
@@ -110,6 +112,7 @@ function App() {
         }}
       >
         {/* sets layout for navigation sidebar */}
+        <Router>
         <Layout>
           {/* contains side-view, hamburger button, and menu options */}
           <Sider
@@ -127,12 +130,14 @@ function App() {
               (<Menu
               theme="dark"
               mode="inline"
-              defaultSelectedKeys={['4']}
+              onClick={onClick}
+              selectedKeys={[clickNav]}
               items={itemsLoggedIn} />) :
               (<Menu
                 theme="dark"
                 mode="inline"
-                defaultSelectedKeys={['4']}
+                onClick={onClick}
+                selectedKeys={[clickNav]}
                 items={itemsLoggedOut} />)
 }
 
@@ -151,7 +156,7 @@ function App() {
                 margin: '24px 16px 0',
               }}
             >
-              <Router>
+              
                 <Routes>
                   <Route
                     path='/'
@@ -234,7 +239,7 @@ function App() {
                       />}
                   />
                 </Routes>
-              </Router>
+              
             </Content>
             {/* ends layout with footer */}
             <Footer
@@ -244,6 +249,7 @@ function App() {
             />
           </Layout>
         </Layout>
+        </Router>
       </ConfigProvider>
     </ApolloProvider>
   );
