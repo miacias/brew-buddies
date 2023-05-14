@@ -1,5 +1,6 @@
 // client-side packages
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
+// import { Provider } from "react-redux";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { Layout, Menu, ConfigProvider, theme } from 'antd';
 import { setContext } from '@apollo/client/link/context';
@@ -49,9 +50,15 @@ const client = new ApolloClient({
 function App() {
   const [clickNav, setClickNav] = useState();
   const onClick = (e) => {
-    console.log('click ', e);
     setClickNav(e.key);
   };
+
+  useEffect(() => {
+    const params = history.location.pathname;
+    console.log(params)
+  }, []);
+
+  // Ant Design UI theme
   const token = {
     colorPrimary: "#f4900c", // amber
     colorSuccess: "#ffe84d", // pale ale
@@ -62,6 +69,7 @@ function App() {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  // navbar menu items
   const items = [
     {
       key: "1",

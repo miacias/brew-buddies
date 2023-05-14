@@ -8,12 +8,23 @@
     --lavender: #C7A5D9;
 }
 
+body {
+    background-color: var(--foam);
+    word-spacing: .2em;
+    letter-spacing: .04em;
+}
+
 h1 {
     font-family: 'Braton Composer Stamp Rough', sans-serif;
     font-size: 3em;
     color: var(--amber);
 }
 
-body {
-    background-color: var(--foam);
+p, 
+div, 
+button,
+a {
+    font-family: 'Winter Danced', sans-serif;
+    font-size: 1.2em;
+
 }
