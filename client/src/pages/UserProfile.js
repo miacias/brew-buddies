@@ -10,7 +10,6 @@ import { ADD_FRIEND } from "../utils/mutations";
 // import Auth from "../utils/auth";
 // import { ExclamationCircleFilled } from "@ant-design/icons";
 import styles from './UserProfile.module.css';
-import { useResetProjection } from "framer-motion";
 const ObjectId = require("bson-objectid");
 
 

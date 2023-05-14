@@ -185,7 +185,6 @@ const resolvers = {
     },
     // allows user to add another user as a friend
     addFriend: async (parent, { friendId }, context) => {
-      console.log('hello sir');
       // console.log(context.user);
       if (context.user) {
         console.log(friendId.id);
