@@ -9,9 +9,9 @@ import Auth from '../src/utils/auth';
 import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
-import { UserProfile } from './pages/UserProfile';
 import SearchPage from './pages/SearchPage';
 import SingleBrewery from './pages/SingleBrewery';
+import { UserProfile } from './pages/UserProfile';
 import { AccountPage } from './pages/AccountPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -121,7 +121,7 @@ function App() {
               <Menu
                 theme="dark"
                 mode="inline"
-                defaultSelectedKeys={window.location.pathname}
+                defaultSelectedKeys={window.location.pathname} // highlights based on pathname & item key
                 items={items} 
               />
             </Sider>
