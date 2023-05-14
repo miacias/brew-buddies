@@ -3,7 +3,7 @@ import { React, useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { Col, Card, Space, Button, Tooltip } from "antd";
-import { StarOutlined, StarFilled, HeartOutlined, HeartFilled, DoubleRightOutlined } from "@ant-design/icons";
+import { StarOutlined, StarFilled, HeartOutlined, HeartFilled, DoubleRightOutlined, PhoneOutlined } from "@ant-design/icons";
 import styles from '../components/BreweryCard.module.css';
 // client-side utils, pages, components
 import Auth from '../utils/auth';
@@ -98,7 +98,14 @@ export default function SingleBrewery() {
                 bordered={false}
               >
                 <p>Brewery Flavor: {breweryData?.brewery_type}</p>
-                <p>{formatPhoneNumber(breweryData?.phone)}</p>
+                <div>
+                  <span style={{ display: 'inline-block', marginRight: '10px' }}>
+                    <PhoneOutlined />
+                  </span>
+                  <span style={{ display: 'inline-block', marginRight: '10px' }}>
+                    <p>{formatPhoneNumber(breweryData?.phone)}</p>
+                  </span>
+                </div>
                 {/* street address */}
                 <p>
                   {breweryData?.street}, {breweryData?.city}, {" "}
