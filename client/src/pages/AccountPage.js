@@ -15,9 +15,8 @@ export function AccountPage() {
   const [breweryList, setBreweryList] = useState(new Set([]));
   const [removeFavBrewery] = useMutation(REMOVE_FAV_BREWERY);
   const [Loading, setLoading] = useState(true);
-  const { loading, data } = useQuery(GET_ME);
+  const { loading, data, refetch } = useQuery(GET_ME);
   const userData = data?.me || {};
-
   useEffect(() => {
     if (!userData) {
       return <h2>Please log in!</h2>;
