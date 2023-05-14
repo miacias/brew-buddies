@@ -16,15 +16,16 @@
 // "street": "5164 Kennedy Ave"
 
 import React from 'react';
-import { Card, Col, Button } from 'antd';
+import { Card, Col, Button, Row } from 'antd';
+import styles from './BreweryCard.module.css'
 
 export default function BreweryCard(props) {
   let urlParams = window.location.pathname;
   const breweryId = props.brewery.id;
   const url = `/${breweryId}`;
   return (
-    <Col span={8}>
-      <Card title={props.brewery.name} bordered={false}>
+    <Row >
+      <Card className={styles.breweryCard} title={props.brewery.name} bordered={false}>
         <p>Brewery Type: {props.brewery.brewery_type}</p>
         <p>Address: {props.brewery.street}, {props.brewery.city}, {props.brewery.state} {props.brewery.postal_code}</p>
         <p><a href={url}>Click here for more information!</a></p>
@@ -36,6 +37,6 @@ export default function BreweryCard(props) {
           ''
         }
       </Card>
-    </Col>
+    </Row>
   )
 };

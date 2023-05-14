@@ -8,6 +8,7 @@ import { ADD_FAV_BREWERY } from "../utils/mutations";
 import { BREWERY_REVIEW } from '../utils/queries';
 import { useParams } from "react-router-dom";
 import { Col, Card, Button/*, Row*/ } from "antd";
+import styles from '../components/BreweryCard.module.css'
 
 export default function SingleBrewery() {
   const { breweryId } = useParams();
@@ -36,9 +37,6 @@ export default function SingleBrewery() {
   const [addFavBrewery, { error }] = useMutation(ADD_FAV_BREWERY);
   const { loading, data } = useQuery(BREWERY_REVIEW, { variables: { breweryId }});
   // adds review to brewery page and to user profile
-  // const [ addReview ] = useMutation(ADD_REVIEW);
-  
-  // const _id = new ObjectId(userData.data._id);
 
   const handleAddFavBrewery = async (event) => {
     try {
@@ -61,8 +59,8 @@ export default function SingleBrewery() {
       <>
         {breweryData && (
           <>
-            <Col span={8}>
-              <Card title={breweryData.name} bordered={false}>
+            <Col >
+              <Card className={styles.singleBrewery} title={breweryData.name} bordered={false}>
                 <p>Brewery Type: {breweryData.brewery_type}</p>
                 <p>
                   Address: {breweryData.street}, {breweryData.city}, {" "}
