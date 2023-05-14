@@ -3,7 +3,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@ap
 import { Layout, Menu, ConfigProvider, theme } from 'antd';
 import { setContext } from '@apollo/client/link/context';
 import { Link, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
+import Auth from '../src/utils/auth';
 import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
@@ -14,7 +14,6 @@ import SingleBrewery from './pages/SingleBrewery';
 import { AccountPage } from './pages/AccountPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Auth from './utils/auth'
 
 
 
@@ -61,7 +60,7 @@ function App() {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  const itemsLoggedOut = [
+  const items = [
     {
       key: "1",
       label: <Link to="/">Home</Link>
@@ -70,35 +69,30 @@ function App() {
       key: "2",
       label: <Link to="/breweries">Breweries</Link>
     },
-    {
-      key: "3",
-      label: <Link to="/signup">Sign Up</Link>
-    },
-    {
-      key: "4",
-      label: <Link to="/connect">Login</Link>
-    }
+    ... Auth.loggedIn() ? 
+      [
+        {
+        key: "3",
+        label: <Link to="/profile">Profile Page</Link>
+        },
+        {
+          key: "4",
+          label: (<Link to="/" onClick={() => Auth.logout()}>
+          Logout
+        </Link>)
+        }
+      ] : [
+        {
+          key: "3",
+          label: <Link to="/signup">Sign Up</Link>
+        },
+        {
+          key: "4",
+          label: <Link to="/connect">Login</Link>
+        }
+      ],
   ]
-  const itemsLoggedIn = [
-    {
-      key: "1",
-      label: <Link to="/">Home</Link>
-    },
-    {
-      key: "2",
-      label: <Link to="/breweries">Breweries</Link>
-    },
-    {
-      key: "3",
-      label: <Link to="/profile">Profile Page</Link>
-    },
-    {
-      key: "4",
-      label: (<a href="/" onClick={() => Auth.logout()}>
-      Logout
-    </a>)
-    }
-  ]
+
   return (
     <ApolloProvider client={client}>
       <ConfigProvider
@@ -126,21 +120,13 @@ function App() {
             }}
           >
             <div className="logo" />
-            {Auth.loggedIn() ?
-              (<Menu
+            <Menu
               theme="dark"
               mode="inline"
               onClick={onClick}
               selectedKeys={[clickNav]}
-              items={itemsLoggedIn} />) :
-              (<Menu
-                theme="dark"
-                mode="inline"
-                onClick={onClick}
-                selectedKeys={[clickNav]}
-                items={itemsLoggedOut} />)
-}
-
+              items={items} 
+            />
           </Sider>
           {/* sets layout for header, content, and footer */}
           <Layout>
