@@ -1,9 +1,9 @@
 // client-side packages
 import React from 'react';
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
-import { Layout, Menu, Avatar, Space, Divider, ConfigProvider, theme } from 'antd';
-import { setContext } from '@apollo/client/link/context';
 import { Link, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { Layout, Menu, Avatar, Space, Divider, ConfigProvider, theme } from 'antd';
 // client-side utils, pages, components
 import Auth from '../src/utils/auth';
 import HomePage from './pages/HomePage';
