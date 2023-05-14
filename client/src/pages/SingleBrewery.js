@@ -7,7 +7,7 @@ import { ADD_FAV_BREWERY } from "../utils/mutations";
 import { BREWERY_REVIEW } from '../utils/queries';
 import { useParams } from "react-router-dom";
 import { Col, Card, Space, Button, Tooltip } from "antd";
-import { StarOutlined, HeartOutlined } from "@ant-design/icons";
+import { StarOutlined, StarFilled, HeartOutlined, HeartFilled } from "@ant-design/icons";
 
 
 export default function SingleBrewery() {
@@ -15,7 +15,6 @@ export default function SingleBrewery() {
   const [breweryData, setBreweryData] = useState();
   const [showForm, setShowForm] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
-  const [ratings, setRatings] = useState(null);
 
   // adds brewery to user Favorites list
   const [addFavBrewery, { error }] = useMutation(ADD_FAV_BREWERY);
@@ -80,7 +79,6 @@ export default function SingleBrewery() {
     } catch (err) {
       console.error(err);
     }
-    setRatings()
   };
 
   if(loggedInUser !== null) {
@@ -100,6 +98,7 @@ export default function SingleBrewery() {
                     {!loading && data.review && (
                     <Tooltip title={`${calculateAverage(loading, data)[1]} ratings!`}>
                       <Button 
+                        type={showForm ? 'primary': 'default'}
                         icon={<StarOutlined />}
                         onClick={() => setShowForm(!showForm)}
                       > 
