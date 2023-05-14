@@ -10,7 +10,7 @@ import Auth from '../utils/auth';
 import formatPhoneNumber from '../utils/phoneFormat';
 import formatZipCode from "../utils/zipFormat";
 import breweryType from '../utils/breweryType';
-import { ADD_FAV_BREWERY } from "../utils/mutations";
+import { ADD_FAV_BREWERY, REMOVE_FAV_BREWERY } from "../utils/mutations";
 import { GET_ME, BREWERY_REVIEW } from '../utils/queries';
 import ReviewCard from "../components/ReviewCard";
 import AddReviewForm from '../components/AddReviewForm';
@@ -21,14 +21,20 @@ export default function SingleBrewery() {
   const [breweryData, setBreweryData] = useState();
   const [showForm, setShowForm] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState();
 
-  // adds brewery to user Favorites list
+  // adds or removes brewery from user Favorites list
   const [addFavBrewery, { error }] = useMutation(ADD_FAV_BREWERY);
+  const [removeFavBrewery, { error: removeError }] = useMutation(REMOVE_FAV_BREWERY);
   // loads all reviews for this brewery
   const { loading: loadingReview, data: reviewData, refetch } = useQuery(BREWERY_REVIEW, { variables: { breweryId }});
   // loads logged in user data
   const { loading: loadingMe, error: meError, data: meData, refetch: refetchMe } = useQuery(GET_ME);
+  const myFaves = meData?.me?.favBreweries;
+  // console.log('my fav array', myFaves)
+  // console.log('brew data from state', breweryData?.id)
+  // use .includes(to return the match)
+  // console.log(myFaves.includes(breweryData?.id))
 
   // calculates star review average
   const calculateAverage = (loadingReview, reviewData) => {
@@ -84,7 +90,10 @@ export default function SingleBrewery() {
       if (!data) {
         throw new Error('Something went wrong!');
       }
-      setFavorite(true); // query user to verify favorite or not
+      const newFav = await myFaves.includes(breweryData?.id);
+      if (newFav) {
+        setFavorite(true)
+      }
     } catch (err) {
       console.error(err);
     }
@@ -139,7 +148,7 @@ export default function SingleBrewery() {
                     {/* add to favorites! */}
                     <Tooltip title="I love it!">
                       <Button 
-                        icon={<HeartOutlined/>}
+                        icon={favorite ? <HeartFilled /> : <HeartOutlined/>}
                         onClick={handleAddFavBrewery}
                       >Favorite it!</Button>
                     </Tooltip>
