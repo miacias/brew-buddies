@@ -1,14 +1,17 @@
+// client-side packages and styles
 import { React, useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
-import ReviewCard from "../components/ReviewCard";
-import AddReviewForm from '../components/AddReviewForm';
-import Auth from '../utils/auth'
-import { ADD_FAV_BREWERY } from "../utils/mutations";
-import { BREWERY_REVIEW } from '../utils/queries';
 import { useParams } from "react-router-dom";
-import styles from '../components/BreweryCard.module.css'
 import { Col, Card, Space, Button, Tooltip } from "antd";
 import { StarOutlined, StarFilled, HeartOutlined, HeartFilled, DoubleRightOutlined } from "@ant-design/icons";
+import styles from '../components/BreweryCard.module.css';
+// client-side utils, pages, components
+import Auth from '../utils/auth';
+import formatPhoneNumber from '../utils/phoneFormat';
+import { ADD_FAV_BREWERY } from "../utils/mutations";
+import { BREWERY_REVIEW } from '../utils/queries';
+import ReviewCard from "../components/ReviewCard";
+import AddReviewForm from '../components/AddReviewForm';
 
 
 export default function SingleBrewery() {
@@ -95,6 +98,7 @@ export default function SingleBrewery() {
                 bordered={false}
               >
                 <p>Brewery Flavor: {breweryData?.brewery_type}</p>
+                <p>{formatPhoneNumber(breweryData?.phone)}</p>
                 {/* street address */}
                 <p>
                   {breweryData?.street}, {breweryData?.city}, {" "}
