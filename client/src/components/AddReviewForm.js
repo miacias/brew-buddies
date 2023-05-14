@@ -12,7 +12,6 @@ const ObjectId = require("bson-objectid");
 
 export default function AddReviewForm({ showForm, setShowForm }) {
     let { breweryId } = useParams();
-    // const breweryIdBson = new ObjectId(breweryId);
     const [form] = Form.useForm();
     const [reviewFormData, setUserFormData] = useState({});
 

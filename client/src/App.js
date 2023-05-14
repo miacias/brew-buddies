@@ -1,15 +1,17 @@
-import { React, useState } from 'react';
+// client-side packages
+import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { Layout, Menu, Avatar, Space, ConfigProvider, theme } from 'antd';
 import { setContext } from '@apollo/client/link/context';
 import { Link, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// client-side utils, pages, components
 import Auth from '../src/utils/auth';
 import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
-import { UserProfile } from './pages/UserProfile';
 import SearchPage from './pages/SearchPage';
 import SingleBrewery from './pages/SingleBrewery';
+import { UserProfile } from './pages/UserProfile';
 import { AccountPage } from './pages/AccountPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -44,11 +46,7 @@ const client = new ApolloClient({
 
 
 function App() {
-  const [clickNav, setClickNav] = useState();
-  const onClick = (e) => {
-    console.log('click ', e);
-    setClickNav(e.key);
-  };
+  // Ant Design UI theme
   const token = {
     colorPrimary: "#f4900c", // amber
     colorSuccess: "#ffe84d", // pale ale
@@ -59,34 +57,35 @@ function App() {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  // navbar menu items
   const items = [
     {
-      key: "1",
+      key: "/",
       label: <Link to="/">Home</Link>
     },
     {
-      key: "2",
+      key: "/breweries",
       label: <Link to="/breweries">Breweries</Link>
     },
     ...Auth.loggedIn() ? 
       [
         {
-        key: "3",
+        key: "/profile",
         label: <Link to="/profile">Profile Page</Link>
         },
         {
-          key: "4",
+          key: "/",
           label: (<Link to="/" onClick={() => Auth.logout()}>
           Logout
         </Link>)
         }
       ] : [
         {
-          key: "3",
+          key: "/signup",
           label: <Link to="/signup">Sign Up</Link>
         },
         {
-          key: "4",
+          key: "/connect",
           label: <Link to="/connect">Login</Link>
         }
       ],
@@ -123,9 +122,7 @@ function App() {
                 <Menu
                   theme="dark"
                   mode="inline"
-                  // defaultSelectedKeys={[clickNav]}
-                  onClick={onClick}
-                  selectedKeys={[clickNav]}
+                  defaultSelectedKeys={window.location.pathname} // highlights based on pathname & item key
                   items={items} 
                 />
                 {Auth.loggedIn() ? (
