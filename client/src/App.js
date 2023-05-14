@@ -1,19 +1,18 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { Layout, Menu, ConfigProvider, theme } from 'antd';
 import { setContext } from '@apollo/client/link/context';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Link, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Auth from '../src/utils/auth';
 import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
-// this page will render any user profile (future development)
 import { UserProfile } from './pages/UserProfile';
 import SearchPage from './pages/SearchPage';
 import SingleBrewery from './pages/SingleBrewery';
 import { AccountPage } from './pages/AccountPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Auth from './utils/auth'
 
 
 
@@ -45,6 +44,11 @@ const client = new ApolloClient({
 
 
 function App() {
+  const [clickNav, setClickNav] = useState();
+  const onClick = (e) => {
+    console.log('click ', e);
+    setClickNav(e.key);
+  };
   const token = {
     colorPrimary: "#f4900c", // amber
     colorSuccess: "#ffe84d", // pale ale
@@ -55,48 +59,39 @@ function App() {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  const itemsLoggedOut = [
+  const items = [
     {
       key: "1",
-      label: (<a href="/">Home</a>)
+      label: <Link to="/">Home</Link>
     },
     {
       key: "2",
-      label: (<a href="/breweries">Breweries</a>)
+      label: <Link to="/breweries">Breweries</Link>
     },
-    // {
-    //   key: "3",
-    //   label: (<a href="/profile">Profile Page</a>)
-    // },
-    {
-      key: "4",
-      label: (<a href="/connect">Login</a>)
-    },
-    {
-      key: "5",
-      label: (<a href="/signup">Sign Up</a>)
-    }
+    ...Auth.loggedIn() ? 
+      [
+        {
+        key: "3",
+        label: <Link to="/profile">Profile Page</Link>
+        },
+        {
+          key: "4",
+          label: (<Link to="/" onClick={() => Auth.logout()}>
+          Logout
+        </Link>)
+        }
+      ] : [
+        {
+          key: "3",
+          label: <Link to="/signup">Sign Up</Link>
+        },
+        {
+          key: "4",
+          label: <Link to="/connect">Login</Link>
+        }
+      ],
   ]
-  const itemsLoggedIn = [
-    {
-      key: "1",
-      label: (<a href="/">Home</a>)
-    },
-    {
-      key: "2",
-      label: (<a href="/breweries">Breweries</a>)
-    },
-    {
-      key: "3",
-      label: (<a href="/profile">Profile Page</a>)
-    },
-    {
-      key: "4",
-      label: (<a href="/" onClick={() => Auth.logout()}>
-      Logout
-    </a>)
-    }
-  ]
+
   return (
     <ApolloProvider client={client}>
       <ConfigProvider
@@ -111,47 +106,42 @@ function App() {
       >
         {/* sets layout for navigation sidebar */}
         <Layout>
-          {/* contains side-view, hamburger button, and menu options */}
-          <Sider
-            breakpoint="lg"
-            collapsedWidth="0"
-            onBreakpoint={(broken) => {
-              // console.log(broken);
-            }}
-            onCollapse={(collapsed, type) => {
-              // console.log(collapsed, type);
-            }}
-          >
-            <div className="logo" />
-            {Auth.loggedIn() ?
-              (<Menu
-              theme="dark"
-              mode="inline"
-              defaultSelectedKeys={['4']}
-              items={itemsLoggedIn} />) :
-              (<Menu
-                theme="dark"
-                mode="inline"
-                defaultSelectedKeys={['4']}
-                items={itemsLoggedOut} />)
-}
-
-          </Sider>
-          {/* sets layout for header, content, and footer */}
-          <Layout>
-            <Header
-              style={{
-                padding: 0,
-                background: colorBgContainer,
+          <Router>
+            {/* contains side-view, hamburger button, and menu options */}
+            <Sider
+              breakpoint="lg"
+              collapsedWidth="0"
+              onBreakpoint={(broken) => {
+                // console.log(broken);
               }}
-            />
-            {/* renders content section based on current url route */}
-            <Content
-              style={{
-                margin: '24px 16px 0',
+              onCollapse={(collapsed, type) => {
+                // console.log(collapsed, type);
               }}
             >
-              <Router>
+              <div className="logo" />
+              <Menu
+                theme="dark"
+                mode="inline"
+                // defaultSelectedKeys={[clickNav]}
+                onClick={onClick}
+                selectedKeys={[clickNav]}
+                items={items} 
+              />
+            </Sider>
+            {/* sets inner layout for header, content, and footer */}
+            <Layout>
+              <Header
+                style={{
+                  padding: 0,
+                  background: colorBgContainer,
+                }}
+              />
+              {/* renders content section based on current url route */}
+              <Content
+                style={{
+                  margin: '24px 16px 0',
+                }}
+              >
                 <Routes>
                   <Route
                     path='/'
@@ -175,7 +165,7 @@ function App() {
                         }}
                       />}
                   />
-                   <Route
+                    <Route
                     path='/profile/:username'
                     exact
                     element={
@@ -187,12 +177,6 @@ function App() {
                         }}
                       />}
                   />
-                  {/* <Route 
-                    path='/search'
-                    element={
-                      <MapPage/>
-                    }
-                  />*/}
                   <Route 
                     path='/:breweryId'
                     exact
@@ -234,15 +218,15 @@ function App() {
                       />}
                   />
                 </Routes>
-              </Router>
-            </Content>
-            {/* ends layout with footer */}
-            <Footer
-              style={{
-                textAlign: 'center',
-              }}
-            />
-          </Layout>
+              </Content>
+              {/* ends inner layout with footer */}
+              <Footer
+                style={{
+                  textAlign: 'center',
+                }}
+              />
+            </Layout>
+          </Router>
         </Layout>
       </ConfigProvider>
     </ApolloProvider>
