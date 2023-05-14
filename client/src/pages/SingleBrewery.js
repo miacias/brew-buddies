@@ -1,20 +1,47 @@
 import { React, useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
-// import BreweryCard from "../components/BreweryCard";
 import ReviewCard from "../components/ReviewCard";
 import AddReviewForm from '../components/AddReviewForm';
 import Auth from '../utils/auth'
 import { ADD_FAV_BREWERY } from "../utils/mutations";
 import { BREWERY_REVIEW } from '../utils/queries';
 import { useParams } from "react-router-dom";
-import { Col, Card, Button/*, Row*/ } from "antd";
 import styles from '../components/BreweryCard.module.css'
+import { Col, Card, Space, Button, Tooltip } from "antd";
+import { StarOutlined, StarFilled, HeartOutlined, HeartFilled } from "@ant-design/icons";
+
 
 export default function SingleBrewery() {
   const { breweryId } = useParams();
   const [breweryData, setBreweryData] = useState();
   const [showForm, setShowForm] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
+  const [favorite, setFavorite] = useState(false);
+
+  // adds brewery to user Favorites list
+  const [addFavBrewery, { error }] = useMutation(ADD_FAV_BREWERY);
+  // loads all reviews for this brewery
+  const { loading, data, refetch } = useQuery(BREWERY_REVIEW, { variables: { breweryId }});
+
+  // calculates star review average
+  const calculateAverage = (loading, data) => {
+    const ratings = [];
+    let average;
+    let totalReviews;
+    if (!loading && data.review) {
+      data.review.forEach(review => {
+        return ratings.push(parseInt(review.starRating));
+      });
+      const initialValue = 0;
+      const sumWithInitial = ratings.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        initialValue
+      );
+      average = sumWithInitial / ratings.length;
+      totalReviews = ratings.length;
+      return [average, totalReviews];
+    }
+  }
 
   // calls OpenBreweryDB API and sets breweryData State
   useEffect(() => {
@@ -33,9 +60,8 @@ export default function SingleBrewery() {
     }
   }, []); // checks once
 
-  // adds brewery to user favorites list
-  const [addFavBrewery, { error }] = useMutation(ADD_FAV_BREWERY);
-  const { loading, data, refetch } = useQuery(BREWERY_REVIEW, { variables: { breweryId }});
+
+  
   // adds review to brewery page and to user profile
   /////refetches brewery review data, used as a prop and passed through form component
   const handleReviewAdded = () => {
@@ -52,7 +78,7 @@ export default function SingleBrewery() {
       if (!data) {
         throw new Error('Something went wrong!');
       }
-      console.log("woohoo")
+      setFavorite(true);
     } catch (err) {
       console.error(err);
     }
@@ -70,19 +96,34 @@ export default function SingleBrewery() {
                   Address: {breweryData.street}, {breweryData.city}, {" "}
                   {breweryData.state} {breweryData.postal_code}
                 </p>
-                <Button onClick={handleAddFavBrewery}>
-                  Save Brewery to Favorites
-                </Button>
-                {showForm && <AddReviewForm onReviewAdded={handleReviewAdded}  showForm={showForm} setShowForm={setShowForm}/>}
-                <Button onClick={() => setShowForm(!showForm)}>
-                  {showForm ? 'Cancel' : 'Add Review'}
-                </Button>
+                  <Space.Compact block>
+                    {/* star ratings! */}
+                    {!loading && data.review && (
+                    <Tooltip title={`${calculateAverage(loading, data)[1]} ratings!`}>
+                      <Button 
+                        type={showForm ? 'primary': 'default'}
+                        icon={<StarOutlined />}
+                        onClick={() => setShowForm(!showForm)}
+                      > 
+                        {!showForm ? `${calculateAverage(loading, data)[0]} out of 5` : 'Cancel'}
+                      </Button>
+                    </Tooltip>
+                    )}
+                    {/* add to favorites! */}
+                    <Tooltip title="I love it!">
+                      <Button 
+                        icon={<HeartOutlined/>}
+                        onClick={handleAddFavBrewery}
+                      >Favorite it!</Button>
+                    </Tooltip>
+                </Space.Compact>
+                {showForm && <AddReviewForm onReviewAdded={handleReviewAdded} showForm={showForm} setShowForm={setShowForm}/>}
               </Card>
             </Col>
           </>
         )}
 
-        <div>Google Maps API here</div>
+        {/* <div>Google Maps API here</div> */}
         <ul>
           {/* creates Review card based on total number of reviews possible */}
           {!loading && data.review && (
