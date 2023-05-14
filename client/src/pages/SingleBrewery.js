@@ -35,8 +35,12 @@ export default function SingleBrewery() {
 
   // adds brewery to user favorites list
   const [addFavBrewery, { error }] = useMutation(ADD_FAV_BREWERY);
-  const { loading, data } = useQuery(BREWERY_REVIEW, { variables: { breweryId }});
+  const { loading, data, refetch } = useQuery(BREWERY_REVIEW, { variables: { breweryId }});
   // adds review to brewery page and to user profile
+  /////refetches brewery review data, used as a prop and passed through form component
+  const handleReviewAdded = () => {
+    refetch();
+  };
 
   const handleAddFavBrewery = async (event) => {
     try {
@@ -69,7 +73,7 @@ export default function SingleBrewery() {
                 <Button onClick={handleAddFavBrewery}>
                   Save Brewery to Favorites
                 </Button>
-                {showForm && <AddReviewForm showForm={showForm} setShowForm={setShowForm}/>}
+                {showForm && <AddReviewForm onReviewAdded={handleReviewAdded}  showForm={showForm} setShowForm={setShowForm}/>}
                 <Button onClick={() => setShowForm(!showForm)}>
                   {showForm ? 'Cancel' : 'Add Review'}
                 </Button>

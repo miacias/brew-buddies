@@ -10,7 +10,7 @@ const ObjectId = require("bson-objectid");
 
 
 
-export default function AddReviewForm({ showForm, setShowForm }) {
+export default function AddReviewForm({ showForm, setShowForm, onReviewAdded }) {
     let { breweryId } = useParams();
     const [form] = Form.useForm();
     const [reviewFormData, setUserFormData] = useState({});
@@ -43,7 +43,9 @@ export default function AddReviewForm({ showForm, setShowForm }) {
             console.log(data);
             if (!data) {
                 throw new Error('Unable to add review.');
-            }
+            }  
+            ////passed as a prop from singleBrewery 
+            onReviewAdded(); 
         } catch (err) {
           console.error(err);
           Form.resetFields();

@@ -31,7 +31,7 @@ const resolvers = {
     review: async (parent, { breweryId }) => {
       const reviewSet = await Review.find({
         breweryId,
-      });
+      }).sort({ createdAt: -1 });
       return reviewSet;
     },
   },

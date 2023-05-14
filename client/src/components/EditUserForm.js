@@ -108,102 +108,7 @@ export const EditUserForm = () => {
       }}
       scrollToFirstError
     >
-      {/* <Form.Item
-        name="email"
-        label="E-mail"
-        rules={[
-          {
-            type: "email",
-            message: "The input is not valid E-mail!",
-          },
-          {
-            required: false,
-            message: "Please input your E-mail!",
-          },
-        ]}
-      >
-        <Input
-          className="site-form-item-icon"
-          name="email"
-          placeholder={userData.email}
-          onChange={handleInputChange}
-          value={userFormData.email}
-        />
-      </Form.Item> */}
-
-      {/* <Form.Item
-        name="password"
-        label="Password"
-        rules={[
-          {
-            required: false,
-            message: "Please input your password!",
-          },
-        ]}
-        hasFeedback
-      >
-        <Input.Password
-          className="site-form-item-icon"
-          //   type="password"
-          placeholder="Password"
-          name="password"
-          onChange={handleInputChange}
-          value={userFormData.password}
-        />
-      </Form.Item> */}
-
-      {/* <Form.Item
-        name="confirm"
-        label="Confirm new Password"
-        dependencies={["password"]}
-        hasFeedback
-        rules={[
-          {
-            required: false,
-            message: "Please confirm your new password!",
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue("password") === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(
-                new Error("The two passwords that you entered do not match!")
-              );
-            },
-          }),
-        ]}
-      >
-        <Input.Password
-          className="site-form-item-icon"
-          //   type="password"
-          placeholder="Confirm Password"
-          name="confirm"
-          onChange={handleInputChange}
-          value={userFormData.confirm}
-        />
-      </Form.Item> */}
-
-      {/* <Form.Item
-        name="username"
-        label="Username"
-        tooltip="What do you want others to call you?"
-        rules={[
-          {
-            required: false,
-            message: "Please input your username!",
-            whitespace: true,
-          },
-        ]}
-      >
-        <Input
-          placeholder={userData.username}
-          name="username"
-          onChange={handleInputChange}
-          value={userFormData.username}
-        />
-      </Form.Item> */}
-
+    
       <Form.Item
         name="profilePic"
         label="Image Link"
@@ -285,26 +190,6 @@ export const EditUserForm = () => {
           <Option value="Prefer-not-to-say">Prefer not to say</Option>
         </Select>
       </Form.Item>
-      {/* <Form.Item
-        name="birthday"
-        label="Enter your birthday"
-        rules={[
-          {
-            required: false,
-            message:
-              "Please enter your birthdate as MM/DD/YYYY, you must be 21 years of age to use this site.",
-            whitespace: true,
-          },
-        ]}
-      >
-        <Input
-          placeholder="Birthday"
-          name="birthday"
-          onChange={handleInputChange}
-          value={userFormData.birthday}
-        />
-      </Form.Item> */}
-
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
           Update
