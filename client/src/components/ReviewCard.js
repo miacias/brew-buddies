@@ -38,7 +38,7 @@ export default function ReviewCard({ oneReview, breweryData }) {
         </Card>
       }
       <Button href={`/profile/${oneReview.reviewAuthor}`}  >
-        See Reviewer
+        View Profile!
         </Button>
     </Card>
   )

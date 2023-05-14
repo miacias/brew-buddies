@@ -17,7 +17,6 @@ export function AccountPage() {
   const [Loading, setLoading] = useState(true);
   const { loading, data } = useQuery(GET_ME);
   const userData = data?.me || {};
-  console.log(userData);
 
   useEffect(() => {
     if (!userData) {
