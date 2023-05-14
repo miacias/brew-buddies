@@ -11,7 +11,7 @@ import formatPhoneNumber from '../utils/phoneFormat';
 import formatZipCode from "../utils/zipFormat";
 import breweryType from '../utils/breweryType';
 import { ADD_FAV_BREWERY } from "../utils/mutations";
-import { BREWERY_REVIEW } from '../utils/queries';
+import { GET_ME, BREWERY_REVIEW } from '../utils/queries';
 import ReviewCard from "../components/ReviewCard";
 import AddReviewForm from '../components/AddReviewForm';
 
@@ -26,15 +26,17 @@ export default function SingleBrewery() {
   // adds brewery to user Favorites list
   const [addFavBrewery, { error }] = useMutation(ADD_FAV_BREWERY);
   // loads all reviews for this brewery
-  const { loading, data, refetch } = useQuery(BREWERY_REVIEW, { variables: { breweryId }});
+  const { loading: loadingReview, data: reviewData, refetch } = useQuery(BREWERY_REVIEW, { variables: { breweryId }});
+  // loads logged in user data
+  const { loading: loadingMe, error: meError, data: meData, refetch: refetchMe } = useQuery(GET_ME);
 
   // calculates star review average
-  const calculateAverage = (loading, data) => {
+  const calculateAverage = (loadingReview, reviewData) => {
     const ratings = [];
     let average;
     let totalReviews;
-    if (!loading && data.review) {
-      data.review.forEach(review => {
+    if (!loadingReview && reviewData.review) {
+      reviewData.review.forEach(review => {
         return ratings.push(parseInt(review.starRating));
       });
       const initialValue = 0;
@@ -102,23 +104,22 @@ export default function SingleBrewery() {
                 {breweryData.brewery_type && (
                 <p>Brewery Flavor: {breweryType(breweryData?.brewery_type)}</p>
                 )}
-                {breweryData.phone ? (<div>
+                {/* phone number */}
+                {breweryData.phone && (<div>
                   <span style={{ display: 'inline-block', marginRight: '10px' }}>
                     <PhoneOutlined />
                   </span>
                   <span style={{ display: 'inline-block', marginRight: '10px' }}>
                     <p>{formatPhoneNumber(breweryData?.phone)}</p>
                   </span>
-                </div>) : ''}
+                </div>)}
                 {/* street address */}
-                <p>
-                  {breweryData?.street}, {breweryData?.city}, {" "}
-                  {breweryData?.state} {formatZipCode(breweryData?.postal_code)}
-                </p>
+                <p>{breweryData?.street}</p>
+                <p>{breweryData?.city}, {breweryData?.state} {breweryData.postal_code && (formatZipCode(breweryData?.postal_code))}</p>
                   <Space.Compact block>
                     {/* star ratings! */}
-                    {!loading && data.review && (
-                    <Tooltip title={`${calculateAverage(loading, data)[1]} ratings!`}>
+                    {!loadingReview && reviewData.review && (
+                    <Tooltip title={`${calculateAverage(loadingReview, reviewData)[1]} ratings!`}>
                       <Button 
                         type={showForm ? 'primary': 'default'}
                         icon={<StarOutlined />}
@@ -127,9 +128,9 @@ export default function SingleBrewery() {
                       {/* shows average ratings, if any. shows Cancel when form is open */}
                         {
                           !showForm
-                            ? isNaN(calculateAverage(loading, data)[0])
+                            ? isNaN(calculateAverage(loadingReview, reviewData)[0])
                               ? 'No reviews'
-                              : `${calculateAverage(loading, data)[0]} out of 5`
+                              : `${calculateAverage(loadingReview, reviewData)[0]} out of 5`
                             : 'Cancel'
                         }
                       </Button>
@@ -163,9 +164,9 @@ export default function SingleBrewery() {
         {/* <div>Google Maps API here</div> */}
         <ul>
           {/* creates Review card based on total number of reviews possible */}
-          {!loading && data.review && (
+          {!loadingReview && reviewData.review && (
             <>
-            {data.review.map((oneReview) => {
+            {reviewData.review.map((oneReview) => {
               return <ReviewCard 
                 oneReview={oneReview} 
                 key={oneReview._id}
