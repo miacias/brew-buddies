@@ -102,7 +102,9 @@ export default function SingleBrewery() {
                       <Button 
                         icon={<StarOutlined />}
                         onClick={() => setShowForm(!showForm)}
-                      > {calculateAverage(loading, data)[0]} out of 5</Button>
+                      > 
+                        {!showForm ? `${calculateAverage(loading, data)[0]} out of 5` : 'Cancel'}
+                      </Button>
                     </Tooltip>
                     )}
                     <Tooltip title="I love it!">
