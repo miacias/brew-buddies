@@ -7,7 +7,6 @@ import Auth from '../src/utils/auth';
 import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
-// this page will render any user profile (future development)
 import { UserProfile } from './pages/UserProfile';
 import SearchPage from './pages/SearchPage';
 import SingleBrewery from './pages/SingleBrewery';
@@ -69,7 +68,7 @@ function App() {
       key: "2",
       label: <Link to="/breweries">Breweries</Link>
     },
-    ... Auth.loggedIn() ? 
+    ...Auth.loggedIn() ? 
       [
         {
         key: "3",
@@ -106,43 +105,43 @@ function App() {
         }}
       >
         {/* sets layout for navigation sidebar */}
-        <Router>
         <Layout>
-          {/* contains side-view, hamburger button, and menu options */}
-          <Sider
-            breakpoint="lg"
-            collapsedWidth="0"
-            onBreakpoint={(broken) => {
-              // console.log(broken);
-            }}
-            onCollapse={(collapsed, type) => {
-              // console.log(collapsed, type);
-            }}
-          >
-            <div className="logo" />
-            <Menu
-              theme="dark"
-              mode="inline"
-              onClick={onClick}
-              selectedKeys={[clickNav]}
-              items={items} 
-            />
-          </Sider>
-          {/* sets layout for header, content, and footer */}
-          <Layout>
-            <Header
-              style={{
-                padding: 0,
-                background: colorBgContainer,
+          <Router>
+            {/* contains side-view, hamburger button, and menu options */}
+            <Sider
+              breakpoint="lg"
+              collapsedWidth="0"
+              onBreakpoint={(broken) => {
+                // console.log(broken);
               }}
-            />
-            {/* renders content section based on current url route */}
-            <Content
-              style={{
-                margin: '24px 16px 0',
+              onCollapse={(collapsed, type) => {
+                // console.log(collapsed, type);
               }}
             >
-              
+              <div className="logo" />
+              <Menu
+                theme="dark"
+                mode="inline"
+                // defaultSelectedKeys={[clickNav]}
+                onClick={onClick}
+                selectedKeys={[clickNav]}
+                items={items} 
+              />
+            </Sider>
+            {/* sets inner layout for header, content, and footer */}
+            <Layout>
+              <Header
+                style={{
+                  padding: 0,
+                  background: colorBgContainer,
+                }}
+              />
+              {/* renders content section based on current url route */}
+              <Content
+                style={{
+                  margin: '24px 16px 0',
+                }}
+              >
                 <Routes>
                   <Route
                     path='/'
@@ -166,7 +165,7 @@ function App() {
                         }}
                       />}
                   />
-                   <Route
+                    <Route
                     path='/profile/:username'
                     exact
                     element={
@@ -178,12 +177,6 @@ function App() {
                         }}
                       />}
                   />
-                  {/* <Route 
-                    path='/search'
-                    element={
-                      <MapPage/>
-                    }
-                  />*/}
                   <Route 
                     path='/:breweryId'
                     exact
@@ -225,17 +218,16 @@ function App() {
                       />}
                   />
                 </Routes>
-              
-            </Content>
-            {/* ends layout with footer */}
-            <Footer
-              style={{
-                textAlign: 'center',
-              }}
-            />
-          </Layout>
+              </Content>
+              {/* ends inner layout with footer */}
+              <Footer
+                style={{
+                  textAlign: 'center',
+                }}
+              />
+            </Layout>
+          </Router>
         </Layout>
-        </Router>
       </ConfigProvider>
     </ApolloProvider>
   );
