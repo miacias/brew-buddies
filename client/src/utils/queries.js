@@ -18,11 +18,13 @@ query me {
         starRating
         reviewAuthor
         createdAt
-        breweryId {
-            _id
-        }
+        breweryId
         }
         favBreweries
+        friends {
+        _id
+        username
+        }
     }
 }`
 
@@ -47,6 +49,7 @@ export const ALL_USERS = gql`
 export const GET_USER = gql`
 query getUser($username: String) {
     user(username: $username) {
+      _id
       username
       email
       password
