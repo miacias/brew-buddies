@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
-import { Layout, Menu, ConfigProvider, theme } from 'antd';
+import { Layout, Menu, Avatar, Space, ConfigProvider, theme } from 'antd';
 import { setContext } from '@apollo/client/link/context';
 import { Link, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Auth from '../src/utils/auth';
@@ -119,14 +119,25 @@ function App() {
               }}
             >
               <div className="logo" />
-              <Menu
-                theme="dark"
-                mode="inline"
-                // defaultSelectedKeys={[clickNav]}
-                onClick={onClick}
-                selectedKeys={[clickNav]}
-                items={items} 
-              />
+              {/* <Space direction='vertical'> */}
+                <Menu
+                  theme="dark"
+                  mode="inline"
+                  // defaultSelectedKeys={[clickNav]}
+                  onClick={onClick}
+                  selectedKeys={[clickNav]}
+                  items={items} 
+                />
+                {Auth.loggedIn() ? (
+                  <Space align='end' direction='vertical'>
+                    <Avatar
+                      src={'https://images4-f.ravelrycache.com/uploads/LightningCat/163663408/DSCN1058_medium2.JPG'}/>
+                  </Space>
+                ) : (
+                  ''
+                )}
+              {/* </Space> */}
+             
             </Sider>
             {/* sets inner layout for header, content, and footer */}
             <Layout>

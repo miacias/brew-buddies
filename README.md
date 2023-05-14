@@ -1,12 +1,13 @@
 # Brew Buddies
 
+
 ## Description
 
 Brew Buddies is a hybrid review site and social media for lovers of beer, breweries, barley, and buddies. This application allows you to search nearby breweries and see user reviews, or take up a pen (so to speak) and write your own! You can also add breweries to your favorites list, so no matter how good a time you have, you'll never forget your favorite hangout hops spots. If a review catches your eye, save it to your favorites so you can try it next Saturday night. You can also add friends, who you might want to share a pint with. The site display is as fresh and fun as your favorite distillery pull. Please drink responsibly! Cheers! 🍻
 
+
 ## Table of Contents
 
-- [Links](#links)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributors](#contributors)
@@ -16,44 +17,60 @@ Brew Buddies is a hybrid review site and social media for lovers of beer, brewer
 - [Features](#features)
 - [Screenshots](#screenshots)
 
-## Links
-
-Website Link: https://fierce-basin-42875.herokuapp.com/
-
-GitHub Repo Link: https://github.com/miacias/brew-buddies
 
 ## Installation
 
-No installation required! This application is deployed to a live Heroku site (see link above).
+No installation required! [Deployed link here.](https://fierce-basin-42875.herokuapp.com/)
+
 
 ## Usage
 
-The landing page of the website presents a list of recent brewery reviews. For full functionality, a user with have to sign up and login. Once logged in, users can search breweries by postal code and is presented with a list of breweries in that area and a map display with their locations. A user can click on any brewery's link to see its page. It will display the brewery info, as well as any available reviews and its average star rating. A user can click on the "Add to Favorites" button to save a list of breweries. They can also add a review of their own. Users can also add another user as a friend to see their reviews or favorites.
+The landing page of the website presents a list of recent brewery reviews. For full functionality, a user with have to sign up and login. Once logged in, users can search breweries by postal code and is presented with a list of breweries in that area and a map display with their locations. A user can click on any brewery's link to see its page. It will display the brewery info, as well as any available reviews and its average star rating. A user can click on the "Add to Favorites" button to save a list of breweries. They can also add a review of their own. Users can also add another user as a friend to see their reviews or favorites. Please see below for screenshots!
+
 
 ## Contributors
 
-Mia Ciasullo
+- Mia Ciasullo
 ~ [GitHub](https://github.com/miacias)
 ~ [LinkedIn](https://www.linkedin.com/in/miaciasullo)
 
-Stevie O'Connell
+- Stevie O'Connell
 ~ [GitHub](https://github.com/OConnell-Coder)
 ~ [LinkedIn](https://www.linkedin.com/in/stephanie-o-connell-965051274)
 
-Margaret Saylor
+- Margaret Saylor
 ~ [GitHub](https://github.com/msaylorphila)
 ~ [LinkedIn](https://www.linkedin.com/in/margaret-saylor)
 
-Fred Chang
+- Fred Chang
 ~ [GitHub](https://github.com/LearnedDr)
 ~ [LinkedIn](https://www.linkedin.com/in/fredrick-chang-85987672)
+
 
 ## Credits
 
 Documentation referenced:
 
+- [OpenBreweryDB API](https://www.openbrewerydb.org/)
+- [MongoDB](https://www.mongodb.com/docs/manual/)
+- Mongoose
 - [Google Maps React Wrapper](https://github.com/googlemaps/react-wrapper/tree/main) - load Google Maps with React
 - [GranimJS](https://sarcadass.github.io/granim.js/examples.html) - animated color gradients
+- Mozilla Developer Network (MDN)
+- Stack Overflow Forums
+- W3 Schools
+
+U. Penn Bootcamp instructor(s): 
+
+- [Dan Gross](https://github.com/DanielWGross) - Set()
+- [Andrew Hojnowski](https://github.com/aHojo) - defined preliminary MVP
+- [C. Ross King](https://github.com/RomeoKilo125/) - why to reset DB after model changes
+
+Tutor(s): 
+
+- Alexis San Javier [GitHub](https://github.com/code-guy21)
+  - making use of client-side auth utils and storing in state variable
+  - rendering user review to Single Brewery page
 
 Tutorials referenced:
 
@@ -68,22 +85,29 @@ Artist(s):
 - font(s)
   - [GuarGum](https://www.cdnfonts.com/g-guargum.font) - by Wahyu Eka Prasetya
   - [Braton Composer Stamp Rough](https://www.cdnfonts.com/braton-composer-stamp-rough.font) - [Alit Suarnegara](https://alitdesign.net/)
+  - [Winter Danced](https://www.cdnfonts.com/winter-danced.font) - [Iwan Kristiaman Nazara, Jasman Nazara, Situjuh Nazara](https://7ntypes.com)
 
-## Technologies
 
+## Technologies & Tools used:
+
+- [VS Code](https://code.visualstudio.com/)
 - React
-- GraphQL, Node.js, Express.js, Apollo
+- GraphQL, [Node.js](https://nodejs.org/en/), Express.js, Apollo
 - MongoDB, Mongoose
-- Bcrypt, Auth.js, JWT, Dotenv
+- Bcrypt, JWT, Dotenv
 - Ant Design, Granim, Framer Motion
 - BSON
 - Heroku
 - Google Maps API
 - Open Brewery DB API
 
+
 ## License
 
-MIT License
+Please refer to the LICENSE in the repo:
+
+[![License](https://img.shields.io/badge/license-MIT-blue?logo=github)](https://github.com/miacias/brew-buddies/blob/main/LICENSE)
+
 
 ## Features
 
@@ -93,6 +117,7 @@ MIT License
 - Add breweries to a favorites list
 - Add and remove friends
 - View user profiles with their reviews
+
 
 ## Screenshots
 
