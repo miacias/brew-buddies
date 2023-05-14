@@ -95,15 +95,25 @@ export function AccountPage() {
             <div>{userData.birthday}</div>
             <div>{userData.pronouns}</div>
             <div>{userData.intro}</div>
-            <Card title="Friend List" >
-            {userData.friends && userData.friends.map((friend) => {
-  return <p key={friend.username}>{friend.username}</p>
-})}
+
+            <Card title="Friend List">
+              {userData.friends && userData.friends.length > 0 ? (
+                userData.friends.map((friend) => (
+                  <p key={friend.username}>{friend.username}</p>
+                ))
+              ) : (
+                <p>You have no friends yet!</p>
+              )}
             </Card>
+
             {Array.from(breweryList).map((brewery) => (
               //
               <Row>
-                <BreweryCard brewery={brewery} key={brewery.id} handleRemoveBrewery={handleRemoveBrewery}/>
+                <BreweryCard
+                  brewery={brewery}
+                  key={brewery.id}
+                  handleRemoveBrewery={handleRemoveBrewery}
+                />
               </Row>
             ))}
           </Col>

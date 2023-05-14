@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Row, Col, Button } from "antd";
 // import 'antd/dist/antd.css';
 // import BreweryCard from "../components/BreweryCard";
@@ -16,6 +16,7 @@ const ObjectId = require("bson-objectid");
 
 export function UserProfile() {
 const [addFriend] = useMutation(ADD_FRIEND);
+const navigate = useNavigate();
 
 
   const { username } = useParams();
@@ -41,6 +42,7 @@ const [addFriend] = useMutation(ADD_FRIEND);
       if (!data) {
         throw new Error('You have no friends');
       }
+      navigate('/profile')
       } catch (err) {
         console.error(err);
       }

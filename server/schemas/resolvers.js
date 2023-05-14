@@ -31,7 +31,7 @@ const resolvers = {
     review: async (parent, { breweryId }) => {
       const reviewSet = await Review.find({
         breweryId,
-      });
+      }).sort({ createdAt: -1 });
       return reviewSet;
     },
   },
@@ -184,12 +184,7 @@ const resolvers = {
       }
     },
     // allows user to add another user as a friend
-    addFriend: async (
-      parent,
-      { friendId },
-      context
-      ) => {
-      console.log("hello sir");
+    addFriend: async (parent, { friendId }, context) => {
       // console.log(context.user);
       if (context.user) {
         console.log(friendId.id);

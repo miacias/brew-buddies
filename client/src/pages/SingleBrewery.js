@@ -6,6 +6,7 @@ import Auth from '../utils/auth'
 import { ADD_FAV_BREWERY } from "../utils/mutations";
 import { BREWERY_REVIEW } from '../utils/queries';
 import { useParams } from "react-router-dom";
+import styles from '../components/BreweryCard.module.css'
 import { Col, Card, Space, Button, Tooltip } from "antd";
 import { StarOutlined, StarFilled, HeartOutlined, HeartFilled } from "@ant-design/icons";
 
@@ -20,7 +21,7 @@ export default function SingleBrewery() {
   // adds brewery to user Favorites list
   const [addFavBrewery, { error }] = useMutation(ADD_FAV_BREWERY);
   // loads all reviews for this brewery
-  const { loading, data } = useQuery(BREWERY_REVIEW, { variables: { breweryId }});
+  const { loading, data, refetch } = useQuery(BREWERY_REVIEW, { variables: { breweryId }});
 
   // calculates star review average
   const calculateAverage = (loading, data) => {
@@ -59,7 +60,14 @@ export default function SingleBrewery() {
     }
   }, []); // checks once
 
-  // adds brewery to user favorites list
+
+  
+  // adds review to brewery page and to user profile
+  /////refetches brewery review data, used as a prop and passed through form component
+  const handleReviewAdded = () => {
+    refetch();
+  };
+
   const handleAddFavBrewery = async (event) => {
     try {
       const { data } = await addFavBrewery({
@@ -81,8 +89,8 @@ export default function SingleBrewery() {
       <>
         {breweryData && (
           <>
-            <Col span={8}>
-              <Card title={breweryData.name} bordered={false}>
+            <Col >
+              <Card className={styles.singleBrewery} title={breweryData.name} bordered={false}>
                 <p>Brewery Type: {breweryData.brewery_type}</p>
                 <p>
                   Address: {breweryData.street}, {breweryData.city}, {" "}
@@ -109,7 +117,7 @@ export default function SingleBrewery() {
                       >Favorite it!</Button>
                     </Tooltip>
                 </Space.Compact>
-                {showForm && <AddReviewForm showForm={showForm} setShowForm={setShowForm}/>}
+                {showForm && <AddReviewForm onReviewAdded={handleReviewAdded} showForm={showForm} setShowForm={setShowForm}/>}
               </Card>
             </Col>
           </>
