@@ -15,6 +15,7 @@ export default function SingleBrewery() {
   const [breweryData, setBreweryData] = useState();
   const [showForm, setShowForm] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
+  const [favorite, setFavorite] = useState(false);
 
   // adds brewery to user Favorites list
   const [addFavBrewery, { error }] = useMutation(ADD_FAV_BREWERY);
@@ -40,7 +41,6 @@ export default function SingleBrewery() {
       return [average, totalReviews];
     }
   }
-  // calculateAverage(loading, data)
 
   // calls OpenBreweryDB API and sets breweryData State
   useEffect(() => {
@@ -59,12 +59,7 @@ export default function SingleBrewery() {
     }
   }, []); // checks once
 
-
-
-  // adds review to brewery page and to user profile
-  // const [ addReview ] = useMutation(ADD_REVIEW);
-  // const _id = new ObjectId(userData.data._id);
-
+  // adds brewery to user favorites list
   const handleAddFavBrewery = async (event) => {
     try {
       const { data } = await addFavBrewery({
@@ -75,7 +70,7 @@ export default function SingleBrewery() {
       if (!data) {
         throw new Error('Something went wrong!');
       }
-      console.log("woohoo")
+      setFavorite(true);
     } catch (err) {
       console.error(err);
     }
@@ -106,6 +101,7 @@ export default function SingleBrewery() {
                       </Button>
                     </Tooltip>
                     )}
+                    {/* add to favorites! */}
                     <Tooltip title="I love it!">
                       <Button 
                         icon={<HeartOutlined/>}
@@ -114,16 +110,12 @@ export default function SingleBrewery() {
                     </Tooltip>
                 </Space.Compact>
                 {showForm && <AddReviewForm showForm={showForm} setShowForm={setShowForm}/>}
-                {/* {showForm && <AddReviewForm showForm={showForm} setShowForm={setShowForm}/>}
-                <Button onClick={() => setShowForm(!showForm)}>
-                  {showForm ? 'Cancel' : 'Add Review'}
-                </Button> */}
               </Card>
             </Col>
           </>
         )}
 
-        <div>Google Maps API here</div>
+        {/* <div>Google Maps API here</div> */}
         <ul>
           {/* creates Review card based on total number of reviews possible */}
           {!loading && data.review && (
