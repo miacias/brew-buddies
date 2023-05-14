@@ -8,6 +8,7 @@ import styles from '../components/BreweryCard.module.css';
 // client-side utils, pages, components
 import Auth from '../utils/auth';
 import formatPhoneNumber from '../utils/phoneFormat';
+import formatZipCode from "../utils/zipFormat";
 import breweryType from '../utils/breweryType';
 import { ADD_FAV_BREWERY } from "../utils/mutations";
 import { BREWERY_REVIEW } from '../utils/queries';
@@ -112,7 +113,7 @@ export default function SingleBrewery() {
                 {/* street address */}
                 <p>
                   {breweryData?.street}, {breweryData?.city}, {" "}
-                  {breweryData?.state} {breweryData?.postal_code}
+                  {breweryData?.state} {formatZipCode(breweryData?.postal_code)}
                 </p>
                   <Space.Compact block>
                     {/* star ratings! */}
