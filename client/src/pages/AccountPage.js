@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Form, Input, Button } from "antd";
+import { Row, Col, Form, Input, Button, Card } from "antd";
 import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
@@ -17,6 +17,7 @@ export function AccountPage() {
   const [Loading, setLoading] = useState(true);
   const { loading, data } = useQuery(GET_ME);
   const userData = data?.me || {};
+  console.log(userData);
 
   useEffect(() => {
     if (!userData) {
@@ -95,6 +96,11 @@ export function AccountPage() {
             <div>{userData.birthday}</div>
             <div>{userData.pronouns}</div>
             <div>{userData.intro}</div>
+            <Card title="Friend List" >
+            {userData.friends && userData.friends.map((friend) => {
+  return <p key={friend.username}>{friend.username}</p>
+})}
+            </Card>
             {Array.from(breweryList).map((brewery) => (
               //
               <Row>

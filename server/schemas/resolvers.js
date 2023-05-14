@@ -14,7 +14,10 @@ const resolvers = {
     // do we want to also populate favBreweries & friends?
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('reviews');
+        return User.findOne({ _id: context.user._id }).populate([
+          'reviews',
+          'friends',
+        ]);
       }
       throw new AuthenticationError('Please log in to do this.');
     },
@@ -181,11 +184,16 @@ const resolvers = {
       }
     },
     // allows user to add another user as a friend
-    addFriend: async (parent, { friendId }, context) => {
+    addFriend: async (
+      parent,
+      { friendId },
+      context
+      ) => {
+      console.log("hello sir");
       // console.log(context.user);
       if (context.user) {
-        console.log(friendId);
-        return User.findOneAndUpdate(
+        console.log(friendId.id);
+        const newFriend = await User.findOneAndUpdate(
           { _id: context.user._id },
           {
             $addToSet: {
@@ -196,6 +204,9 @@ const resolvers = {
             new: true,
           }
         );
+        return {
+          newFriend,
+        };
       }
     },
     // removes user from friends list

@@ -1,16 +1,23 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Row, Col } from "antd";
+import { Row, Col, Button } from "antd";
 // import 'antd/dist/antd.css';
 // import BreweryCard from "../components/BreweryCard";
 // import ReviewCard from "../components/ReviewCard";
-import { /*useMutation,*/ useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { GET_USER } from "../utils/queries";
+import { ADD_FRIEND } from "../utils/mutations";
 // import Auth from "../utils/auth";
 // import { ExclamationCircleFilled } from "@ant-design/icons";
 import styles from './UserProfile.module.css';
+const ObjectId = require("bson-objectid");
+
+
 
 export function UserProfile() {
+const [addFriend] = useMutation(ADD_FRIEND);
+
+
   const { username } = useParams();
   const { loading, error, data } = useQuery(GET_USER, {
     variables: { username },
@@ -23,6 +30,21 @@ export function UserProfile() {
   if (!userData) {
     return <div>Loading...</div>; // return a loading state if userData is falsy
   }
+  const handleFollowFriend = async () => {
+    console.log(new ObjectId(userData._id))
+    try {
+      const { data } = await addFriend({
+        variables: {
+          friendId: new ObjectId(userData._id)
+        },
+      });
+      if (!data) {
+        throw new Error('You have no friends');
+      }
+      } catch (err) {
+        console.error(err);
+      }
+    }
   
   return (
     <>
@@ -51,6 +73,9 @@ export function UserProfile() {
           <div>{userData.intro}</div>
         </Col>
       </Row>
+      <Button onClick = {handleFollowFriend}>
+              Add Friend
+      </Button>
       <Row>
         <h2>My most recent reviews</h2>
         {/* <ReviewCard/>
@@ -63,6 +88,7 @@ export function UserProfile() {
         <BreweryCard/>
         <BreweryCard/> */}
       </Row>
+    
     </>
   );
 }
