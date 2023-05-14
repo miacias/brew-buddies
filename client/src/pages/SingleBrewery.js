@@ -8,7 +8,7 @@ import { BREWERY_REVIEW } from '../utils/queries';
 import { useParams } from "react-router-dom";
 import styles from '../components/BreweryCard.module.css'
 import { Col, Card, Space, Button, Tooltip } from "antd";
-import { StarOutlined, StarFilled, HeartOutlined, HeartFilled } from "@ant-design/icons";
+import { StarOutlined, StarFilled, HeartOutlined, HeartFilled, DoubleRightOutlined } from "@ant-design/icons";
 
 
 export default function SingleBrewery() {
@@ -61,13 +61,12 @@ export default function SingleBrewery() {
   }, []); // checks once
 
 
-  
-  // adds review to brewery page and to user profile
-  /////refetches brewery review data, used as a prop and passed through form component
+  // refetches brewery review data, used as a prop and passed through form component
   const handleReviewAdded = () => {
     refetch();
   };
 
+  // adds review to brewery page and to user profile
   const handleAddFavBrewery = async (event) => {
     try {
       const { data } = await addFavBrewery({
@@ -78,7 +77,7 @@ export default function SingleBrewery() {
       if (!data) {
         throw new Error('Something went wrong!');
       }
-      setFavorite(true);
+      setFavorite(true); // query user to verify favorite or not
     } catch (err) {
       console.error(err);
     }
@@ -90,11 +89,16 @@ export default function SingleBrewery() {
         {breweryData && (
           <>
             <Col >
-              <Card className={styles.singleBrewery} title={breweryData.name} bordered={false}>
-                <p>Brewery Type: {breweryData.brewery_type}</p>
+              <Card 
+                className={styles.singleBrewery} 
+                title={breweryData?.name} 
+                bordered={false}
+              >
+                <p>Brewery Flavor: {breweryData?.brewery_type}</p>
+                {/* street address */}
                 <p>
-                  Address: {breweryData.street}, {breweryData.city}, {" "}
-                  {breweryData.state} {breweryData.postal_code}
+                  {breweryData?.street}, {breweryData?.city}, {" "}
+                  {breweryData?.state} {breweryData?.postal_code}
                 </p>
                   <Space.Compact block>
                     {/* star ratings! */}
@@ -116,8 +120,19 @@ export default function SingleBrewery() {
                         onClick={handleAddFavBrewery}
                       >Favorite it!</Button>
                     </Tooltip>
+                    {/* external website button if site exists */}
+                    {breweryData?.website_url && 
+                    (<Tooltip title='View site!'>
+                      <Button icon={<DoubleRightOutlined />} href={breweryData?.website_url} />
+                    </Tooltip>)}
                 </Space.Compact>
-                {showForm && <AddReviewForm onReviewAdded={handleReviewAdded} showForm={showForm} setShowForm={setShowForm}/>}
+                {/* shows/hides Add Review form based on showForm State */}
+                {showForm && 
+                <AddReviewForm 
+                  onReviewAdded={handleReviewAdded} 
+                  showForm={showForm} 
+                  setShowForm={setShowForm}
+                />}
               </Card>
             </Col>
           </>
