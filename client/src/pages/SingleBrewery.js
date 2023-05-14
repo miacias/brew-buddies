@@ -109,7 +109,14 @@ export default function SingleBrewery() {
                         icon={<StarOutlined />}
                         onClick={() => setShowForm(!showForm)}
                       > 
-                        {!showForm ? `${calculateAverage(loading, data)[0]} out of 5` : 'Cancel'}
+                      {/* shows average ratings, if any. shows Cancel when form is open */}
+                        {
+                          !showForm
+                            ? isNaN(calculateAverage(loading, data)[0])
+                              ? 'No reviews'
+                              : `${calculateAverage(loading, data)[0]} out of 5`
+                            : 'Cancel'
+                        }
                       </Button>
                     </Tooltip>
                     )}
@@ -129,9 +136,9 @@ export default function SingleBrewery() {
                 {/* shows/hides Add Review form based on showForm State */}
                 {showForm && 
                 <AddReviewForm 
-                  onReviewAdded={handleReviewAdded} 
                   showForm={showForm} 
                   setShowForm={setShowForm}
+                  onReviewAdded={handleReviewAdded} 
                 />}
               </Card>
             </Col>
