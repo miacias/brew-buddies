@@ -30,7 +30,20 @@ export default function SingleBrewery() {
   const { loading: loadingReview, data: reviewData, refetch } = useQuery(BREWERY_REVIEW, { variables: { breweryId }});
   // loads logged in user data
   const { loading: loadingMe, error: meError, data: meData, refetch: refetchMe } = useQuery(GET_ME);
-  const myFaves = meData?.me?.favBreweries;
+
+
+  const handleHeartFill = async (brewery) => {
+    const myFaves = await meData?.me?.favBreweries;
+    const breweryId = await brewery?.id.toString();
+    console.log('faves', myFaves)
+    console.log('id', breweryId)
+
+    // if (myFaves.find(breweryId.id)) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+  }
   // console.log('my fav array', myFaves)
   // console.log('brew data from state', breweryData?.id)
   // use .includes(to return the match)
@@ -61,7 +74,10 @@ export default function SingleBrewery() {
     const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${breweryId}`;
     fetch(searchByIdApi)
       .then((response) => response.json())
-      .then((data) => setBreweryData(data))
+      .then((data) => {
+        setBreweryData(data);
+        handleHeartFill(data);
+      })
       .catch((error) => console.error(error));
   }, [breweryId]);
 
@@ -90,7 +106,7 @@ export default function SingleBrewery() {
       if (!data) {
         throw new Error('Something went wrong!');
       }
-      const newFav = await myFaves.includes(breweryData?.id);
+      const newFav = await meData?.me.includes(breweryData?.id);
       if (newFav) {
         setFavorite(true)
       }
@@ -148,7 +164,7 @@ export default function SingleBrewery() {
                     {/* add to favorites! */}
                     <Tooltip title="I love it!">
                       <Button 
-                        icon={favorite ? <HeartFilled /> : <HeartOutlined/>}
+                        icon={favorite ? <HeartFilled /> : <HeartOutlined />}
                         onClick={handleAddFavBrewery}
                       >Favorite it!</Button>
                     </Tooltip>
