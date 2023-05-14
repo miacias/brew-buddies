@@ -8,6 +8,7 @@ import styles from '../components/BreweryCard.module.css';
 // client-side utils, pages, components
 import Auth from '../utils/auth';
 import formatPhoneNumber from '../utils/phoneFormat';
+import breweryType from '../utils/breweryType';
 import { ADD_FAV_BREWERY } from "../utils/mutations";
 import { BREWERY_REVIEW } from '../utils/queries';
 import ReviewCard from "../components/ReviewCard";
@@ -97,15 +98,17 @@ export default function SingleBrewery() {
                 title={breweryData?.name} 
                 bordered={false}
               >
-                <p>Brewery Flavor: {breweryData?.brewery_type}</p>
-                <div>
+                {breweryData.brewery_type && (
+                <p>Brewery Flavor: {breweryType(breweryData?.brewery_type)}</p>
+                )}
+                {breweryData.phone ? (<div>
                   <span style={{ display: 'inline-block', marginRight: '10px' }}>
                     <PhoneOutlined />
                   </span>
                   <span style={{ display: 'inline-block', marginRight: '10px' }}>
                     <p>{formatPhoneNumber(breweryData?.phone)}</p>
                   </span>
-                </div>
+                </div>) : ''}
                 {/* street address */}
                 <p>
                   {breweryData?.street}, {breweryData?.city}, {" "}
