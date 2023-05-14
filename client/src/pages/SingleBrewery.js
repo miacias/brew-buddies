@@ -7,7 +7,7 @@ import { ADD_FAV_BREWERY } from "../utils/mutations";
 import { BREWERY_REVIEW } from '../utils/queries';
 import { useParams } from "react-router-dom";
 import { Col, Card, Space, Button, Tooltip } from "antd";
-import { StarOutlined } from "@ant-design/icons";
+import { StarOutlined, HeartOutlined } from "@ant-design/icons";
 
 
 export default function SingleBrewery() {
@@ -95,24 +95,28 @@ export default function SingleBrewery() {
                   Address: {breweryData.street}, {breweryData.city}, {" "}
                   {breweryData.state} {breweryData.postal_code}
                 </p>
-                {!loading && data.review && (
                   <Space.Compact block>
-                  {/* <div>{calculateAverage(loading, data)[0]}</div> */}
-                  <Tooltip title={`${calculateAverage(loading, data)[1]} ratings!`}>
-                    <Button icon={<StarOutlined />} > {calculateAverage(loading, data)[0]}</Button>
-                  </Tooltip>
-                  {/* <Tooltip title="Heart">
-                    <Button icon={<HeartOutlined />} />
-                  </Tooltip> */}
+                    {/* star ratings! */}
+                    {!loading && data.review && (
+                    <Tooltip title={`${calculateAverage(loading, data)[1]} ratings!`}>
+                      <Button 
+                        icon={<StarOutlined />}
+                        onClick={() => setShowForm(!showForm)}
+                      > {calculateAverage(loading, data)[0]} out of 5</Button>
+                    </Tooltip>
+                    )}
+                    <Tooltip title="I love it!">
+                      <Button 
+                        icon={<HeartOutlined/>}
+                        onClick={handleAddFavBrewery}
+                      >Favorite it!</Button>
+                    </Tooltip>
                 </Space.Compact>
-                )}
-                <Button onClick={handleAddFavBrewery}>
-                  Save Brewery to Favorites
-                </Button>
                 {showForm && <AddReviewForm showForm={showForm} setShowForm={setShowForm}/>}
+                {/* {showForm && <AddReviewForm showForm={showForm} setShowForm={setShowForm}/>}
                 <Button onClick={() => setShowForm(!showForm)}>
                   {showForm ? 'Cancel' : 'Add Review'}
-                </Button>
+                </Button> */}
               </Card>
             </Col>
           </>
