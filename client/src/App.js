@@ -1,13 +1,11 @@
 // client-side packages
-import { React, useEffect, useState } from 'react';
-// import { Provider } from "react-redux";
+import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { Layout, Menu, ConfigProvider, theme } from 'antd';
 import { setContext } from '@apollo/client/link/context';
-import { Link, useParams, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Link, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // client-side utils, pages, components
 import Auth from '../src/utils/auth';
-import history from './utils/history';
 import HomePage from './pages/HomePage';
 import ConnectPage from './pages/ConnectPage';
 import SignupPage from './pages/SignupPage';
@@ -107,7 +105,7 @@ function App() {
       >
         {/* sets layout for navigation sidebar */}
         <Layout>
-          <Router history={history}>
+          <Router>
             {/* contains side-view, hamburger button, and menu options */}
             <Sider
               breakpoint="lg"
