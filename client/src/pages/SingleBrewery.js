@@ -6,8 +6,8 @@ import Auth from '../utils/auth'
 import { ADD_FAV_BREWERY } from "../utils/mutations";
 import { BREWERY_REVIEW } from '../utils/queries';
 import { useParams } from "react-router-dom";
-import { Col, Card, Button } from "antd";
-import { StarFilled } from '@ant-design/icons';
+import { Col, Card, Space, Button, Tooltip } from "antd";
+import { StarOutlined } from "@ant-design/icons";
 
 
 export default function SingleBrewery() {
@@ -23,8 +23,10 @@ export default function SingleBrewery() {
   const { loading, data } = useQuery(BREWERY_REVIEW, { variables: { breweryId }});
 
   // calculates star review average
-  const calculateAverage = async (loading, data) => {
+  const calculateAverage = (loading, data) => {
     const ratings = [];
+    let average;
+    let totalReviews;
     if (!loading && data.review) {
       data.review.forEach(review => {
         return ratings.push(parseInt(review.starRating));
@@ -34,10 +36,12 @@ export default function SingleBrewery() {
         (accumulator, currentValue) => accumulator + currentValue,
         initialValue
       );
-      return sumWithInitial / ratings.length;
+      average = sumWithInitial / ratings.length;
+      totalReviews = ratings.length;
+      return [average, totalReviews];
     }
   }
-  calculateAverage(loading, data)
+  // calculateAverage(loading, data)
 
   // calls OpenBreweryDB API and sets breweryData State
   useEffect(() => {
@@ -91,6 +95,17 @@ export default function SingleBrewery() {
                   Address: {breweryData.street}, {breweryData.city}, {" "}
                   {breweryData.state} {breweryData.postal_code}
                 </p>
+                {!loading && data.review && (
+                  <Space.Compact block>
+                  {/* <div>{calculateAverage(loading, data)[0]}</div> */}
+                  <Tooltip title={`${calculateAverage(loading, data)[1]} ratings!`}>
+                    <Button icon={<StarOutlined />} > {calculateAverage(loading, data)[0]}</Button>
+                  </Tooltip>
+                  {/* <Tooltip title="Heart">
+                    <Button icon={<HeartOutlined />} />
+                  </Tooltip> */}
+                </Space.Compact>
+                )}
                 <Button onClick={handleAddFavBrewery}>
                   Save Brewery to Favorites
                 </Button>
