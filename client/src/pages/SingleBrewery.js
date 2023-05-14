@@ -32,18 +32,25 @@ export default function SingleBrewery() {
   const { loading: loadingMe, error: meError, data: meData, refetch: refetchMe } = useQuery(GET_ME);
 
 
+
   const handleHeartFill = async (brewery) => {
-    const myFaves = await meData?.me?.favBreweries;
-    const breweryId = await brewery?.id.toString();
+    const myFaves = meData?.me?.favBreweries;
+    const breweryId = brewery?.id.toString();
     console.log('faves', myFaves)
     console.log('id', breweryId)
-
-    // if (myFaves.find(breweryId.id)) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
+    if (myFaves && myFaves.length > 0) {
+      const foundMatch = myFaves.find((favMatch) => favMatch === breweryId)
+      if (foundMatch) {
+        console.log(true)
+        return true;
+      } else {
+        console.log(false)
+        return false;
+      }
+    }
   }
+
+
   // console.log('my fav array', myFaves)
   // console.log('brew data from state', breweryData?.id)
   // use .includes(to return the match)
@@ -106,10 +113,7 @@ export default function SingleBrewery() {
       if (!data) {
         throw new Error('Something went wrong!');
       }
-      const newFav = await meData?.me.includes(breweryData?.id);
-      if (newFav) {
-        setFavorite(true)
-      }
+        setFavorite(true);
     } catch (err) {
       console.error(err);
     }
