@@ -4,7 +4,7 @@ import { React, useEffect, useState } from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { Layout, Menu, ConfigProvider, theme } from 'antd';
 import { setContext } from '@apollo/client/link/context';
-import { Link, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Link, useParams, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // client-side utils, pages, components
 import Auth from '../src/utils/auth';
 import history from './utils/history';
@@ -48,16 +48,6 @@ const client = new ApolloClient({
 
 
 function App() {
-  const [clickNav, setClickNav] = useState();
-  const onClick = (e) => {
-    setClickNav(e.key);
-  };
-
-  useEffect(() => {
-    const params = history.location.pathname;
-    console.log(params)
-  }, []);
-
   // Ant Design UI theme
   const token = {
     colorPrimary: "#f4900c", // amber
@@ -72,32 +62,32 @@ function App() {
   // navbar menu items
   const items = [
     {
-      key: "1",
+      key: "/",
       label: <Link to="/">Home</Link>
     },
     {
-      key: "2",
+      key: "/breweries",
       label: <Link to="/breweries">Breweries</Link>
     },
     ...Auth.loggedIn() ? 
       [
         {
-        key: "3",
+        key: "/profile",
         label: <Link to="/profile">Profile Page</Link>
         },
         {
-          key: "4",
+          key: "/",
           label: (<Link to="/" onClick={() => Auth.logout()}>
           Logout
         </Link>)
         }
       ] : [
         {
-          key: "3",
+          key: "/signup",
           label: <Link to="/signup">Sign Up</Link>
         },
         {
-          key: "4",
+          key: "/connect",
           label: <Link to="/connect">Login</Link>
         }
       ],
@@ -133,9 +123,7 @@ function App() {
               <Menu
                 theme="dark"
                 mode="inline"
-                // defaultSelectedKeys={[clickNav]}
-                onClick={onClick}
-                selectedKeys={[clickNav]}
+                defaultSelectedKeys={window.location.pathname}
                 items={items} 
               />
             </Sider>
