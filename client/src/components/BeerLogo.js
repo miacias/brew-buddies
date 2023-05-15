@@ -6,7 +6,6 @@ export default function BeerLogo() {
     const ref = React.useRef(null);
     useEffect(() => {
         // DOM elements are accessible here
-        // console.log(ref.current);
         let granimInstance = new Granim({
             element: '#logo-canvas',
             direction: 'left-right',
