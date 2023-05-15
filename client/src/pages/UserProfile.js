@@ -86,14 +86,18 @@ export function UserProfile() {
               />
             )}
           </div>
-        </Col>
-        <Col>
-          <h2>
-            {userData.username} {userData.postalCode}
-          </h2>
-          <div>{userData.birthday}</div>
-          <div>{userData.pronouns}</div>
-          <div>{userData.intro}</div>
+          </Col>
+          <Col>
+          <div style={{fontSize: '24px'}}>
+            <h2>
+              {userData.username} 
+            </h2>
+              {userData.pronouns}
+            </div>
+            {/* <div>{userData.birthday}</div> */}
+            
+
+            <div>{userData.intro}</div>
         </Col>
       </Row>
       {/* had to add meData to the check to get rid of error upon initial page load.  Also removed length check as it was unnecessary.  The actual is changing map() to some() */}
@@ -106,15 +110,13 @@ export function UserProfile() {
           <Button onClick={handleFollowFriend}>Add Friend</Button>
         )
       )}
-      <Card title="Friend List">        
+      <Card title={<h2 style={{ fontSize: '24px' }}>Friend List</h2>} style={{ width: '25%' }}>        
         {console.log(userData.friends)}
         {userData?.friends && userData.friends.length > 0 ? (
           userData.friends.map((friend) => (
-            <ul>
-             <li>
-              <Link to={`/profile/${friend.username}`} key={friend.username}>{friend.username}</Link>
-              </li>
-            </ul>
+            <div key={friend.username} style={{fontSize: '18px'}}>
+              <Link to={`/profile/${friend.username}`} >{friend.username}</Link>
+              </div>
           ))
         ) : (
           <p>They have no friends to show yet!</p>
