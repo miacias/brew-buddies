@@ -96,7 +96,7 @@ export function UserProfile() {
           <div>{userData.intro}</div>
         </Col>
       </Row>
-      {/* had to add meData to the check to get rid of error upon initial page load.  Also removed length check as it was unnecessary. */}
+      {/* had to add meData to the check to get rid of error upon initial page load.  Also removed length check as it was unnecessary.  The actual is changing map() to some() */}
       {meData && (
         meData.me.friends.some((friend) => friend.username === userData.username) ? (
           <Button onClick={() => handleRemoveFriend(userData._id)}>
@@ -110,10 +110,11 @@ export function UserProfile() {
         {console.log(userData.friends)}
         {userData?.friends && userData.friends.length > 0 ? (
           userData.friends.map((friend) => (
-            <>
+            <ul>
+             <li>
               <Link to={`/profile/${friend.username}`} key={friend.username}>{friend.username}</Link>
-              <br></br>
-            </>
+              </li>
+            </ul>
           ))
         ) : (
           <p>They have no friends to show yet!</p>
