@@ -38,7 +38,7 @@ export default function BreweryApi({ breweryList, setBreweryList }) {
     return (
         <div>
     <Space direction="vertical">
-        <Search placeholder="Search by Postal Code" name="search" allowClear value={zipInput} onChange={handleInput} onSearch={searchAPI} style={{ width: 200 }} />
+        <Search placeholder="Search by Zip Code" name="search" allowClear value={zipInput} onChange={handleInput} onSearch={searchAPI} style={{ width: 200 }} />
         </Space>
             {breweryList.length > 0 ? 
             (
