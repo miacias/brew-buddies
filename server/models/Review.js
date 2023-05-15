@@ -21,9 +21,6 @@ const reviewSchema = new Schema({
     required: true,
     trim: true,
   },
-  // reviewAuthorPic: {
-  //  code here to show reviewAuthor's profile pic
-  // }
   createdAt: {
     type: Date,
     default: Date.now,

@@ -22,11 +22,27 @@ const resolvers = {
       throw new AuthenticationError('Please log in to do this.');
     },
     // shows all breweries with attached reviews
+    // add await after the arrow function
     breweries: async () => Brewery.find().populate('reviews'),
     // shows specific brewery with attached reviews
     brewery: async (id) => Brewery.findOne({ id }).populate('reviews'),
     // shows three most recent reviews from Review model
-    reviews: async () => Review.find().sort({ createdAt: -1 }).limit(3),
+    reviews: async () => {
+      const homeReviews = await Review.find().sort({ createdAt: -1 }).limit(3);
+      // console.log(homeReviews);
+      // promise inside a map, the await Promise.all will fire off all asyncs
+      const homeReviewsWithAvatar = await Promise.all(homeReviews.map(async (review) => {
+        const reviewUser = await User.findOne({ username: review.reviewAuthor });
+          return {
+            ...review,
+            avatar: reviewUser.profilePic,
+          };
+      }));
+      //why is it returning a nested object?
+      console.log(homeReviewsWithAvatar);
+      return homeReviews;
+      //loop over results of homereviews, we need to map through and match usernames
+    },
     // finds review by ID
     review: async (parent, { breweryId }) => {
       const reviewSet = await Review.find({
