@@ -24,26 +24,29 @@ function MyMapComponent({center, zoom, breweryList}) {
 
     useEffect(() => {
         if (breweryList && breweryList.length > 0) {
+            // filters out breweries with null coordinates
+            const mapBreweries = breweryList.filter(brewery => brewery.latitude !== null && brewery.longitude !== null);
             const map = new window.google.maps.Map(ref.current, {
-                // centers on first result or default location if null
+                // centers on first result
                 center: { 
-                    lat: +breweryList[0].latitude !== null ? +breweryList[0].latitude : center.lat, 
-                    lng: +breweryList[0].longitude !== null ? +breweryList[0].longitude : center.lng 
+                    lat: +mapBreweries[0].latitude, 
+                    lng: +mapBreweries[0].longitude 
                 },
                 zoom,
             });
             // creates a map marker for each brewery
-            breweryList.forEach(brewery => {
-                new window.google.maps.Marker({
-                    // make case for if lat/lng is nullEA4335
-                    position: { 
-                        lat: +(brewery.latitude) ? +(brewery.latitude) : null, 
-                        lng: +(brewery.longitude) ? +(brewery.longitude) : null
-                    },
-                    map,
-                    title: brewery.name,
-                    icon: svgMarker
-                })
+            mapBreweries.forEach(brewery => {
+                // removes null values, if any
+                    new window.google.maps.Marker({
+                        // make case for if lat/lng is null
+                        position: { 
+                            lat: +(brewery.latitude) ? +(brewery.latitude) : null, 
+                            lng: +(brewery.longitude) ? +(brewery.longitude) : null
+                        },
+                        map,
+                        title: brewery.name,
+                        icon: svgMarker
+                    });
             });
         }
     }, [breweryList, center, zoom]);
