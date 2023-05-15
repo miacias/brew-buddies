@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Form, Input, Button, Card } from "antd";
+import { Row, Col, Form, Input, Button, Card, } from "antd";
 import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
@@ -83,37 +83,46 @@ export function AccountPage() {
         </Button>
         {showForm && <EditUserForm />}
         <Row>
-          <Col>
-            <div>
-              {imageData ? (
-                <img
-                  className={styles.profilePic}
-                  src={imageData}
-                  alt="Database profile"
-                />
-              ) : (
-                <img
-                  className={styles.profilePic}
-                  src={profilePic}
-                  alt="Default profile"
-                />
-              )}
-            </div>
+        
+        <Col>
+          <div>
+            {imageData ? (
+              <img
+                className={styles.profilePic}
+                src={imageData}
+                alt="Database profile"
+              />
+            ) : (
+              <img
+                className={styles.profilePic}
+                src={profilePic}
+                alt="Default profile"
+              />
+            )}
+          </div>
           </Col>
           <Col>
+          <div style={{fontSize: '24px'}}>
             <h2>
               {userData.username} 
             </h2>
+              {userData.pronouns}
+            </div>
             {/* <div>{userData.birthday}</div> */}
-            <div>{userData.pronouns}</div>
-            <div>{userData.intro}</div>
+            
 
-            <Card title="Friend List">
+            <div>{userData.intro}</div>
+        </Col>
+      </Row>
+            <Card title={<h2 style={{ fontSize: '24px' }}>Friend List</h2>} style={{ width: '25%' }}>
               {userData.friends && userData.friends.length > 0 ? (
                 userData.friends.map((friend) => (
-                  <Link to={`/profile/${friend.username}`} key={friend.username}>{friend.username}</Link>
+                  <div key={friend.username} style ={{fontSize: '18px'}}>
+                  <Link to={`/profile/${friend.username}`} >{friend.username}</Link>
+                  </div>
                 ))
-              ) : (
+              )
+               : (
                 <p>You have no friends yet!</p>
               )}
             </Card>
@@ -126,8 +135,6 @@ export function AccountPage() {
                   />
               ))}
             </Row>
-          </Col>
-        </Row>
       </>
     );
   } else {
