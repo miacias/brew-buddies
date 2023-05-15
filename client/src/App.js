@@ -74,7 +74,7 @@ function App() {
         },
         {
           key: "4",
-          label: (<Link to="/" onClick={() => Auth.logout()}>Logout</Link>),
+          label: <Link to="/" onClick={() => Auth.logout()}>Logout</Link>,
         }
       ] : [
         {

@@ -62,8 +62,12 @@ const Signup = () => {
   };
 
   const handleFormSubmit = async (event) => {
+    const preferNone = userFormData.pronouns;
+    if (preferNone) {
+      userFormData.pronouns = null;
+    }
     try {
-      userFormData.username = userFormData.username.toLowerCase()
+      userFormData.username = userFormData.username.toLowerCase();
       const { data } = await addUser({
         variables: { ...userFormData },
       });

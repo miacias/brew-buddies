@@ -5,7 +5,6 @@ import { useMutation, useQuery } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
 import { EditUserForm } from "../components/EditUserForm";
 import BreweryCard from "../components/BreweryCard";
-// import Review from "../components/Review";
 import styles from "./UserProfile.module.css";
 import Auth from "../utils/auth";
 import { REMOVE_FAV_BREWERY } from "../utils/mutations";
@@ -103,9 +102,9 @@ export function AccountPage() {
           </Col>
           <Col>
             <h2>
-              {userData.username} {userData.postalCode}
+              {userData.username} 
             </h2>
-            <div>{userData.birthday}</div>
+            {/* <div>{userData.birthday}</div> */}
             <div>{userData.pronouns}</div>
             <div>{userData.intro}</div>
 

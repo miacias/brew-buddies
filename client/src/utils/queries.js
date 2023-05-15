@@ -58,10 +58,21 @@ query getUser($username: String) {
       postalCode
       intro
       pronouns
+      reviews {
+        _id
+        reviewText
+        starRating
+        reviewAuthor
+        createdAt
+        breweryId
+      }
       favBreweries
+      friends {
+        username
+        _id
+      }
     }
-  }
-`;
+  }`;
 export const ALL_BREWERIES = gql`
     query allBreweries {
         breweries {
