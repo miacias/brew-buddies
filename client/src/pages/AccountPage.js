@@ -9,6 +9,7 @@ import BreweryCard from "../components/BreweryCard";
 import styles from "./UserProfile.module.css";
 import Auth from "../utils/auth";
 import { REMOVE_FAV_BREWERY } from "../utils/mutations";
+import {  Link } from "react-router-dom";
 
 export function AccountPage() {
   const [showForm, setShowForm] = useState(false);
@@ -111,7 +112,7 @@ export function AccountPage() {
             <Card title="Friend List">
               {userData.friends && userData.friends.length > 0 ? (
                 userData.friends.map((friend) => (
-                  <p key={friend.username}>{friend.username}</p>
+                  <Link to={`/profile/${friend.username}`} key={friend.username}>{friend.username}</Link>
                 ))
               ) : (
                 <p>You have no friends yet!</p>
