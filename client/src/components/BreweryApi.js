@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import BreweryCard from './BreweryCard';
+import { Input, Space } from 'antd';
+
 
 
 export default function BreweryApi({ breweryList, setBreweryList }) {
@@ -14,48 +16,30 @@ export default function BreweryApi({ breweryList, setBreweryList }) {
     };
 
     function searchAPI(e) {
-        e.preventDefault();
         fetch(searchByZipAPI)
             .then(response => response.json())
             .then(data => {
-                // console.log(data);
                 data.length ? setBreweryList(data) : setBreweryList(null);
         });
         setZipInput('');
     };
-
+    const { Search } = Input
     if (breweryList === null) {
         return (
             <div>
-                <form>
-                    <input
-                        value={zipInput}
-                        onChange={handleInput}
-                        id="searchInput"
-                        type="text"
-                        placeholder="Search by Postal Code"
-                        name="search"
-                    />
-                    <button htmlFor="search" onClick={searchAPI}>Search 🔍</button>
-            </form>
+             <Space direction="vertical">
+        <Search placeholder="Search by Zip Code" name="search" allowClear value={zipInput} onChange={handleInput} onSearch={searchAPI} style={{ width: 200 }} />
+        </Space>
                 <p>No results to show!</p>
             </div>
         )
     }
-
+    
     return (
         <div>
-            <form>
-                <input
-                    value={zipInput}
-                    onChange={handleInput}
-                    id="searchInput"
-                    type="text"
-                    placeholder="Search by Postal Code"
-                    name="search"
-                />
-                <button htmlFor="search" onClick={searchAPI}>Search 🔍</button>
-            </form>
+    <Space direction="vertical">
+        <Search placeholder="Search by Postal Code" name="search" allowClear value={zipInput} onChange={handleInput} onSearch={searchAPI} style={{ width: 200 }} />
+        </Space>
             {breweryList.length > 0 ? 
             (
                 <>
