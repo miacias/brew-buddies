@@ -1,5 +1,5 @@
 // using both "loading card" and "inner card" components from ANT.  The Meta tag comes from "loading card" is attached to an "inner card"
-
+import { Link } from 'react-router-dom';
 import { Avatar, Card, Rate, Button } from 'antd';
 const { Meta } = Card;
 
@@ -37,9 +37,11 @@ export default function ReviewCard({ oneReview, breweryData }) {
           <p>{oneReview.reviewText}</p>
         </Card>
       }
-      <Button href={`/profile/${oneReview.reviewAuthor}`}  >
-        View Profile!
-        </Button>
+      <Button >
+        <Link to={`/profile/${oneReview.reviewAuthor}`}>
+          View Profile!
+        </Link>
+      </Button>
     </Card>
   )
 };
