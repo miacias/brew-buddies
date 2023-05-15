@@ -42,7 +42,6 @@ export function AccountPage() {
     }
   }
 
-
   // sets loading and sets brewery list data in react State
   useEffect(() => {
     if (!userData) {
@@ -50,29 +49,6 @@ export function AccountPage() {
     } else {
       breweryApi()
     }
-    // if (userData.favBreweries && userData.favBreweries.length > 0) {
-    //   for (let i = 0; i < userData.favBreweries.length; i++) {
-    //     const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${userData.favBreweries[i]}`;
-    //     setLoading(true);
-    //     fetch(searchByIdApi)
-    //       .then((response) => response.json())
-    //       .then((data) => {
-    //         setLoading(false);
-    //         // We set a new set, saving the data as a new set in the array every time
-    //         // setBreweryList((current) => {
-    //         //   return new Set([...current, data]);
-    //         // });
-    //         setBreweryList((current) => {
-    //           // Check if the brewery already exists in the set
-    //           if (![...current].some((brewery) => brewery.id === data.id)) {
-    //             // Add the brewery to the set
-    //             return new Set([...current, data]);
-    //           }
-    //           return current; // Return the current set without adding the duplicate brewery
-    //         });
-    //       });
-    //   }
-    // }
   }, [userData.favBreweries]);
 
   // const [removeFavBrewery] = useMutation(REMOVE_FAV_BREWERY)
