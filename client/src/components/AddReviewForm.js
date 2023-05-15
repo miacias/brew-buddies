@@ -35,12 +35,10 @@ export default function AddReviewForm({ showForm, setShowForm, onReviewAdded }) 
     // adds review to database and empties form
     const handleReviewSubmit = async (values) => {
         // setUserFormData({...reviewFormData, values});
-        console.log(reviewFormData)
         try {
             const { data } = await addReview({
                 variables: { ...reviewFormData }
             });
-            console.log(data);
             if (!data) {
                 throw new Error('Unable to add review.');
             }  

@@ -31,14 +31,12 @@ export function UserProfile() {
   const imageData = userData?.profilePic;
   let profilePic =
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
-  console.log(userData);
   if (!userData) {
     return <div>Loading...</div>; // return a loading state if userData is falsy
   }
   // if check to see if userData._id === something in me.friends._id
 
   const handleFollowFriend = async () => {
-    console.log(new ObjectId(userData._id));
     try {
       const { data } = await addFriend({
         variables: {
@@ -63,7 +61,6 @@ export function UserProfile() {
       });
       refetch();
       navigate("/profile");
-      console.log(data);
     } catch (err) {
       console.log(err);
     }

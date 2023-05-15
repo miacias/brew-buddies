@@ -53,12 +53,6 @@ export default function SingleBrewery() {
     }
   }, [meData, breweryData]);
 
-
-  // console.log('my fav array', myFaves)
-  // console.log('brew data from state', breweryData?.id)
-  // use .includes(to return the match)
-  // console.log(myFaves.includes(breweryData?.id))
-
   // calculates star review average
   const calculateAverage = (loadingReview, reviewData) => {
     const ratings = [];
