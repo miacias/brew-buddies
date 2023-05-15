@@ -73,7 +73,6 @@ export const EditUserForm = () => {
       .filter(([_, value]) => value !== "")
       .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
     try {
-      console.log(userFormData);
       const { data } = await editUser({
         variables: { input: { ...filteredData } },
       });

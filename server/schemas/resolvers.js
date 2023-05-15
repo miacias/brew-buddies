@@ -104,7 +104,6 @@ const resolvers = {
     // adds brewery to user favorites list
     addFavBrewery: async (parent, { breweryId }, context) => {
       if (context.user) {
-        console.log(breweryId);
         return User.findOneAndUpdate(
           { _id: context.user._id },
           {
@@ -137,7 +136,6 @@ const resolvers = {
       { breweryId, starRating, reviewText },
       context
     ) => {
-      console.log('hi from addReview resolver');
       if (context.user) {
         const newReview = await Review.create({
           reviewText,
@@ -185,9 +183,7 @@ const resolvers = {
     },
     // allows user to add another user as a friend
     addFriend: async (parent, { friendId }, context) => {
-      // console.log(context.user);
       if (context.user) {
-        console.log(friendId.id);
         const newFriend = await User.findOneAndUpdate(
           { _id: context.user._id },
           {

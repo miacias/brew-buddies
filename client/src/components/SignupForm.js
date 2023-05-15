@@ -63,7 +63,6 @@ const Signup = () => {
 
   const handleFormSubmit = async (event) => {
     try {
-      console.log(userFormData);
       userFormData.username = userFormData.username.toLowerCase()
       const { data } = await addUser({
         variables: { ...userFormData },
@@ -282,6 +281,9 @@ const Signup = () => {
           <Option value="They/Them">They/Them</Option>
           <Option value="Other">Other</Option>
           <Option value="Prefer-not-to-say">Prefer not to say</Option>
+          {userFormData.pronouns === 'Prefer-not-to-say' && (
+            <Input/>
+          )}
         </Select>
       </Form.Item>
       <Form.Item

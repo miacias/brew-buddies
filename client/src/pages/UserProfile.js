@@ -30,14 +30,12 @@ export function UserProfile() {
   const imageData = userData?.profilePic;
   let profilePic =
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
-  console.log(userData);
   if (!userData) {
     return <div>Loading...</div>; // return a loading state if userData is falsy
   }
   // if check to see if userData._id === something in me.friends._id
   
   const handleFollowFriend = async () => {
-    console.log(new ObjectId(userData._id))
     try {
       const { data } = await addFriend({
         variables: {
@@ -55,7 +53,6 @@ export function UserProfile() {
   }
   const handleRemoveFriend = async(friendId) => {
     try {
-      console.log("from line 57!!!!!!!!!", friendId)
       const { data } = await removeFriend({
         variables: {
           friendId: new ObjectId(userData._id),
@@ -63,14 +60,6 @@ export function UserProfile() {
       });
       refetch();
       navigate('/profile');
-      // setBreweryList((current) => {
-      //   // Create a new set of breweries excluding the deleted brewery
-      //   const updatedBreweries = new Set(
-      //     [...current].filter((brewery) => brewery.id !== breweryId)
-      //   );
-      //   return updatedBreweries;
-      // });
-      console.log(data)
     } catch (err) {
       console.log(err);
     }
@@ -104,24 +93,17 @@ export function UserProfile() {
           <div>{userData.intro}</div>
         </Col>
       </Row>
-      {
-    meData?.me.friends && meData.me.friends.length > 0 ? (
-      meData.me.friends.map((friend) => (
-        (friend.username === userData.username)?
-        <Button key={friend.username} onClick={handleRemoveFriend}>
-        Remove Friend
-      </Button>
-      :
-      console.log("hi")
-        
-      )
-      )
-    ) : (
-      <Button onClick={handleFollowFriend}>
-      Add Friend
-    </Button>
-  )
-  }
+      {/* renders Follow or Unfollow button */}
+      {meData?.me.friends && meData.me.friends.length > 0 ? 
+        (meData.me.friends.map((friend) => (
+            (friend.username === userData.username) ?
+              <Button key={friend.username} onClick={handleRemoveFriend}>Remove Friend</Button>
+            :
+              <></>))
+            ) 
+              : 
+            (<Button onClick={handleFollowFriend}>Add Friend</Button>)
+      }
       <Row>
         <h2>My most recent reviews</h2>
         {/* <ReviewCard/>
