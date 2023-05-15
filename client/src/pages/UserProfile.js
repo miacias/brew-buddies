@@ -95,18 +95,16 @@ export function UserProfile() {
           <div>{userData.intro}</div>
         </Col>
       </Row>
-      {meData?.me.friends && meData.me.friends.length > 0 ? (
+       {meData.me.friends && meData.me.friends.length > 0 && (
         meData.me.friends.map((friend) =>
-          friend.username === userData.username ? (
+          (friend.username === userData.username) ? (
             <Button key={friend.username} onClick={handleRemoveFriend}>
               Remove Friend
             </Button>
           ) : (
-            console.log("They don't match!")
+            <Button onClick={handleFollowFriend}>Add Friend</Button>
           )
         )
-      ) : (
-        <Button onClick={handleFollowFriend}>Add Friend</Button>
       )}
       <Card title="Friend List">
         {console.log(userData.friends)}
