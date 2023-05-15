@@ -92,6 +92,7 @@ Tutor(s):
 - Alexis San Javier [GitHub](https://github.com/code-guy21)
   - making use of client-side auth utils and storing in state variable
   - rendering user review to Single Brewery page
+- ChatGPT - basic debugging
 
 Tutorials referenced:
 
