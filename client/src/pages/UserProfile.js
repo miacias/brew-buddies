@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { Row, Col, Button, Card } from "antd";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_USER, GET_ME } from "../utils/queries";
@@ -115,8 +115,11 @@ export function UserProfile() {
         {console.log(userData.friends)}
         {userData?.friends && userData.friends.length > 0 ? (
           userData.friends.map((friend) => (
-            <p key={friend.username}>{friend.username}</p>
-          ))
+            <>
+            <Link to={`/profile/${friend.username}`} key={friend.username}>{friend.username}</Link>
+            <br></br>
+            </>
+            ))
         ) : (
           <p>They have no friends to show yet!</p>
         )}
