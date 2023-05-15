@@ -1,6 +1,5 @@
 # Brew Buddies
 
-
 ## Description
 
 Brew Buddies is a hybrid review site and social media for lovers of beer, breweries, barley, and buddies. This application allows you to search nearby breweries and see user reviews, or take up a pen (so to speak) and write your own! You can also add breweries to your Favorites list, so no matter how good a time you have, you'll never forget your favorite hangout hops spots. If a review catches your eye, save it to your favorites so you can try it next Saturday night. You can also add Friends, who you might want to share a pint with. The site display is as fresh and fun as your favorite distillery pull. Please drink responsibly! Cheers! 🍻
@@ -143,5 +142,7 @@ Please refer to the LICENSE in the repo:
 
 ## Screenshots
 
+![Home Page with Reviews](assets/home-pg-reviews.png)
 ![Brewery Search](assets/brewery-search.png)
 ![Map Display](assets/map-display.png)
+![Brewery Page](assets/single-brewery-pg.png)
