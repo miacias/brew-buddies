@@ -47,6 +47,7 @@ const resolvers = {
       const reviewSet = await Review.find({
         breweryId,
       }).sort({ createdAt: -1 });
+      // add user data (see above for example), return similar structure
       return reviewSet;
     },
   },

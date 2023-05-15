@@ -97,12 +97,17 @@ export const GET_BREWERY = gql`
 export const ALL_REVIEWS = gql`
     query allReviews {
         reviews {
-            _id
-            reviewText
-            starRating
-            reviewAuthor
-            createdAt
-            breweryId
+            review {
+                _id
+                reviewText
+                starRating
+                reviewAuthor
+                createdAt
+                breweryId
+            }
+            author {
+                profilePic
+            }
         }
     }
 `;

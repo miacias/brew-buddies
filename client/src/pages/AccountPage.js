@@ -18,7 +18,7 @@ export function AccountPage() {
   const { loading, data, refetch } = useQuery(GET_ME);
   const userData = data?.me || {};
   
-  const breweryApi = async () => {
+  const breweryApi = () => {
     if (userData.favBreweries && userData.favBreweries.length > 0) {
       for (let i = 0; i < userData.favBreweries.length; i++) {
         const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${userData.favBreweries[i]}`;

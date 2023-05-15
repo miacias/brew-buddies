@@ -43,6 +43,11 @@ const typeDefs = gql`
     breweryId: String
   }
 
+  type ReviewCard {
+    review: Review
+    author: User
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -54,8 +59,8 @@ const typeDefs = gql`
     me: User
     breweries: [Brewery]
     brewery(breweryId: String): Brewery
-    reviews: [Review]
-    review(breweryId: String): [Review]
+    reviews: [ReviewCard]
+    review(breweryId: String): [Review] # change to [ReviewCard]
   }
 
   type Mutation {

@@ -6,6 +6,8 @@ const { Meta } = Card;
 
 export default function ReviewCard({ oneReview, breweryData }) {
   let urlParams = window.location.pathname;
+  // console.log(oneReview);
+  // set up card to display incoming info
 
   return (
     <Card>
