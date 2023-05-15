@@ -19,8 +19,13 @@ app.use(express.json());
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
+  // allows refresh on production
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+  });
 }
 
+// for local testing or not used?
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
@@ -29,13 +34,6 @@ app.get('/', (req, res) => {
 const startApolloServer = async () => {
   await server.start();
   server.applyMiddleware({ app });
-  // sets cache control headers to prevent caching
-  // server.applyMiddleware({
-  //   app,
-  //   cors: false,
-  //   setHeaders: (res) =>
-  //     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate'),
-  // });
 
   db.once('open', () => {
     app.listen(PORT, () => {
