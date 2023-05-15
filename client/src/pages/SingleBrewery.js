@@ -69,7 +69,7 @@ export default function SingleBrewery() {
       );
       average = sumWithInitial / ratings.length;
       totalReviews = ratings.length;
-      return [average, totalReviews];
+      return [average.toFixed(1), totalReviews];
     }
   }
 
