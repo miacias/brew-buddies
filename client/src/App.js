@@ -147,9 +147,10 @@ function App() {
               >
                 <Routes>
                   <Route
-                    path='/'
+                    path='/profile/:username'
+                    exact
                     element={
-                      <HomePage 
+                      <UserProfile
                         style={{
                         padding: 24,
                         minHeight: 360,
@@ -159,20 +160,9 @@ function App() {
                   />
                   <Route
                     path='/profile'
-                    element={
-                      <AccountPage
-                        style={{
-                        padding: 24,
-                        minHeight: 360,
-                        background: colorBgContainer,
-                        }}
-                      />}
-                  />
-                    <Route
-                    path='/profile/:username'
                     exact
                     element={
-                      <UserProfile
+                      <AccountPage
                         style={{
                         padding: 24,
                         minHeight: 360,
@@ -189,6 +179,7 @@ function App() {
                   />
                   <Route
                     path='/breweries'
+                    exact
                     element={
                       <SearchPage
                         style={{
@@ -200,6 +191,7 @@ function App() {
                   />
                   <Route
                     path='/connect'
+                    exact
                     element={
                       <ConnectPage 
                         style={{
@@ -211,8 +203,20 @@ function App() {
                   />
                   <Route
                     path='/signup'
+                    exact
                     element={
                       <SignupPage 
+                        style={{
+                        padding: 24,
+                        minHeight: 360,
+                        background: colorBgContainer,
+                        }}
+                      />}
+                  />
+                  <Route
+                    path='/'
+                    element={
+                      <HomePage 
                         style={{
                         padding: 24,
                         minHeight: 360,
