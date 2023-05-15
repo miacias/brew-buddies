@@ -1,6 +1,7 @@
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Alert, Space } from 'antd';
-import React, { useState, useEffect } from 'react';
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../utils/mutations';
@@ -81,7 +82,7 @@ const Login = () => {
         <Button disabled={!(userFormData.email && userFormData.password)} type="primary" htmlType="submit" className="login-form-button">
           Log in
         </Button>
-        Or <a href="/signup">register now!</a>
+        Or <Link to="/signup">register now!</Link>
       </Form.Item>
     </Form>
   );
