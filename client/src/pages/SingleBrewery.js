@@ -32,23 +32,26 @@ export default function SingleBrewery() {
   const { loading: loadingMe, error: meError, data: meData, refetch: refetchMe } = useQuery(GET_ME);
 
 
-
+  // heart icon is filled if brewery on screen is in the favorites list of the user viewing the page
   const handleHeartFill = async (brewery) => {
     const myFaves = meData?.me?.favBreweries;
     const breweryId = brewery?.id.toString();
-    console.log('faves', myFaves)
-    console.log('id', breweryId)
     if (myFaves && myFaves.length > 0) {
       const foundMatch = myFaves.find((favMatch) => favMatch === breweryId)
       if (foundMatch) {
-        console.log(true)
-        return true;
+        return setFavorite(true);
       } else {
-        console.log(false)
-        return false;
+        return setFavorite(false);
       }
     }
   }
+
+  // checks if user data is loaded then fills in the favorite heart or not
+  useEffect(() => {
+    if(meData) {
+      handleHeartFill(breweryData);
+    }
+  }, [meData, breweryData]);
 
 
   // console.log('my fav array', myFaves)
