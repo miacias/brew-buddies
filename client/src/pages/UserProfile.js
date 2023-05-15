@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Row, Col, Button, Card } from "antd";
@@ -34,7 +35,6 @@ export function UserProfile() {
   if (!userData) {
     return <div>Loading...</div>; // return a loading state if userData is falsy
   }
-  // if check to see if userData._id === something in me.friends._id
 
   const handleFollowFriend = async () => {
     try {
@@ -52,11 +52,12 @@ export function UserProfile() {
       console.error(err);
     }
   };
+
   const handleRemoveFriend = async (friendId) => {
     try {
       const { data } = await removeFriend({
         variables: {
-          friendId: new ObjectId(userData._id),
+          friendId: new ObjectId(friendId),
         },
       });
       refetch();
@@ -95,26 +96,24 @@ export function UserProfile() {
           <div>{userData.intro}</div>
         </Col>
       </Row>
-       {meData.me.friends && meData.me.friends.length > 0 && (
-        meData.me.friends.map((friend) =>
-          (friend.username === userData.username) ? (
-            <Button key={friend.username} onClick={handleRemoveFriend}>
-              Remove Friend
-            </Button>
-          ) : (
-            <Button onClick={handleFollowFriend}>Add Friend</Button>
-          )
+      {meData && (
+        meData.me.friends.some((friend) => friend.username === userData.username) ? (
+          <Button onClick={() => handleRemoveFriend(userData._id)}>
+            Remove Friend
+          </Button>
+        ) : (
+          <Button onClick={handleFollowFriend}>Add Friend</Button>
         )
       )}
-      <Card title="Friend List">
+      <Card title="Friend List">        
         {console.log(userData.friends)}
         {userData?.friends && userData.friends.length > 0 ? (
           userData.friends.map((friend) => (
             <>
-            <Link to={`/profile/${friend.username}`} key={friend.username}>{friend.username}</Link>
-            <br></br>
+              <Link to={`/profile/${friend.username}`} key={friend.username}>{friend.username}</Link>
+              <br></br>
             </>
-            ))
+          ))
         ) : (
           <p>They have no friends to show yet!</p>
         )}
