@@ -47,8 +47,17 @@ const resolvers = {
       const reviewSet = await Review.find({
         breweryId,
       }).sort({ createdAt: -1 });
+      const usernames = reviewSet.map((review) => review.reviewAuthor);
+      const reviewUsers = await User.find({ username: { $in: usernames } });
+      const mergedData = reviewSet.map((review) => {
+        const author = reviewUsers.find(
+          (user) => user.username === review.reviewAuthor
+        );
+        return { review, author };
+      });
+      return mergedData;
       // add user data (see above for example), return similar structure
-      return reviewSet;
+      // return reviewSet;
     },
   },
   Mutation: {

@@ -110,10 +110,10 @@ export const ALL_REVIEWS = gql`
         reviews {
             review {
                 _id
-                reviewText
-                starRating
                 reviewAuthor
                 createdAt
+                reviewText
+                starRating
                 breweryId
             }
             author {
@@ -126,11 +126,17 @@ export const ALL_REVIEWS = gql`
 export const BREWERY_REVIEW = gql`
     query Review($breweryId: String) {
         review(breweryId: $breweryId) {
-            _id
-            reviewAuthor
-            createdAt
-            reviewText
-            starRating
+            review {
+                _id
+                reviewAuthor
+                createdAt
+                reviewText
+                starRating
+                breweryId
+            }
+            author {
+                profilePic
+            }
         }
     }
 `;

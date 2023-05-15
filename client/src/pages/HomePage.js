@@ -13,7 +13,7 @@ export default function HomePage() {
         if (!loading && data.reviews && data.reviews.length > 0) {
             const reviewArr = data.reviews;
            
-            reviewArr.forEach(async (data) => {     
+            reviewArr.forEach(async (data) => {
                 const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${data.review.breweryId}`;
                 fetch(searchByIdApi)
                     .then((response) => response.json())
@@ -30,15 +30,33 @@ export default function HomePage() {
                     })
                     .catch((error) => console.error(error));
             });
+            handleBreweryMatch()
         }
     }, [data]);
 
+    const handleBreweryMatch = () => {
+        const breweryArr = [...breweryData];
+        console.log(data.reviews[0].review.breweryId)
+        const match = breweryArr.map((brewery) => {
+            for (let i = 0; i < data.reviews.length; i++) {
+                if (brewery.id === data.reviews[i].review.breweryId) {
+                    return brewery;
+                }
+            }
+            return brewery.id;
+        });
+        console.log(match)
+        return match;
+    }
+
+    
     return (
         <>
             {!loading && data && breweryData && (
                 <>
                 {data.reviews.map((oneReview) => {
                     return <ReviewCard
+                        handleBreweryMatch={handleBreweryMatch}
                         oneReview={oneReview}
                         key={oneReview?._id}
                         breweryData={breweryData}
