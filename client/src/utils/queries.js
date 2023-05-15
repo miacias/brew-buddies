@@ -13,17 +13,17 @@ query me {
         intro
         pronouns
         reviews {
-        _id
-        reviewText
-        starRating
-        reviewAuthor
-        createdAt
-        breweryId
+            _id
+            reviewText
+            starRating
+            reviewAuthor
+            createdAt
+            breweryId
         }
         favBreweries
         friends {
-        _id
-        username
+            _id
+            username
         }
     }
 }`

@@ -120,7 +120,7 @@ export const ADD_FRIEND = gql`
         addFriend(
           friendId: $friendId
           ) {
-        _id
+            _id
         }
     }
 `;
