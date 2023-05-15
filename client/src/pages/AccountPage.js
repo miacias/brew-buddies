@@ -17,10 +17,8 @@ export function AccountPage() {
   const [Loading, setLoading] = useState(true);
   const { loading, data, refetch } = useQuery(GET_ME);
   const userData = data?.me || {};
-  useEffect(() => {
-    if (!userData) {
-      return <h2>Please log in!</h2>;
-    }
+  
+  const breweryApi = async () => {
     if (userData.favBreweries && userData.favBreweries.length > 0) {
       for (let i = 0; i < userData.favBreweries.length; i++) {
         const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${userData.favBreweries[i]}`;
@@ -31,11 +29,50 @@ export function AccountPage() {
             setLoading(false);
             // We set a new set, saving the data as a new set in the array every time
             setBreweryList((current) => {
-              return new Set([...current, data]);
+              // checks if the brewery already exists in the set
+              if (![...current].some((brewery) => brewery.id === data.id)) {
+                // adds the brewery to the set
+                return new Set([...current, data]);
+              }
+              return current; // returns current set without adding the duplicate brewery
             });
+            refetch();
           });
       }
     }
+  }
+
+
+  // sets loading and sets brewery list data in react State
+  useEffect(() => {
+    if (!userData) {
+      return <h2>Please log in!</h2>;
+    } else {
+      breweryApi()
+    }
+    // if (userData.favBreweries && userData.favBreweries.length > 0) {
+    //   for (let i = 0; i < userData.favBreweries.length; i++) {
+    //     const searchByIdApi = `https://api.openbrewerydb.org/v1/breweries/${userData.favBreweries[i]}`;
+    //     setLoading(true);
+    //     fetch(searchByIdApi)
+    //       .then((response) => response.json())
+    //       .then((data) => {
+    //         setLoading(false);
+    //         // We set a new set, saving the data as a new set in the array every time
+    //         // setBreweryList((current) => {
+    //         //   return new Set([...current, data]);
+    //         // });
+    //         setBreweryList((current) => {
+    //           // Check if the brewery already exists in the set
+    //           if (![...current].some((brewery) => brewery.id === data.id)) {
+    //             // Add the brewery to the set
+    //             return new Set([...current, data]);
+    //           }
+    //           return current; // Return the current set without adding the duplicate brewery
+    //         });
+    //       });
+    //   }
+    // }
   }, [userData.favBreweries]);
 
   // const [removeFavBrewery] = useMutation(REMOVE_FAV_BREWERY)
@@ -104,17 +141,15 @@ export function AccountPage() {
                 <p>You have no friends yet!</p>
               )}
             </Card>
-
-            {Array.from(breweryList).map((brewery) => (
-              //
-              <Row>
-                <BreweryCard
-                  brewery={brewery}
-                  key={brewery.id}
-                  handleRemoveBrewery={handleRemoveBrewery}
-                />
-              </Row>
-            ))}
+            <Row>
+              {Array.from(breweryList).map((brewery) => (
+                  <BreweryCard
+                    brewery={brewery}
+                    key={brewery.id}
+                    handleRemoveBrewery={handleRemoveBrewery}
+                  />
+              ))}
+            </Row>
           </Col>
         </Row>
       </>
