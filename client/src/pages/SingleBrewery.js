@@ -169,7 +169,7 @@ export default function SingleBrewery() {
                     </Tooltip>
                     )}
                     {/* add to favorites! */}
-                    <Tooltip title="I love it!">
+                    <Tooltip title={favorite ? 'I love it!' : 'Add me?'}>
                       <Button 
                         icon={favorite ? <HeartFilled /> : <HeartOutlined />}
                         onClick={handleAddFavBrewery}
