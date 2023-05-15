@@ -96,6 +96,7 @@ export function UserProfile() {
           <div>{userData.intro}</div>
         </Col>
       </Row>
+      {/* had to add meData to the check to get rid of error upon initial page load.  Also removed length check as it was unnecessary. */}
       {meData && (
         meData.me.friends.some((friend) => friend.username === userData.username) ? (
           <Button onClick={() => handleRemoveFriend(userData._id)}>
