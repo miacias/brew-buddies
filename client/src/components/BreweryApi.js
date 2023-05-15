@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import BreweryCard from './BreweryCard';
 
+
 export default function BreweryApi({ breweryList, setBreweryList }) {
 
     const [zipInput, setZipInput] = useState('');
