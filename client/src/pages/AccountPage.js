@@ -78,9 +78,12 @@ export function AccountPage() {
   if (Auth.loggedIn()) {
     return (
       <>
-        
+        <Button onClick={() => setShowForm(!showForm)}>
+          {showForm ? "Close" : "Edit Profile"}
+        </Button>
         {showForm && <EditUserForm />}
         <Row>
+        
         <Col>
           <div>
             {imageData ? (
@@ -111,9 +114,6 @@ export function AccountPage() {
             <div>{userData.intro}</div>
         </Col>
       </Row>
-      <Button onClick={() => setShowForm(!showForm)}>
-          {showForm ? "Close" : "Edit Profile"}
-        </Button>
             <Card title={<h2 style={{ fontSize: '24px' }}>Friend List</h2>} style={{ width: '25%' }}>
               {userData.friends && userData.friends.length > 0 ? (
                 userData.friends.map((friend) => (
