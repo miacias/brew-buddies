@@ -23,7 +23,7 @@ import styles from './BreweryCard.module.css'
 export default function BreweryCard(props) {
   let urlParams = window.location.pathname;
   const breweryId = props.brewery.id;
-  const url = `/${breweryId}`;
+  const url = `/beweries/${breweryId}`;
   return (
     <Row >
       <Card className={styles.breweryCard} title={props.brewery.name} bordered={false}>

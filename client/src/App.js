@@ -171,7 +171,7 @@ function App() {
                       />}
                   />
                   <Route 
-                    path='/:breweryId'
+                    path='/beweries/:breweryId'
                     exact
                     element={
                       <SingleBrewery/>
