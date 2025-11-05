@@ -22,6 +22,8 @@ Brew Buddies is a hybrid review site and social media for lovers of beer, brewer
 
 No installation required! [Deployed link here.](https://fierce-basin-42875.herokuapp.com/)
 
+[Video demo here!](https://youtu.be/2a89CTdvhDI)
+
 
 ## Usage
 
